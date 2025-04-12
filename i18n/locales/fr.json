@@ -1,0 +1,79 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "chat": "Chat IA",
+    "about": "À Propos",
+    "projects": {
+      "title": "Projets",
+      "featured": "Mis en Avant",
+      "all": "Tous les Projets"
+    },
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "blog": "Blog",
+    "contact": "Contact",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "descriptions": {
+    "chat": "Interagissez avec mon assistant IA",
+    "about": "En savoir plus sur mon parcours",
+    "projects": {
+      "featured": "Mes projets les plus notables",
+      "all": "Portfolio complet de projets"
+    },
+    "skills": "Expertise technique et outils",
+    "experience": "Parcours professionnel",
+    "blog": "Articles techniques et analyses",
+    "contact": "Me contacter",
+    "github": "Voir mon code",
+    "linkedin": "Profil professionnel"
+  },
+  "home": {
+    "title": "Bonjour, je suis {name}",
+    "subtitle": "Tech Lead | Développeur Full-Stack | Passionné de Technologie",
+    "description": "Je dirige des équipes technologiques dans des startups, construisant des solutions évolutives tout en explorant et adoptant constamment de nouvelles technologies pour stimuler l'innovation.",
+    "chat": {
+      "title": "Discutez avec Mon Assistant IA",
+      "subtitle": "Découvrez la puissance de l'IA en action",
+      "features": {
+        "ai": {
+          "title": "IA Avancée",
+          "description": "Propulsé par des modèles de langage de pointe et des outils personnalisés"
+        },
+        "tech": {
+          "title": "Expertise Technique",
+          "description": "Obtenez des insights sur le développement logiciel et l'architecture"
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "Explorez les dernières tendances en IA et technologie"
+        }
+      }
+    },
+    "highlights": {
+      "leadership": {
+        "title": "Leadership Technique",
+        "description": "Diriger des équipes de développement, définir l'orientation technique et favoriser une culture d'apprentissage continu et d'innovation."
+      },
+      "startup": {
+        "title": "Expérience Startup",
+        "description": "Construire et faire évoluer des produits dans des environnements dynamiques, en se concentrant sur l'excellence technique et l'impact commercial."
+      },
+      "learning": {
+        "title": "Apprentissage Continu",
+        "description": "Passionné par l'exploration de nouvelles technologies et le partage de connaissances à travers le développement et l'écriture technique."
+      }
+    },
+    "cta": {
+      "text": "Vous souhaitez en savoir plus sur mon travail ou discuter d'opportunités potentielles ?",
+      "projects": "Voir Mes Projets",
+      "contact": "Me Contacter"
+    }
+  },
+  "colorMode": {
+    "system": "Système",
+    "light": "Clair",
+    "dark": "Sombre"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "navigation": {
+    "home": "Home",
+    "chat": "Chat AI",
+    "about": "About Me",
+    "projects": {
+      "title": "Projects",
+      "featured": "Featured",
+      "all": "All Projects"
+    },
+    "skills": "Skills",
+    "experience": "Experience",
+    "blog": "Blog",
+    "contact": "Contact",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "descriptions": {
+    "chat": "Interact with my AI assistant",
+    "about": "Learn more about my background",
+    "projects": {
+      "featured": "My most notable projects",
+      "all": "Complete project portfolio"
+    },
+    "skills": "Technical expertise and tools",
+    "experience": "Professional journey",
+    "blog": "Technical articles and insights",
+    "contact": "Get in touch",
+    "github": "View my code",
+    "linkedin": "Professional profile"
+  },
+  "home": {
+    "title": "Hi, I'm {name}",
+    "subtitle": "Tech Lead | Full-Stack Developer | Technology Enthusiast",
+    "description": "I lead technology teams at startups, building scalable solutions while constantly exploring and adopting new technologies to drive innovation.",
+    "chat": {
+      "title": "Chat with My AI Assistant",
+      "subtitle": "Experience the power of AI in action",
+      "features": {
+        "ai": {
+          "title": "Advanced AI",
+          "description": "Powered by cutting-edge language models and custom tools"
+        },
+        "tech": {
+          "title": "Technical Expertise",
+          "description": "Get insights on software development and architecture"
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "Explore the latest in AI and technology trends"
+        }
+      }
+    },
+    "highlights": {
+      "leadership": {
+        "title": "Tech Leadership",
+        "description": "Leading development teams, setting technical direction, and fostering a culture of continuous learning and innovation."
+      },
+      "startup": {
+        "title": "Startup Experience",
+        "description": "Building and scaling products in fast-paced startup environments, focusing on both technical excellence and business impact."
+      },
+      "learning": {
+        "title": "Continuous Learning",
+        "description": "Passionate about exploring new technologies and sharing knowledge through development and technical writing."
+      }
+    },
+    "cta": {
+      "text": "Want to learn more about my work or discuss potential opportunities?",
+      "projects": "View My Projects",
+      "contact": "Get in Touch"
+    }
+  },
+  "colorMode": {
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  }
+}

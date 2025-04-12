@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+.tiptap {
+  p {
+    margin: 0px;
+  }
+}
