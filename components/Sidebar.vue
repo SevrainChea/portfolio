@@ -7,7 +7,6 @@
         class="w-48"
       />
 
-      <UDivider class="my-4" />
       <USelect
         v-model="colorMode.preference"
         :items="colorModeOptions"
@@ -69,6 +68,12 @@
         icon: 'i-lucide-briefcase',
         to: '/experience',
         description: 'Professional journey',
+      },
+      {
+        label: 'Resume',
+        icon: 'i-lucide-file-text',
+        to: '/resume',
+        description: 'Download my resume',
       },
       {
         label: 'Blog',

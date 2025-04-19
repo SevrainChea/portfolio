@@ -4,7 +4,7 @@
     <section class="text-center space-y-6">
       <div class="flex justify-center">
         <NuxtImg
-          src="/images/profile.jpeg"
+          src="/images/profile_home.jpeg"
           alt="Sevrain Chea"
           class="w-40 h-40 rounded-full object-cover border-4 border-primary-200 dark:border-primary-800 shadow-lg"
         />
@@ -14,7 +14,7 @@
           Hi, I'm <span class="text-primary-500">Sevrain</span>
         </h1>
         <p class="text-xl text-primary">
-          Tech Lead | Full-Stack Developer | Technology Enthusiast
+          Tech Lead | Full-Stack Engineer | Technology Enthusiast
         </p>
         <p class="max-w-2xl mx-auto text-primary">
           I lead technology teams at startups, building scalable solutions while
