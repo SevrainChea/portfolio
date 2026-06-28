@@ -210,10 +210,14 @@ const {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   overflow-y: auto;
   padding: 6px 0;
   position: relative;
+}
+/* Pin a short conversation to the bottom without `justify-content: flex-end`,
+   which clips overflowing content off the top and makes it unscrollable. */
+.editorial-chat-root .feed:not(.empty) > :first-child {
+  margin-top: auto;
 }
 .editorial-chat-root .turn {
   display: grid;

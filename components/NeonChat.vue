@@ -285,11 +285,15 @@ html:not(.dark) .neon-chat-root .sign {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 16px;
   padding: 26px 4px;
   overflow-y: auto;
   position: relative;
+}
+/* Pin a short conversation to the bottom without `justify-content: flex-end`,
+   which clips overflowing content off the top and makes it unscrollable. */
+.neon-chat-root .feed:not(.empty) > :first-child {
+  margin-top: auto;
 }
 .neon-chat-root .row {
   display: flex;

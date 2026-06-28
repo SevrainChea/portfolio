@@ -261,11 +261,15 @@ const {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 16px;
   padding: 26px 2px;
   overflow-y: auto;
   position: relative;
+}
+/* Pin a short conversation to the bottom without `justify-content: flex-end`,
+   which clips overflowing content off the top and makes it unscrollable. */
+.aurora-chat-root .feed:not(.empty) > :first-child {
+  margin-top: auto;
 }
 .aurora-chat-root .msg-row {
   display: flex;

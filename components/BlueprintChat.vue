@@ -244,11 +244,15 @@ const figLabel = (i: number, role: Message["role"]) => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 14px;
   overflow-y: auto;
   padding: 22px 0;
   position: relative;
+}
+/* Pin a short conversation to the bottom without `justify-content: flex-end`,
+   which clips overflowing content off the top and makes it unscrollable. */
+.blueprint-chat-root .feed:not(.empty) > :first-child {
+  margin-top: auto;
 }
 .blueprint-chat-root .entry {
   position: relative;
