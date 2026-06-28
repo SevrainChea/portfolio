@@ -1,5 +1,5 @@
 // Single source of truth for all portfolio content.
-// Consumed by every theme layout (Aurora today; Neon/Editorial/Blueprint later)
+// Consumed by every theme family's layout (Aurora, Neon, Editorial, Blueprint)
 // so the copy never diverges. Rendering differs per family — content does not.
 
 export interface ProjectLink {

@@ -5,9 +5,9 @@ styles, `tailwind.css`, `theme-registry.ts`, `useTheme.ts`, or `nuxt.config.ts`.
 
 ## The model: family → variant → mode
 
-- **Family** = a whole layout + visual language (`AuroraLayout`). Only `aurora`
-  ships today; `neon` / `editorial` / `blueprint` are listed in
-  `UPCOMING_FAMILIES` and shown disabled in the switcher.
+- **Family** = a whole layout + visual language (e.g. `AuroraLayout`). Four
+  ship: `aurora`, `neon`, `editorial`, and `blueprint`; each is selectable in
+  the switcher (`UPCOMING_FAMILIES` is currently empty).
 - **Variant** = a color scheme within a family (Aurora has `cobalt`, `emerald`,
   `amethyst`, `garnet`).
 - **Mode** = `dark` | `light`.
@@ -84,8 +84,8 @@ from the registry automatically.
    `UPCOMING_FAMILIES`. Set its `breakpoint` (px at/under which it collapses to
    the mobile layout).
 4. Add `FamilyId` to the union type in `theme-registry.ts`.
-5. In `pages/index.vue`, switch on `useTheme().family` to choose the layout
-   (today it renders `<AuroraLayout>` unconditionally).
+5. In `pages/index.vue`, add a branch on `useTheme().family` to render the new
+   family's layout (it already switches across the shipping families).
 
 Everything else (switcher entry, swatches, defaults map, FOUC script) derives
 from the registry.
