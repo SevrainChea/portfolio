@@ -84,3 +84,23 @@ trailing commas).
   — re-read files before editing.
 - Force-delete (`git branch -D`) is needed for branches never merged into
   `main`.
+
+## Agent skills
+
+Per-repo configuration consumed by the engineering skills (full detail in
+`docs/agents/`).
+
+### Issue tracker
+
+Issues and PRDs live as markdown files under `.scratch/<feature-slug>/`. See
+`docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical triage roles use their default strings, recorded as a
+`Status:` line in each issue file. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — one `CONTEXT.md` + `docs/adr/` at the repo root. See
+`docs/agents/domain.md`.
