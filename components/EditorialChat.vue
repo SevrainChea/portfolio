@@ -41,9 +41,12 @@
           <div class="mark">{{ msg.role === "user" ? "Q." : "A." }}</div>
           <div class="body">
             <p v-if="msg.role === 'user'" class="qtext">{{ msg.content }}</p>
-            <p v-else class="atext">
-              {{ msg.content }}<span v-if="msg.streaming" class="caret">|</span>
-            </p>
+            <div
+              v-else
+              class="atext"
+              :class="{ streaming: msg.streaming }"
+              v-html="renderMarkdown(msg.content)"
+            />
             <div
               v-if="
                 msg.role === 'assistant' &&
@@ -257,14 +260,116 @@ const {
   color: var(--th-body);
   margin: 3px 0 0;
   max-width: 60ch;
-  white-space: pre-wrap;
+  white-space: normal;
 }
 .editorial-chat-root .atext.composing {
   font-style: italic;
   color: var(--th-muted);
 }
-/* streaming caret — typeset */
-.editorial-chat-root .caret {
+/* rendered markdown (assistant replies) */
+.editorial-chat-root .atext > :first-child {
+  margin-top: 0;
+}
+.editorial-chat-root .atext > :last-child {
+  margin-bottom: 0;
+}
+.editorial-chat-root .atext :where(p) {
+  margin: 0.7em 0;
+}
+.editorial-chat-root .atext :where(ul, ol) {
+  margin: 0.7em 0;
+  padding-left: 1.25em;
+}
+.editorial-chat-root .atext :where(li) {
+  margin: 0.3em 0;
+}
+.editorial-chat-root .atext :where(strong) {
+  font-weight: 700;
+  color: var(--th-ink);
+}
+.editorial-chat-root .atext :where(em) {
+  font-style: italic;
+}
+.editorial-chat-root .atext :where(a) {
+  color: var(--th-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.editorial-chat-root .atext :where(h1, h2, h3, h4) {
+  font-family: var(--font-playfair-display);
+  font-weight: 700;
+  color: var(--th-ink);
+  line-height: 1.2;
+  margin: 0.8em 0 0.35em;
+}
+.editorial-chat-root .atext :where(h1) {
+  font-size: 1.5em;
+}
+.editorial-chat-root .atext :where(h2) {
+  font-size: 1.3em;
+}
+.editorial-chat-root .atext :where(h3) {
+  font-size: 1.15em;
+}
+.editorial-chat-root .atext :where(h4) {
+  font-size: 1em;
+}
+.editorial-chat-root .atext :where(code) {
+  font-family: var(--font-jetbrains-mono, ui-monospace, monospace);
+  font-size: 0.85em;
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--th-ink) 6%, transparent);
+  border: 1px solid var(--th-border);
+}
+.editorial-chat-root .atext :where(pre) {
+  margin: 0.7em 0;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--th-ink) 5%, transparent);
+  border: 1px solid var(--th-border);
+  overflow-x: auto;
+}
+.editorial-chat-root .atext :where(pre code) {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.84em;
+}
+.editorial-chat-root .atext :where(blockquote) {
+  margin: 0.7em 0;
+  padding: 0.1em 0 0.1em 1em;
+  border-left: 3px solid var(--th-accent);
+  color: var(--th-muted);
+  font-style: italic;
+}
+.editorial-chat-root .atext :where(hr) {
+  border: none;
+  border-top: 1px solid var(--th-border);
+  margin: 1em 0;
+}
+.editorial-chat-root .atext :where(table) {
+  border-collapse: collapse;
+  margin: 0.7em 0;
+  font-size: 0.92em;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.editorial-chat-root .atext :where(th, td) {
+  border: 1px solid var(--th-border);
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.editorial-chat-root .atext :where(th) {
+  font-weight: 700;
+  color: var(--th-ink);
+  background: color-mix(in srgb, var(--th-ink) 5%, transparent);
+}
+/* streaming caret — typeset pipe after the last rendered line */
+.editorial-chat-root .atext.streaming > :last-child::after {
+  content: "|";
   color: var(--th-ink);
   font-weight: 400;
   margin-left: 1px;
@@ -407,7 +512,7 @@ const {
   cursor: default;
 }
 @media (prefers-reduced-motion: reduce) {
-  .editorial-chat-root .caret {
+  .editorial-chat-root .atext.streaming > :last-child::after {
     animation: none;
   }
 }

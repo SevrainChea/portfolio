@@ -36,8 +36,13 @@
           :data-fig="figLabel(i, msg.role)"
         >
           <div class="txt">
-            {{ msg.content
-            }}<span v-if="msg.streaming" class="cur sm" />
+            <template v-if="msg.role === 'user'">{{ msg.content }}</template>
+            <div
+              v-else
+              class="md"
+              :class="{ streaming: msg.streaming }"
+              v-html="renderMarkdown(msg.content)"
+            />
           </div>
           <div
             v-if="
@@ -295,6 +300,125 @@ const figLabel = (i: number, role: Message["role"]) => {
   font-size: 13.5px;
   color: var(--th-head);
 }
+/* rendered markdown (assistant replies) */
+.blueprint-chat-root .md {
+  white-space: normal;
+}
+.blueprint-chat-root .md > :first-child {
+  margin-top: 0;
+}
+.blueprint-chat-root .md > :last-child {
+  margin-bottom: 0;
+}
+.blueprint-chat-root .md :where(p) {
+  margin: 0.6em 0;
+}
+.blueprint-chat-root .md :where(ul, ol) {
+  margin: 0.6em 0;
+  padding-left: 1.3em;
+}
+.blueprint-chat-root .md :where(li) {
+  margin: 0.25em 0;
+}
+.blueprint-chat-root .md :where(li)::marker {
+  color: var(--th-accent);
+}
+.blueprint-chat-root .md :where(strong) {
+  font-weight: 700;
+  color: var(--th-head);
+}
+.blueprint-chat-root .md :where(em) {
+  font-style: italic;
+}
+.blueprint-chat-root .md :where(a) {
+  color: var(--th-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.blueprint-chat-root .md :where(a):hover {
+  filter: brightness(1.25);
+}
+.blueprint-chat-root .md :where(h1, h2, h3, h4) {
+  font-family: var(--font-jetbrains-mono);
+  color: var(--th-head);
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  margin: 0.8em 0 0.4em;
+}
+.blueprint-chat-root .md :where(h1) {
+  font-size: 1.3em;
+}
+.blueprint-chat-root .md :where(h2) {
+  font-size: 1.18em;
+}
+.blueprint-chat-root .md :where(h3) {
+  font-size: 1.08em;
+}
+.blueprint-chat-root .md :where(h4) {
+  font-size: 1em;
+}
+.blueprint-chat-root .md :where(code) {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 0.86em;
+  padding: 0.12em 0.4em;
+  background: color-mix(in srgb, var(--th-accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--th-accent) 40%, transparent);
+}
+.blueprint-chat-root .md :where(pre) {
+  margin: 0.7em 0;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--th-accent) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--th-accent) 40%, transparent);
+  overflow-x: auto;
+}
+.blueprint-chat-root .md :where(pre code) {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.84em;
+}
+.blueprint-chat-root .md :where(blockquote) {
+  margin: 0.7em 0;
+  padding: 0.2em 0 0.2em 1em;
+  border-left: 2px solid var(--th-accent);
+  color: var(--th-muted);
+}
+.blueprint-chat-root .md :where(hr) {
+  border: none;
+  border-top: 1px solid var(--th-line1);
+  margin: 1em 0;
+}
+.blueprint-chat-root .md :where(table) {
+  border-collapse: collapse;
+  margin: 0.7em 0;
+  font-size: 0.92em;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.blueprint-chat-root .md :where(th, td) {
+  border: 1px solid color-mix(in srgb, var(--th-accent) 35%, transparent);
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.blueprint-chat-root .md :where(th) {
+  font-family: var(--font-jetbrains-mono);
+  font-weight: 600;
+  color: var(--th-head);
+  background: color-mix(in srgb, var(--th-accent) 10%, transparent);
+}
+/* streaming caret — block cursor after the last rendered line */
+.blueprint-chat-root .md.streaming > :last-child::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  background: var(--th-accent);
+  animation: bc-blink 1.1s steps(1) infinite;
+}
 .blueprint-chat-root .srcs {
   margin-top: 10px;
   font-family: var(--font-jetbrains-mono);
@@ -444,7 +568,8 @@ const figLabel = (i: number, role: Message["role"]) => {
   cursor: default;
 }
 @media (prefers-reduced-motion: reduce) {
-  .blueprint-chat-root .cur {
+  .blueprint-chat-root .cur,
+  .blueprint-chat-root .md.streaming > :last-child::after {
     animation: none;
   }
 }

@@ -60,6 +60,27 @@ experiences, socials, nav) comes from `usePortfolioData()`. A new theme family
 later should consume the same data and only differ in markup/CSS — so don't bake
 strings into components. See [composables-data.md](composables-data.md).
 
+### Assistant markdown (chat skins)
+
+The assistant is prompted to answer with structure (bullets, the occasional
+table), so its replies are **markdown** and must be rendered, not interpolated:
+
+- Each `*Chat.vue` renders the assistant bubble with
+  `v-html="renderMarkdown(msg.content)"`. `renderMarkdown` (`utils/markdown.ts`,
+  auto-imported) parses with **marked** (GFM) and sanitizes with **DOMPurify** —
+  marked passes raw HTML through (the model sometimes writes literal `<br>` in
+  table cells), so DOMPurify is what makes the output safe to inject.
+- **User** messages stay plain `{{ msg.content }}` interpolation. Never `v-html`
+  user-authored text.
+- Rendered elements are styled per skin under `.md` (Editorial reuses `.atext`)
+  inside the root namespace — `v-html` content has no scoped data-attribute, same
+  reason `AuroraLayout` is non-scoped (see above). Set `white-space: normal` on
+  the container (the bubbles use `pre-wrap` for plain text).
+- The streaming caret is a `::after` on the last rendered line
+  (`.md.streaming > :last-child::after`), not a sibling element.
+- DOMPurify's link hook adds `target="_blank" rel="noopener noreferrer"`,
+  matching the external-link rule below.
+
 ## Accessibility (expected on every interactive component)
 
 The existing components set the bar — match it:

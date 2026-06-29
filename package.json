@@ -17,6 +17,8 @@
     "@nuxt/image": "1.10.0",
     "@tailwindcss/vite": "^4.1.8",
     "ai": "^6.0.197",
+    "dompurify": "^3.4.11",
+    "marked": "^18.0.5",
     "nuxt": "^3.17.4",
     "ollama-ai-provider-v2": "^3.5.1",
     "tailwindcss": "^4.1.8",

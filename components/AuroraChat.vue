@@ -40,9 +40,12 @@
           :class="['msg-row', msg.role === 'user' ? 'user-row' : 'bot-row']"
         >
           <div :class="['msg', msg.role === 'user' ? 'user' : 'bot']">
-            <span class="txt">{{ msg.content }}</span><span
-              v-if="msg.streaming"
-              class="caret"
+            <span v-if="msg.role === 'user'" class="txt">{{ msg.content }}</span>
+            <div
+              v-else
+              class="md"
+              :class="{ streaming: msg.streaming }"
+              v-html="renderMarkdown(msg.content)"
             />
           </div>
           <div
@@ -307,8 +310,117 @@ const {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
-/* streaming caret — thin pulsing bar */
-.aurora-chat-root .caret {
+/* rendered markdown (assistant bubbles) */
+.aurora-chat-root .md {
+  white-space: normal;
+}
+.aurora-chat-root .md > :first-child {
+  margin-top: 0;
+}
+.aurora-chat-root .md > :last-child {
+  margin-bottom: 0;
+}
+.aurora-chat-root .md :where(p) {
+  margin: 0.6em 0;
+}
+.aurora-chat-root .md :where(ul, ol) {
+  margin: 0.6em 0;
+  padding-left: 1.3em;
+}
+.aurora-chat-root .md :where(li) {
+  margin: 0.25em 0;
+}
+.aurora-chat-root .md :where(li)::marker {
+  color: var(--th-accent);
+}
+.aurora-chat-root .md :where(strong) {
+  font-weight: 600;
+  color: var(--th-ink);
+}
+.aurora-chat-root .md :where(em) {
+  font-style: italic;
+}
+.aurora-chat-root .md :where(a) {
+  color: var(--th-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.aurora-chat-root .md :where(a):hover {
+  color: var(--th-accent-soft);
+}
+.aurora-chat-root .md :where(h1, h2, h3, h4) {
+  font-family: var(--font-playfair-display);
+  color: var(--th-name);
+  line-height: 1.25;
+  margin: 0.8em 0 0.4em;
+}
+.aurora-chat-root .md :where(h1) {
+  font-size: 1.4em;
+}
+.aurora-chat-root .md :where(h2) {
+  font-size: 1.25em;
+}
+.aurora-chat-root .md :where(h3) {
+  font-size: 1.12em;
+}
+.aurora-chat-root .md :where(h4) {
+  font-size: 1em;
+}
+.aurora-chat-root .md :where(code) {
+  font-family: var(--font-jetbrains-mono, ui-monospace, monospace);
+  font-size: 0.86em;
+  padding: 0.12em 0.4em;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--th-ink) 8%, transparent);
+  border: 1px solid var(--th-border);
+}
+.aurora-chat-root .md :where(pre) {
+  margin: 0.7em 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--th-ink) 7%, transparent);
+  border: 1px solid var(--th-border);
+  overflow-x: auto;
+}
+.aurora-chat-root .md :where(pre code) {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.84em;
+}
+.aurora-chat-root .md :where(blockquote) {
+  margin: 0.7em 0;
+  padding: 0.2em 0 0.2em 1em;
+  border-left: 3px solid color-mix(in srgb, var(--th-accent) 60%, transparent);
+  color: var(--th-muted);
+}
+.aurora-chat-root .md :where(hr) {
+  border: none;
+  border-top: 1px solid var(--th-border);
+  margin: 1em 0;
+}
+.aurora-chat-root .md :where(table) {
+  border-collapse: collapse;
+  margin: 0.7em 0;
+  font-size: 0.92em;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.aurora-chat-root .md :where(th, td) {
+  border: 1px solid var(--th-border);
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.aurora-chat-root .md :where(th) {
+  font-weight: 600;
+  color: var(--th-ink);
+  background: color-mix(in srgb, var(--th-accent) 10%, transparent);
+}
+/* streaming caret — thin pulsing bar tucked after the last rendered line */
+.aurora-chat-root .md.streaming > :last-child::after {
+  content: "";
   display: inline-block;
   width: 2px;
   height: 1em;
@@ -500,7 +612,7 @@ const {
   margin: -14px 0 26px;
 }
 @media (prefers-reduced-motion: reduce) {
-  .aurora-chat-root .caret,
+  .aurora-chat-root .md.streaming > :last-child::after,
   .aurora-chat-root .typing .dot {
     animation: none;
   }
