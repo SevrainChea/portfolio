@@ -1,18 +1,18 @@
 [
   {
-    "text": "My name is Sévrain CHEA. I am a Tech Lead and Full-Stack Engineer with 7 years of experience building and scaling web applications. I specialize in designing and implementing system architecture, leading engineering teams, and driving product development from concept to launch. My professional philosophy is a start-up mindset: shipping fast, iterating on product, and building scalable processes for high-performing engineering teams.",
+    "text": "My name is Sévrain CHEA. I am Head of Engineering at Mayday and a hands-on Full-Stack Engineer with 8 years of experience building and scaling web applications. I specialize in system architecture, leading engineering teams, and driving product from concept to launch — while staying close to the code, currently building agentic AI systems for my team. I work with a start-up mindset: shipping fast, iterating on product, and building scalable processes for high-performing teams, and I am especially energized by how AI is reshaping the way we build software.",
     "source": "profile_summary"
   },
   {
-    "text": "I am currently working at Mayday as a Tech Lead (2021–2025). I joined as the first engineer and helped grow the tech team from 0 to 10 engineers. I started by building core product features, then moved into designing scalable systems and leading technical architecture. Today I lead two engineering squads (7 engineers) and focus on driving technical direction, mentoring, and shipping high-impact features. Mayday is a SaaS knowledge management platform (https://www.mayday.fr/).",
+    "text": "I have been at Mayday since 2021 and am currently its Head of Engineering (since March 2026), reporting to the CTO. I joined as the first engineer and helped build the team from the ground up. I started by building core product features, then progressed from Senior Engineer to Tech Lead — designing scalable systems and leading technical architecture — before stepping up to Head of Engineering, where I lead the engineering team of 8 (alongside a separate 4-person data team): its delivery, day-to-day technical direction, and people. I still spend about half my time hands-on — building high-impact features and developing our agentic coding system. Mayday is a SaaS knowledge management platform for customer support teams (https://www.mayday.fr/).",
     "source": "experience_mayday"
   },
   {
-    "text": "Key achievements at Mayday: grew tech team from 0 to 10 engineers, led two engineering squads of 7 people, collaborated with product on roadmaps and feature prioritization, spearheaded technical discoveries such as a collaborative editor using Y.js, shaped scalable architecture, refactored notification system using RabbitMQ, initiated the LMS product, implemented single/multi-tenant database architecture for premium users, and defined onboarding processes for new engineers.",
+    "text": "Key achievements at Mayday: helped build the engineering team from the ground up as its first engineer (now 8 engineers, alongside a 4-person data team); collaborated with product on roadmaps and feature prioritization; spearheaded technical discoveries such as a collaborative editor using Y.js; shaped scalable architecture; refactored the notification system using RabbitMQ; initiated and shipped the LMS product (now a sold product, though the team is refocusing resources on the core platform); implemented single/multi-tenant database architecture for premium users; and defined onboarding processes for new engineers. Most recently (2026), I restructured the engineering squads around epic teams aligned to business priorities, and I have been driving the adoption of agentic coding across the tech team — building the system and harness for it (both ongoing).",
     "source": "experience_mayday_achievements"
   },
   {
-    "text": "Tech stack at Mayday: VueJS, TailwindCSS, NodeJS, ExpressJS, NestJS, TypeScript, GraphQL, MongoDB, PostgreSQL, RabbitMQ.",
+    "text": "Tech stack at Mayday: Vue 3 and Nuxt with TailwindCSS on the frontend; Node.js, ExpressJS, NestJS, and TypeScript with GraphQL on the backend, plus some Python; MongoDB, PostgreSQL, Redis, and Elasticsearch for data and search; RabbitMQ for messaging; and the OpenAI API alongside Claude Code powering our agentic coding work. It runs on Azure, with Docker and Kubernetes (K8s) deployed via ArgoCD.",
     "source": "experience_mayday_stack"
   },
   {
@@ -24,51 +24,55 @@
     "source": "experience_maiia_stack"
   },
   {
-    "text": "I worked at Viveris from 2018 to 2019 (10 months) as a Software Engineer. I was embedded at Cobham in the aerospace sector, where I developed unit tests in C using RTRT (IBM Rational Test RealTime) and validated technical and functional requirements. I then joined an Intelligent Transportation Systems team as a software and QA engineer, serving as a technical consultant for Renault and Akka Technologies on an autonomous vehicle proof of concept. I authored test plans and led functional validation efforts in safety-critical environments.",
+    "text": "Early in my career (2018–2019, 10 months), I worked as a Software Engineer at Viveris across some demanding domains: embedded at Cobham in the aerospace sector, then as a technical consultant for Renault and Akka Technologies on an autonomous-vehicle proof of concept with an Intelligent Transportation Systems team. The hands-on work was safety-critical validation — writing tests in C (IBM Rational Test RealTime) and authoring test plans. It is a world away from what I build now, but cutting my teeth in high-stakes, safety-critical environments shaped how I think about quality and reliability.",
     "source": "experience_viveris"
   },
   {
-    "text": "I completed a 6-month internship at Sopra Steria in 2018, working on the GIP-MDS project for the net-entreprises.fr portal (French government tax compliance system). I developed new features with unit testing, built a Circuit Breaker proof of concept using Hystrix for system resilience, led a task force of 4 developers, and reduced the backlog from 50 to under 20 tickets within one month. Tech stack: Java, JEE, JSP, SpringBoot, JUnit, HTML, CSS, JavaScript, jQuery.",
+    "text": "During a 6-month internship at Sopra Steria in 2018, I worked on the GIP-MDS project behind France's net-entreprises.fr tax-compliance portal. Even as an intern I led a task force of 4 developers and cut the backlog from 50 to under 20 tickets in a month, and I prototyped a Circuit Breaker (Hystrix) to harden system resilience. The stack was Java/JEE — early-career, well before what I build today.",
     "source": "experience_sopra_steria"
   },
   {
-    "text": "I completed a 6-month internship at CineApps in 2018. I led development of a Java-based monitoring tool for Twavox, a cinema accessibility device designed for hearing- and visually-impaired audiences. I managed the full cycle from requirements gathering to deployment at client sites, collaborated on software design, testing, and customer support, and authored technical documentation and user manuals. Tech stack: Java, Swing, Linux.",
+    "text": "During a 6-month internship at CineApps in 2018, I led development of the monitoring tool for Twavox — a cinema accessibility device that opens up screenings to hearing- and visually-impaired audiences. As an intern I owned the full cycle, from requirements gathering to deployment at client sites, spanning design, testing, customer support, and documentation. It was my first time shipping a real product end-to-end, for a mission that genuinely mattered.",
     "source": "experience_cineapps"
   },
   {
-    "text": "My frontend technical skills: Vue.js (Vue 2 and Vue 3), Nuxt 3, React, TypeScript, JavaScript, TailwindCSS, HTML, CSS, GraphQL (client-side), jQuery.",
+    "text": "My frontend technical skills: my core, day-to-day stack is Vue 3 and Nuxt with TypeScript, JavaScript, and TailwindCSS, on top of solid HTML and CSS fundamentals. I also work with client-side GraphQL, and while React is not my daily driver, I am comfortable in it — my Vue expertise transfers directly.",
     "source": "skills_frontend"
   },
   {
-    "text": "My backend technical skills: Node.js, ExpressJS, NestJS, Python (FastAPI), Java, SpringBoot, JEE. I have experience with REST APIs and GraphQL, message brokers like RabbitMQ, and real-time collaboration using Y.js.",
+    "text": "My backend technical skills: my core, day-to-day stack is Node.js, ExpressJS, and NestJS in TypeScript, where I build REST and GraphQL APIs and design and own GraphQL schemas. I also use RabbitMQ for messaging and Python (FastAPI) for AI tooling and side projects, and I have explored real-time collaboration with Y.js. Earlier in my career I built backends with Java, SpringBoot, and JEE.",
     "source": "skills_backend"
   },
   {
-    "text": "My database skills: PostgreSQL, MongoDB, Redis. I have designed both single-tenant and multi-tenant database architectures. I also have experience with vector databases (ChromaDB, Pinecone) for AI/ML applications.",
+    "text": "My database skills: PostgreSQL and MongoDB are my day-to-day databases, with Redis for caching. I have designed both single-tenant and multi-tenant database architectures, including premium tenancy at Mayday. I also have some hands-on exposure to Elasticsearch-backed search.",
     "source": "skills_databases"
   },
   {
-    "text": "My AI and machine learning skills: LangChain, RAG (Retrieval-Augmented Generation) systems, OpenAI API, Gemini API, Ollama (local LLMs), ChromaDB for vector storage. I built an AI-powered personal assistant chatbot using FastAPI, LangChain, and RAG architecture with a hybrid LLM approach (Ollama for development, Gemini API for production) to optimize costs.",
+    "text": "My AI and machine learning skills: my current focus is building LLM-powered and agentic systems. At Mayday I am building an agentic coding system and harness for the engineering team, driven largely with Claude Code. I also build LLM-powered product features with the Vercel AI SDK — handling streaming, multi-provider integration, and prompt engineering across Groq, Ollama for local development, and the OpenAI API. This portfolio's AI assistant is a concrete example: it streams answers from a Nuxt/Nitro server route with the knowledge base injected directly into the system prompt. RAG and its surrounding ecosystem are an area I am actively exploring right now rather than claiming deep expertise in.",
     "source": "skills_ai_ml"
   },
   {
-    "text": "My DevOps and cloud skills: Docker, Kubernetes, AWS, CI/CD pipelines, Railway (PaaS deployment). I have experience deploying and maintaining production applications on cloud infrastructure.",
+    "text": "My DevOps and cloud skills: I am hands-on with Docker, CI/CD pipelines, and Vercel (where I deploy my own projects). Mayday's production infrastructure runs on Azure with Kubernetes (K8s) and ArgoCD; as Head of Engineering I oversee it and work closely with the team that owns it day-to-day, rather than operating it hands-on myself. I have solid experience getting production applications shipped and kept running.",
     "source": "skills_devops"
   },
   {
-    "text": "My programming language experience: TypeScript, JavaScript (primary), Java (extensive experience from 2018–2021), Python (FastAPI backend, AI tooling), C (embedded systems, aerospace sector).",
+    "text": "My programming language experience: TypeScript and JavaScript are my primary languages today. Python is a secondary language I reach for in AI tooling and side projects. Earlier in my career (2018–2021) I worked extensively in Java and, in aerospace and embedded contexts, C — foundational experience I lean on less in day-to-day start-up engineering.",
     "source": "skills_languages"
   },
   {
-    "text": "My leadership experience: I have led engineering teams across multiple companies. At Mayday, I led two squads totaling 7 engineers. At Maiia, I led a backend team of 3. At Sopra Steria, I led a task force of 4 developers. My leadership responsibilities include technical architecture decisions, roadmap collaboration with product, code reviews, mentoring junior and mid-level developers, defining engineering processes, and team onboarding.",
+    "text": "What I am actively learning right now: I am deeply invested in where AI is taking software — I believe it will reshape how we code, how we run engineering, and even the kinds of products we build. Right now that means learning evaluation (evals) methodology hands-on, by building an eval harness for this portfolio's own AI assistant — practising how to measure and improve an LLM feature rather than just shipping it. I am also going deeper on agentic and LLM engineering, including its data-engineering side, and on RAG and its tooling (LangChain, vector databases like ChromaDB) — still largely at the reading-and-experimenting stage, much of it learned directly through Claude. These are deliberate bets on where my work is heading, not idle curiosity.",
+    "source": "currently_learning"
+  },
+  {
+    "text": "My leadership experience: I have been leading and growing engineering teams for years, and it is central to how I work. As Head of Engineering at Mayday I lead an 8-person engineering team, owning engineering strategy and organisational design — including the tech re-org I launched around epic teams aligned to business priorities — as well as budget and headcount planning and technical excellence across the team. I partner closely with product on the roadmap and put real effort into mentoring and growing engineers. Earlier I led a backend team of 3 at Maiia, and even during a 2018 internship at Sopra Steria I led a task force of 4 developers — so my leadership track record started early.",
     "source": "leadership_experience"
   },
   {
-    "text": "I have deep domain expertise across several industries: SaaS product development (Mayday - knowledge management), healthcare technology (Maiia - teleconsultation and scheduling for practitioners), French government digital services (Sopra Steria - tax compliance), cinema accessibility technology (CineApps - Twavox device for hearing/visually impaired), aerospace and embedded systems (Viveris/Cobham), and autonomous vehicles (Viveris - Renault/Akka Technologies).",
+    "text": "I have worked across a wide range of industries. My deepest domain expertise is in SaaS product development (Mayday — knowledge management for customer support) and healthcare technology (Maiia — teleconsultation and scheduling for practitioners). Beyond those, I have also worked across French government digital services (Sopra Steria — tax compliance), cinema accessibility technology (CineApps — the Twavox device for hearing- and visually-impaired audiences), aerospace and embedded systems (Viveris/Cobham), and autonomous vehicles (Viveris — Renault/Akka Technologies) — breadth that gives me perspective, even where the exposure came earlier in my career.",
     "source": "domain_expertise"
   },
   {
-    "text": "My notable technical projects include: a collaborative knowledge editor using Y.js (real-time collaboration) at Mayday, a multi-tenant database architecture for premium SaaS users at Mayday, a notification system refactor using RabbitMQ at Mayday, a payment processing integration with Stripe at Maiia, an Algolia search integration at Maiia, a Circuit Breaker proof of concept with Hystrix at Sopra Steria, a Java monitoring tool for the Twavox cinema accessibility device at CineApps, and an AI-powered personal portfolio chatbot using FastAPI, LangChain, ChromaDB, and RAG.",
+    "text": "My notable technical projects include: leading the rollout of Claude Code across the engineering team at Mayday — driving internal adoption and architecting the agentic coding harness around it (in progress); a collaborative knowledge editor using Y.js (real-time collaboration) at Mayday; a multi-tenant database architecture for premium SaaS users at Mayday; a notification system refactor using RabbitMQ at Mayday; a payment processing integration with Stripe at Maiia; an Algolia search integration at Maiia; a Circuit Breaker proof of concept with Hystrix at Sopra Steria; a monitoring tool for the Twavox cinema accessibility device at CineApps; and this AI-powered personal portfolio chatbot itself — an in-app Nuxt/Nitro streaming endpoint built on the Vercel AI SDK, with the knowledge base injected directly into the system prompt (Groq/Ollama).",
     "source": "notable_projects"
   },
   {
@@ -76,31 +80,31 @@
     "source": "personal_life"
   },
   {
-    "text": "My work philosophy: I believe in a start-up mindset — shipping fast, iterating on product, and building scalable processes for high-performing engineering teams. I am pragmatic about software engineering, choosing the right tool for the job and balancing perfectionism with delivery. I am passionate about developer productivity, clean architecture, and creating systems that are a joy to work with.",
+    "text": "My work philosophy: I believe in a start-up mindset — shipping fast, iterating on product, and building scalable processes for high-performing engineering teams. I am pragmatic about software engineering, choosing the right tool for the job and balancing perfectionism with delivery. I am passionate about developer productivity, clean architecture, and creating systems that are a joy to work with. I also believe we are at a turning point: AI is going to reshape how we write code, how we run engineering teams, and even the kinds of products we build — and I am actively leaning into that shift rather than watching it happen.",
     "source": "work_philosophy"
   },
   {
-    "text": "My approach to problem-solving: I always start by understanding the business context first, then break down complex problems into manageable pieces, prototype quickly to validate assumptions, and iterate based on feedback. I value clear communication, thorough documentation, and I actively mentor developers to build team capacity rather than creating single points of failure.",
+    "text": "My approach to problem-solving: I always start by understanding the business context first, then break down complex problems into manageable pieces, prototype quickly to validate assumptions, and iterate based on feedback. Increasingly I lean on agentic coding (Claude Code) to prototype and validate even faster. I value clear communication and actively mentor developers to build team capacity rather than creating single points of failure.",
     "source": "problem_solving_approach"
   },
   {
-    "text": "My experience with third-party API integrations includes: Stripe (payment processing), Algolia (search), Notion API (dynamic data retrieval for chatbot), OpenAI API, Gemini API (Google AI), and Twavox hardware monitoring systems.",
+    "text": "My experience with third-party API integrations: at Maiia I integrated Stripe (payment processing) and Algolia (search). At Mayday I work with the OpenAI API in a secondary capacity, and earlier at CineApps I integrated with the Twavox hardware monitoring system. More recently I have been wiring up LLM providers — Groq and Ollama for local development — into my portfolio through the Vercel AI SDK, as part of what I am currently learning.",
     "source": "integrations_experience"
   },
   {
-    "text": "My experience with messaging and event-driven systems: I have used RabbitMQ for asynchronous messaging and notification pipelines at both Mayday and Maiia. I designed and refactored event-driven architectures to improve system decoupling and scalability.",
+    "text": "My experience with messaging and event-driven systems: I have worked with RabbitMQ for asynchronous messaging at both Mayday and Maiia. My main hands-on work here was building and refactoring Mayday's notification system on top of RabbitMQ — decoupling services and making it handle load more reliably.",
     "source": "messaging_systems"
   },
   {
-    "text": "My experience with testing: I have written unit tests in Java (JUnit), C using RTRT (IBM Rational Test RealTime), and have experience with test plan authoring and functional validation in safety-critical environments (aerospace, autonomous vehicles). I follow test-driven approaches when building critical features.",
+    "text": "My experience with testing and quality: my roots are in safety-critical validation — early in my career I authored test plans and wrote unit tests in Java (JUnit) and C (IBM Rational Test RealTime) for aerospace and autonomous-vehicle systems, which shaped how I think about quality. At Mayday our testing culture started out light, and as Head of Engineering I am actively pushing it forward: we recently launched a tech initiative to build out end-to-end testing, and I am encouraging the team to adopt test-driven development — using Claude Code and agentic coding to make TDD faster and more natural. I also see evaluation (evals) as the emerging way to measure and improve quality in LLM-powered features.",
     "source": "testing_experience"
   },
   {
-    "text": "Career timeline summary: 2018 – Internship at CineApps (Java monitoring tool for cinema accessibility). 2018 – Internship at Sopra Steria (Java full-stack, French government portal). 2018–2019 – Software Engineer at Viveris (C, embedded systems, aerospace, autonomous vehicles). 2019–2021 – Full Stack then Backend Tech Lead at Maiia (Java/Node.js, healthcare platform). 2021–2025 – Senior Engineer then Tech Lead at Mayday (Vue.js/Node.js/NestJS, SaaS knowledge management).",
+    "text": "Career timeline summary: 2018 – Internship at CineApps (monitoring tool for the Twavox cinema-accessibility device). 2018 – Internship at Sopra Steria (full-stack work on France's net-entreprises.fr tax-compliance portal). 2018–2019 – Software Engineer at Viveris (safety-critical work in aerospace and autonomous vehicles). 2019–2021 – Full Stack then Backend Tech Lead at Maiia (healthcare teleconsultation and scheduling platform). 2021–present – Senior Engineer, then Tech Lead, now Head of Engineering (since March 2026) at Mayday (Vue 3/Nuxt, Node.js/NestJS, and AI/agentic engineering; SaaS knowledge management for customer support).",
     "source": "career_timeline"
   },
   {
-    "text": "I am open to new opportunities and enjoy tackling complex technical challenges, especially those involving system architecture, team scaling, and product-driven engineering. My ideal environment is a fast-moving company where engineering quality and business impact are both valued.",
+    "text": "I am open to new opportunities and enjoy tackling complex technical challenges, especially those involving system architecture, team scaling, and product-driven engineering. Increasingly, I am steering my work toward AI and agentic engineering — I see it as the frontier that will reshape how software is built, and I want to be building there. My ideal environment is a fast-moving company where engineering quality and business impact are both valued.",
     "source": "career_goals"
   }
 ]
