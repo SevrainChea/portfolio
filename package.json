@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "eval": "node --env-file=.env --import tsx evals/run.ts",
+    "eval:align": "node --import tsx evals/align.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.80",
@@ -31,6 +33,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/uil": "^1.2.3",
     "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tsx": "^4.23.0"
   }
 }
