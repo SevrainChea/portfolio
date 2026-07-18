@@ -62,8 +62,8 @@ An external link to a product or project tied to an Experience.
 ## Chat
 
 **Knowledge base**
-The fixed set of documents about Sévrain that the assistant may draw on. The
-assistant answers _only_ from these.
+The fixed set of documents about Sévrain that the assistant may draw on.
+Answering only from these is Grounding.
 
 **Context block**
 The Knowledge base flattened into the assistant's system prompt. There is no
@@ -75,3 +75,26 @@ Chosen by configuration; the chat behaves the same regardless of which is active
 
 **Message**
 A single turn in a chat conversation — from either the user or the assistant.
+
+**Guardrail**
+A rule constraining the assistant's behavior. There are two: Scope (should it
+engage at all?) and Grounding (if it engages, is every claim supported?). They
+are orthogonal — keep them distinct.
+
+**Scope**
+The topic boundary of the assistant: Sévrain — his person, experience, skills,
+projects, and availability. A question is **in scope** when it is about him
+(even if the Knowledge base can't answer it) and **out of scope** when it is a
+general-purpose ask (arbitrary code, trivia, homework).
+_Avoid_: on-topic/off-topic (use in/out of scope)
+
+**Grounding**
+Answering only from the Knowledge base. An in-scope question the Knowledge base
+doesn't cover gets an honest "I don't have that" — never an invented fact, and
+never a Redirect (missing data is not a Scope problem).
+
+**Redirect**
+The canonical reply to an out-of-scope request: one warm sentence declining,
+then a nudge back to what the assistant can discuss. The task is not performed,
+even partially.
+_Avoid_: refusal (a Redirect steers; it doesn't just say no)

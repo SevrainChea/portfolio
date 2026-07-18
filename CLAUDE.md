@@ -35,6 +35,9 @@ Package manager is **pnpm** (v10.11.1); Node is pinned in `.nvmrc` (v22.16.0).
 - `pnpm dev` — dev server at localhost:3000 (the user keeps one running; **do
   not start your own** — changes hot-reload)
 - `pnpm build` / `pnpm generate` / `pnpm preview`
+- `pnpm eval` — run the chat-assistant eval harness (`evals/`, needs a Groq key
+  in `.env`; slow on the free tier). `pnpm eval:align <label-csv>` reports
+  judge↔human agreement. See [docs/EVALS.md](docs/EVALS.md).
 
 No test framework or linter is configured. Formatting is **Prettier** with
 `prettier-plugin-tailwindcss` (defaults: 2-space, double quotes, semicolons,
@@ -66,6 +69,10 @@ trailing commas).
   `chat.messages` to the shape the `*Chat.vue` skins consume.
 - Provider/key config lives in `runtimeConfig` (server-only) in `nuxt.config.ts`,
   read from env (`LLM_PROVIDER`, `GROQ_API_KEY`, etc.); see `.env.example`.
+- The assistant's Scope/Grounding guardrails are **prompt-only by decision**
+  ([ADR-0004](docs/adr/0004-scope-guardrail-prompt-first.md)); behavior is
+  measured by the eval harness in `evals/` ([docs/EVALS.md](docs/EVALS.md)).
+  Keep `server/utils/prompt.ts` pure — the harness imports it directly.
 
 ## Conventions (read before editing)
 
