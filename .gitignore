@@ -16,6 +16,10 @@ logs
 # ── Eval harness run outputs (dataset stays committed) ──
 evals/results/
 
+# ── Local planning / working notes (issue tracker + candid worksheets) ──
+# Kept out of this PUBLIC repo's history on purpose.
+.scratch/
+
 # ── Nuxt dev/build outputs ────────────────────────
 node_modules/
 .output
