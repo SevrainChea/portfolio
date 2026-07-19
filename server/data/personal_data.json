@@ -1,14 +1,14 @@
 [
   {
-    "text": "My name is Sévrain CHEA. I am Head of Engineering at Mayday and a hands-on Full-Stack Engineer with 8 years of experience building and scaling web applications. I specialize in system architecture, leading engineering teams, and driving product from concept to launch — while staying close to the code, currently building agentic AI systems for my team. I work with a start-up mindset: shipping fast, iterating on product, and building scalable processes for high-performing teams, and I am especially energized by how AI is reshaping the way we build software.",
+    "text": "My name is Sévrain CHEA. I am a hands-on Full-Stack Engineer and product builder with 8 years of experience building and scaling web applications. I am currently Head of Engineering at Mayday, where I started as the founding engineer and helped grow the company from zero to a €7M-ARR acquisition. I specialize in system architecture, leading engineering teams, and driving product from concept to launch — while staying close to the code, currently building agentic AI systems for my team. I work with a start-up mindset: shipping fast, iterating on product, and building scalable processes for high-performing teams, and I am especially energized by how AI is reshaping the way we build software.",
     "source": "profile_summary"
   },
   {
-    "text": "I have been at Mayday since 2021 and am currently its Head of Engineering (since March 2026), reporting to the CTO. I joined as the first engineer and helped build the team from the ground up. I started by building core product features, then progressed from Senior Engineer to Tech Lead — designing scalable systems and leading technical architecture — before stepping up to Head of Engineering, where I lead the engineering team of 8 (alongside a separate 4-person data team): its delivery, day-to-day technical direction, and people. I still spend about half my time hands-on — building high-impact features and developing our agentic coding system. Mayday is a SaaS knowledge management platform for customer support teams (https://www.mayday.fr/).",
+    "text": "I have been at Mayday since 2021 and am currently its Head of Engineering (since March 2026), reporting to the CTO. I joined as the founding engineer and helped build both the product and the team from the ground up, growing the company from zero to €7M ARR. I progressed from Senior Engineer to Tech Lead — designing scalable systems and leading technical architecture — and after Mayday was acquired by the German software company USU GmbH in September 2025, I stepped up to Head of Engineering, where I lead the engineering team of 8 (alongside a separate 4-person data team): its delivery, day-to-day technical direction, and people. I still spend about half my time hands-on — building high-impact features and developing our agentic coding system. Mayday is a SaaS knowledge management platform for customer support teams (https://www.mayday.fr/).",
     "source": "experience_mayday"
   },
   {
-    "text": "Key achievements at Mayday: helped build the engineering team from the ground up as its first engineer (now 8 engineers, alongside a 4-person data team); collaborated with product on roadmaps and feature prioritization; spearheaded technical discoveries such as a collaborative editor using Y.js; shaped scalable architecture; refactored the notification system using RabbitMQ; initiated and shipped the LMS product (now a sold product, though the team is refocusing resources on the core platform); implemented single/multi-tenant database architecture for premium users; and defined onboarding processes for new engineers. Most recently (2026), I restructured the engineering squads around epic teams aligned to business priorities, and I have been driving the adoption of agentic coding across the tech team — building the system and harness for it (both ongoing).",
+    "text": "Key achievements at Mayday: joined as the founding engineer and helped grow the company from zero to €7M ARR, through to its acquisition by the German software company USU GmbH in September 2025; built the engineering team from the ground up (now 8 engineers, alongside a 4-person data team); collaborated with product on roadmaps and feature prioritization; spearheaded technical discoveries such as a collaborative editor using Y.js; shaped scalable architecture; refactored the notification system using RabbitMQ; initiated and shipped the LMS product (now a sold product, though the team is refocusing resources on the core platform); implemented single/multi-tenant database architecture for premium users; and defined onboarding processes for new engineers. Most recently (2026), I restructured the engineering squads around epic teams aligned to business priorities, and I have been driving the adoption of agentic coding across the tech team — building the system and harness for it (both ongoing).",
     "source": "experience_mayday_achievements"
   },
   {
@@ -100,11 +100,27 @@
     "source": "testing_experience"
   },
   {
-    "text": "Career timeline summary: 2018 – Internship at CineApps (monitoring tool for the Twavox cinema-accessibility device). 2018 – Internship at Sopra Steria (full-stack work on France's net-entreprises.fr tax-compliance portal). 2018–2019 – Software Engineer at Viveris (safety-critical work in aerospace and autonomous vehicles). 2019–2021 – Full Stack then Backend Tech Lead at Maiia (healthcare teleconsultation and scheduling platform). 2021–present – Senior Engineer, then Tech Lead, now Head of Engineering (since March 2026) at Mayday (Vue 3/Nuxt, Node.js/NestJS, and AI/agentic engineering; SaaS knowledge management for customer support).",
+    "text": "Career timeline summary: 2018 – Internship at CineApps (monitoring tool for the Twavox cinema-accessibility device). 2018 – Internship at Sopra Steria (full-stack work on France's net-entreprises.fr tax-compliance portal). 2018–2019 – Software Engineer at Viveris (safety-critical work in aerospace and autonomous vehicles). 2019–2021 – Full Stack then Backend Tech Lead at Maiia (healthcare teleconsultation and scheduling platform). 2021–present – Founding Engineer, then Tech Lead, now Head of Engineering (since March 2026) at Mayday; helped grow the company from zero to €7M ARR, through to its acquisition by USU GmbH in September 2025 (Vue 3/Nuxt, Node.js/NestJS, and AI/agentic engineering; SaaS knowledge management for customer support).",
     "source": "career_timeline"
   },
   {
-    "text": "I am open to new opportunities and enjoy tackling complex technical challenges, especially those involving system architecture, team scaling, and product-driven engineering. Increasingly, I am steering my work toward AI and agentic engineering — I see it as the frontier that will reshape how software is built, and I want to be building there. My ideal environment is a fast-moving company where engineering quality and business impact are both valued.",
+    "text": "What I am looking for next: after taking Mayday from founding engineer to acquisition, I want to get back to building at the earliest stage. I am actively looking for Founding Engineer roles at early-stage startups, and I am open to freelance work too. At heart I am a product builder — I love owning a product from concept to launch and staying close to both the code and the users. I am especially drawn to teams building at the frontier of AI and agentic engineering, which I believe will reshape how software gets built. My ideal environment is fast-moving, product-driven, and values engineering quality and business impact in equal measure.",
     "source": "career_goals"
+  },
+  {
+    "text": "Where I am based and how I work: I live in Lognes (77), just east of Paris. I work hybrid or fully remote and am not looking for a full on-site role. I am actively open to new opportunities right now, including freelance engagements.",
+    "source": "logistics_availability"
+  },
+  {
+    "text": "Languages I speak: French is my native language, and I speak English fluently at a professional working level — I use it daily in a technical setting, and both my CV and this portfolio are in English.",
+    "source": "languages_spoken"
+  },
+  {
+    "text": "How to get in touch: the best way to reach me is by email at sevrain.chea@gmail.com, or on LinkedIn at https://www.linkedin.com/in/sevrainchea/. You can also see my code on GitHub at https://github.com/SevrainChea. I am always happy to talk about interesting roles or projects.",
+    "source": "contact"
+  },
+  {
+    "text": "My education: I hold an engineering degree (Diplôme d'Ingénieur, equivalent to a Master's) from ESIEE Paris, a French engineering school, which I earned in 2018.",
+    "source": "education"
   }
 ]
