@@ -37,10 +37,30 @@ export function useChat() {
     const mapped: Message[] = chat.messages
       .filter((m) => m.role === "user" || m.role === "assistant")
       .map((m, i, arr) => {
-        const content = m.parts
+        const textContent = m.parts
           .filter((p): p is { type: "text"; text: string } => p.type === "text")
           .map((p) => p.text)
           .join("");
+
+        // Resume Action (Phase 0): the getResume tool returns a { url }. We
+        // synthesize a lead-in + markdown link into the message content so it
+        // renders through each skin's existing renderMarkdown path — no per-skin
+        // Action card yet (that's the Phase 1 inline-viewer upgrade). The bubble
+        // wording is deterministic here on purpose: the tool is single-step, so
+        // the model emits no prose of its own. See CONTEXT.md ("Action").
+        const resumePart = m.parts.find((p) => p.type === "tool-getResume") as
+          | { state?: string; output?: { url?: string } }
+          | undefined;
+        const resumeUrl =
+          resumePart?.state === "output-available"
+            ? resumePart.output?.url
+            : undefined;
+        const content = resumeUrl
+          ? [textContent, `You can view Sévrain's CV here: [Sévrain's CV](${resumeUrl})`]
+              .filter(Boolean)
+              .join("\n\n")
+          : textContent;
+
         const isLast = i === arr.length - 1;
         const streaming =
           m.role === "assistant" && isLast && chat.status === "streaming";

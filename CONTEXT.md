@@ -98,3 +98,14 @@ The canonical reply to an out-of-scope request: one warm sentence declining,
 then a nudge back to what the assistant can discuss. The task is not performed,
 even partially.
 _Avoid_: refusal (a Redirect steers; it doesn't just say no)
+
+**Action**
+Something the assistant does for a visitor beyond answering in prose, rendered
+as an interactive element in the chat rather than a sentence. Some Actions only
+_present_ information (a project summary card); others carry an _effect_ the
+visitor can trigger (download the resume, open a pre-filled contact draft, switch
+the site's Theme). The assistant offers the affordance; the visitor triggers the
+effect — it never forces one.
+_Avoid_: "tool" here — the AI-SDK primitive that produces an Action is an
+implementation mechanism, not a domain concept, and lives in `docs/conventions/`
+and `docs/adr/`, never in this glossary.
