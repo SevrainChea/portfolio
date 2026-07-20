@@ -11,12 +11,12 @@ choice persists across reloads.
 
 The four families:
 
-| Family | Vibe | Variants | Default mode |
-|---|---|---|---|
-| **Aurora** | Frameless, tokenized, soft animated aurora blobs behind a two-column layout | Cobalt & Frost, Emerald & Brass, Amethyst & Rose, Garnet & Ember | dark |
-| **Neon** | A glowing neon-sign card at night; the hero card "breathes" | Hotline, Acid, Electric | dark |
-| **Editorial** | A printed literary issue — masthead, drop cap, multi-column flow | The Issue, Broadsheet, Quarterly | light |
-| **Blueprint** | An engineering spec sheet — drafting grid, title block, mono callouts | Azure, Crimson, Verdant | dark |
+| Family        | Vibe                                                                        | Variants                                                         | Default mode |
+| ------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------ |
+| **Aurora**    | Frameless, tokenized, soft animated aurora blobs behind a two-column layout | Cobalt & Frost, Emerald & Brass, Amethyst & Rose, Garnet & Ember | dark         |
+| **Neon**      | A glowing neon-sign card at night; the hero card "breathes"                 | Hotline, Acid, Electric                                          | dark         |
+| **Editorial** | A printed literary issue — masthead, drop cap, multi-column flow            | The Issue, Broadsheet, Quarterly                                 | light        |
+| **Blueprint** | An engineering spec sheet — drafting grid, title block, mono callouts       | Azure, Crimson, Verdant                                          | dark         |
 
 > The content (name, tagline, about copy, experiences, stacks) is **identical across all
 > themes** — only the presentation changes. Content lives in one file: `portfolio-data.js`.
@@ -39,13 +39,13 @@ The React/JSX here is purely a vehicle for the prototype; the production impleme
 The prototype uses React only because that's the prototyping environment. Every pattern maps
 cleanly to the existing Vue codebase:
 
-| Prototype (React) | Production (Vue 3, existing repo) |
-|---|---|
-| `window.PORTFOLIO` data object | hardcoded arrays already in `ExperiencesSection.vue` / `AboutSection.vue` — keep them, or lift to a composable |
-| `useTweaks` / localStorage state | `ref()` + `useState()` + `localStorage` (or a small composable) |
-| CSS injected via `dangerouslySetInnerHTML` | Tailwind utility classes + `--th-*` tokens in `assets/css/tailwind.css` |
-| Inline `style={{ "--accent": ... }}` token objects | `:style` bindings or a `data-theme`/class on a root wrapper |
-| `IconFor()` inline SVGs | `@nuxt/icon` (`<Icon name="...">`) |
+| Prototype (React)                                  | Production (Vue 3, existing repo)                                                                              |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `window.PORTFOLIO` data object                     | hardcoded arrays already in `ExperiencesSection.vue` / `AboutSection.vue` — keep them, or lift to a composable |
+| `useTweaks` / localStorage state                   | `ref()` + `useState()` + `localStorage` (or a small composable)                                                |
+| CSS injected via `dangerouslySetInnerHTML`         | Tailwind utility classes + `--th-*` tokens in `assets/css/tailwind.css`                                        |
+| Inline `style={{ "--accent": ... }}` token objects | `:style` bindings or a `data-theme`/class on a root wrapper                                                    |
+| `IconFor()` inline SVGs                            | `@nuxt/icon` (`<Icon name="...">`)                                                                             |
 
 ---
 
@@ -107,7 +107,7 @@ Source of truth in the prototype: `design-files/portfolio-data.js`. In the repo 
 already exists (slightly differently worded) in `ExperiencesSection.vue` and `AboutSection.vue` —
 reconcile to one source.
 
-- **Name:** Sévrain Chea  ·  **Role:** `Tech Lead · Full-Stack Engineer`
+- **Name:** Sévrain Chea · **Role:** `Tech Lead · Full-Stack Engineer`
 - **Tagline:** "Start-up mindset — shipping fast, iterating on product, and building scalable
   processes for high-performing engineering teams."
 - **Photo:** `assets/profile_home.jpeg` (in repo: `public/images/` or `assets/images/`)
@@ -116,7 +116,7 @@ reconcile to one source.
 - **About:** 4 paragraphs (full text in `portfolio-data.js`). Note paragraph 2 bolds **Mayday**;
   preserve inline `<b>` emphasis.
 - **Experiences:** array of `{ title, company, contract, dates, duration, positions[],
-  description, stack[], link }`. The prototype shows 3 lead roles; the repo currently lists 5
+description, stack[], link }`. The prototype shows 3 lead roles; the repo currently lists 5
   (incl. Sopra Steria, CineApps). **Keep all real entries** — the prototype just trimmed for
   brevity. Each renders: dates + duration, "Title @ Company", contract + positions, description,
   and a row of stack tags.
@@ -130,6 +130,7 @@ then each family's specific layout & component spec. All four collapse to a sing
 mobile (breakpoints noted per family).
 
 ### Shared structure (all families)
+
 - **Identity block:** circular avatar, name (two lines: "Sévrain" / "Chea"), role eyebrow, tagline,
   nav, social icons.
 - **About:** an overline/label + the 4 paragraphs.
@@ -138,7 +139,7 @@ mobile (breakpoints noted per family).
 
 ---
 
-### Family 1 — Aurora  *(closest to the current live site)*
+### Family 1 — Aurora _(closest to the current live site)_
 
 **Reference:** `aurora-portfolio.jsx` (layout + CSS), `aurora-variants.js` (4 color worlds × 2 modes).
 
@@ -155,7 +156,7 @@ mobile (breakpoints noted per family).
 - **Typography:**
   - Name: **Playfair Display**, 52px, weight 600, line-height 1.0, letter-spacing −0.015em, color `--name`
   - Role eyebrow: Inter, 12.5px, weight 600, letter-spacing 0.18em, uppercase, color `--accent`
-  - Tagline: Playfair Display *italic*, 17.5px, line-height 1.55, color `--muted`, max-width 300px
+  - Tagline: Playfair Display _italic_, 17.5px, line-height 1.55, color `--muted`, max-width 300px
   - About paragraphs: Inter, 16.5px, line-height 1.74, color `--body`, max-width 60ch; `<b>` → `--ink`
   - Section overline: Inter, 11.5px, weight 700, letter-spacing 0.22em, uppercase, color `--accent`,
     with a trailing gradient hairline (`::after`, `flex:1; height:1px`)
@@ -174,8 +175,8 @@ mobile (breakpoints noted per family).
   - tags: 11.5px/500, `padding: 4px 11px`, `border-radius: 6px`, `--tag-bg` + `--tag-border`,
     text `--tag-text`
 - **Tokens:** reads **only** CSS variables (`--bg, --bg-grad, --ink, --name, --body, --muted,
-  --accent, --accent-soft, --border, --border-strong, --avatar-ring, --tag-bg, --tag-border,
-  --tag-text, --blob-1/2/3, --blob-blend, --blob-op, --grain-op, --tagline-style`). Adding a
+--accent, --accent-soft, --border, --border-strong, --avatar-ring, --tag-bg, --tag-border,
+--tag-text, --blob-1/2/3, --blob-blend, --blob-op, --grain-op, --tagline-style`). Adding a
   variant = adding a token block. Full values for all 4 variants × 2 modes in `aurora-variants.js`.
 - **Responsive:** `@max-width:880px` → single column, left becomes static, right gets a top border
   instead of left. `@max-width:760px` → name 40px, avatar 78px, tighter spacing.
@@ -183,7 +184,7 @@ mobile (breakpoints noted per family).
 
 ---
 
-### Family 2 — Neon  *(one animated hero)*
+### Family 2 — Neon _(one animated hero)_
 
 **Reference:** `theme-neon.jsx`. Font: **Space Grotesk** (fallback Inter).
 
@@ -222,7 +223,7 @@ mobile (breakpoints noted per family).
 
 ---
 
-### Family 3 — Editorial  *(printed literary issue; default mode = light)*
+### Family 3 — Editorial _(printed literary issue; default mode = light)_
 
 **Reference:** `theme-editorial.jsx`. Fonts: **Playfair Display** (display) + **Inter** (UI/meta).
 
@@ -241,22 +242,22 @@ mobile (breakpoints noted per family).
     Playfair index numbers in `acc`)
 - **About:** **two-column** flow (`columns: 2; column-gap: 48px`). First paragraph gets a Playfair
   **drop cap** (`::first-letter`, 62px, float left, `acc`). Body 15px/1.72 `body`; `<b>` → `ink`.
-- **Section labels** `.sectlabel`: Playfair *italic* 21px `acc` + trailing hairline.
+- **Section labels** `.sectlabel`: Playfair _italic_ 21px `acc` + trailing hairline.
 - **Experience entries:** grid `130px 1fr`, gap 34px, separated by top rules.
   - left "when": 12.5px `mut`, tabular-nums, with duration on its own line in italic Playfair `acc`
   - right: h3 Playfair 26px/600 (company in italic `acc`); pos uppercase 12.5px `mut`; desc
     14.5px/1.72 `body` max-width 62ch; tags as a single uppercase 11px line, items separated by a
     `/` in `acc`
 - **Variants (roles `paper, ink, acc, mut, rule, body, grain, vol, place`):** The Issue (warm paper
-  + rust, Vol. 7), Broadsheet (near-B&W newsprint, accent = ink, Vol. II), Quarterly (cool ivory +
-  forest green, Vol. 04). Each has a **dark "night edition"** counterpart. Full values in file.
+  - rust, Vol. 7), Broadsheet (near-B&W newsprint, accent = ink, Vol. II), Quarterly (cool ivory +
+    forest green, Vol. 04). Each has a **dark "night edition"** counterpart. Full values in file.
 - **Default mode is LIGHT** for this family.
 - **Responsive:** `@max-width:760px` → masthead stacks, h1 48px, lead becomes one column, about
   collapses to one column, experience rows stack.
 
 ---
 
-### Family 4 — Blueprint  *(engineering spec sheet)*
+### Family 4 — Blueprint _(engineering spec sheet)_
 
 **Reference:** `theme-blueprint.jsx`. Fonts: **Playfair Display** (names/headings), **Inter** (body),
 **JetBrains Mono** (labels, callouts, mono UI).
@@ -280,7 +281,7 @@ mobile (breakpoints noted per family).
   Hover → `CY88` border + `CY12` fill. h3 Playfair 21px/600 `HEAD` (company italic `CY`); when-row,
   pos, and tags all **JetBrains Mono**; tags are square `1px CY44` chips with `CY08` fill.
 - **Variants (roles `bg, CY (primary), AM (secondary/“Experience” label), line1, line2, INK, MUT,
-  HEAD, panel, notch, avFilter`):** Azure (navy + azure/amber), Crimson (wine + coral/teal),
+HEAD, panel, notch, avFilter`):** Azure (navy + azure/amber), Crimson (wine + coral/teal),
   Verdant (forest + emerald/terracotta). Each has dark + light palettes. Full values in file.
 - **Responsive:** `@max-width:760px` → single column, frame `inset: 10px`, nav becomes a wrapped
   row of bordered chips, right column gets a top border.
@@ -317,6 +318,7 @@ from each registry's `swatchKeys` (e.g. Neon uses `[GLOW, ACC]`, Editorial `[acc
 theme controls.
 
 ### Persistence (localStorage keys)
+
 - `pf-family` → string family id (`aurora` default)
 - `pf-variants` → JSON map `{ [familyId]: variantId }`
 - `pf-modes` → JSON map `{ [familyId]: "dark"|"light" }`
@@ -362,9 +364,16 @@ A single reactive theme state, persisted to localStorage:
 
 ```ts
 // useTheme() composable (suggested)
-const family  = useState<'aurora'|'neon'|'editorial'|'blueprint'>('pf-family', () => load('pf-family','aurora'))
-const variants = useState<Record<string,string>>('pf-variants', () => loadJSON('pf-variants', {}))
-const modes    = useState<Record<string,'dark'|'light'>>('pf-modes', () => loadJSON('pf-modes', {}))
+const family = useState<"aurora" | "neon" | "editorial" | "blueprint">(
+  "pf-family",
+  () => load("pf-family", "aurora"),
+);
+const variants = useState<Record<string, string>>("pf-variants", () =>
+  loadJSON("pf-variants", {}),
+);
+const modes = useState<Record<string, "dark" | "light">>("pf-modes", () =>
+  loadJSON("pf-modes", {}),
+);
 // derived: current variant/mode fall back to per-family defaults
 // effect: write data-family / data-variant on root + toggle `.dark` class; persist on change
 ```
@@ -454,6 +463,6 @@ variants, and light/dark.
 4. Refactor the current page into `AuroraLayout.vue` (reuse `HeaderCard`/`AboutSection`/
    `ExperiencesSection`/`ExperienceCard`/`StackTag` where possible).
 5. Add `NeonLayout.vue`, `EditorialLayout.vue`, `BlueprintLayout.vue`, each consuming shared content
-   + its token set.
+   - its token set.
 6. Have `pages/index.vue` switch layouts on the active family.
 7. Pass over hover/motion details + `prefers-reduced-motion`, then responsive breakpoints per family.

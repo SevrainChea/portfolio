@@ -47,7 +47,11 @@
         <section id="experiences" class="section">
           <div class="sect-label">Experience</div>
           <div class="tl">
-            <article v-for="xp in data.experiences" :key="xp.company" class="xp">
+            <article
+              v-for="xp in data.experiences"
+              :key="xp.company"
+              class="xp"
+            >
               <div class="when">
                 <span>{{ xp.dates }}</span>
                 <span class="dur">{{ xp.duration }}</span>

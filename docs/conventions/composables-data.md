@@ -35,18 +35,18 @@ hydration rules, see [styling-and-themes.md](styling-and-themes.md).
 
 Public surface:
 
-| Returned                | Kind      | Notes                                            |
-| ----------------------- | --------- | ------------------------------------------------ |
-| `families`              | array     | all registered `FamilyDef`s                      |
-| `family`                | ref       | active `FamilyId`                                |
-| `currentFamily`         | computed  | active `FamilyDef`                               |
-| `currentVariant`        | computed  | active variant id (falls back to family default) |
-| `currentVariantDef`     | computed  | active `VariantDef`                              |
-| `currentMode`           | computed  | `dark`/`light` (stored → OS pref → family default)|
-| `isDark`                | computed  | convenience boolean                              |
-| `accent`                | computed  | active accent hex (switcher chrome)              |
-| `setFamily/Variant/Mode`| fn        | update + persist to `localStorage`               |
-| `toggleMode`            | fn        | flip dark/light for the active family            |
+| Returned                 | Kind     | Notes                                              |
+| ------------------------ | -------- | -------------------------------------------------- |
+| `families`               | array    | all registered `FamilyDef`s                        |
+| `family`                 | ref      | active `FamilyId`                                  |
+| `currentFamily`          | computed | active `FamilyDef`                                 |
+| `currentVariant`         | computed | active variant id (falls back to family default)   |
+| `currentVariantDef`      | computed | active `VariantDef`                                |
+| `currentMode`            | computed | `dark`/`light` (stored → OS pref → family default) |
+| `isDark`                 | computed | convenience boolean                                |
+| `accent`                 | computed | active accent hex (switcher chrome)                |
+| `setFamily/Variant/Mode` | fn       | update + persist to `localStorage`                 |
+| `toggleMode`             | fn       | flip dark/light for the active family              |
 
 Notes:
 

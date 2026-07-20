@@ -31,12 +31,12 @@ Other scripts: `pnpm build`, `pnpm generate`, `pnpm preview`.
 Server-only chat config lives in `runtimeConfig` (`nuxt.config.ts`), read from
 env. See `.env.example`. Key vars:
 
-| Var             | Purpose                                  |
-| --------------- | ---------------------------------------- |
-| `LLM_PROVIDER`  | `groq` \| `gemini` \| `ollama`           |
-| `GROQ_API_KEY`  | Groq key (production default)             |
-| `GROQ_MODEL`    | e.g. `llama-3.1-8b-instant`              |
-| `OLLAMA_BASE_URL` / `OLLAMA_MODEL` | local dev (no key)    |
+| Var                                | Purpose                        |
+| ---------------------------------- | ------------------------------ |
+| `LLM_PROVIDER`                     | `groq` \| `gemini` \| `ollama` |
+| `GROQ_API_KEY`                     | Groq key (production default)  |
+| `GROQ_MODEL`                       | e.g. `llama-3.1-8b-instant`    |
+| `OLLAMA_BASE_URL` / `OLLAMA_MODEL` | local dev (no key)             |
 
 ## Project layout
 

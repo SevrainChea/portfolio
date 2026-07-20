@@ -4,15 +4,15 @@ Conventions for components in `components/`. All components are auto-imported.
 
 ## Inventory
 
-| Component            | Role                                                        | Styling approach            |
-| -------------------- | ----------------------------------------------------------- | --------------------------- |
-| `{Aurora,Neon,Editorial,Blueprint}Layout.vue` | Per-family home screen; `index.vue` switches on `family`    | Namespaced plain CSS        |
+| Component                                     | Role                                                                         | Styling approach            |
+| --------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------- |
+| `{Aurora,Neon,Editorial,Blueprint}Layout.vue` | Per-family home screen; `index.vue` switches on `family`                     | Namespaced plain CSS        |
 | `{Aurora,Neon,Editorial,Blueprint}Chat.vue`   | Per-family `/chat` skin; `chat.vue` switches on `family`, shared `useChat()` | Namespaced plain CSS        |
-| `AuroraBackground.vue`| Fixed full-bleed animated background (blobs + grain)       | Scoped plain CSS            |
-| `ThemeSwitcher.vue`  | Family dropdown + variant swatches + light/dark toggle      | Scoped plain CSS            |
-| `StackTag.vue`       | Small inline tech-stack pill                                | Tailwind utilities → tokens |
-| `GlassCard.vue`      | **Dead code** — no references since the themed chat redesign | _Deprecated_                |
-| `BgGradient.vue`     | **Dead code** — no references; do not reuse                 | _Deprecated_                |
+| `AuroraBackground.vue`                        | Fixed full-bleed animated background (blobs + grain)                         | Scoped plain CSS            |
+| `ThemeSwitcher.vue`                           | Family dropdown + variant swatches + light/dark toggle                       | Scoped plain CSS            |
+| `StackTag.vue`                                | Small inline tech-stack pill                                                 | Tailwind utilities → tokens |
+| `GlassCard.vue`                               | **Dead code** — no references since the themed chat redesign                 | _Deprecated_                |
+| `BgGradient.vue`                              | **Dead code** — no references; do not reuse                                  | _Deprecated_                |
 
 ## The two styling approaches
 

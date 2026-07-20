@@ -22,7 +22,17 @@ window.PORTFOLIO = {
       positions: ["Senior Engineer", "Full-Stack Engineer"],
       description:
         "Led two squads (7 engineers) building a SaaS platform at a fast-growing startup. Shaped scalable architecture, spearheaded technical discoveries (collaborative editor with Y.js), refactored the notification system with RabbitMQ, and initiated the LMS product. Implemented single/multi-tenant DB architecture and defined onboarding for rapid team growth.",
-      stack: ["VueJS", "TailwindCSS", "NodeJS", "NestJS", "TypeScript", "GraphQL", "MongoDB", "PostgreSQL", "RabbitMQ"],
+      stack: [
+        "VueJS",
+        "TailwindCSS",
+        "NodeJS",
+        "NestJS",
+        "TypeScript",
+        "GraphQL",
+        "MongoDB",
+        "PostgreSQL",
+        "RabbitMQ",
+      ],
       link: "https://www.mayday.fr/",
     },
     {
@@ -34,7 +44,15 @@ window.PORTFOLIO = {
       positions: ["Full-Stack Engineer"],
       description:
         "Led a backend team (3 developers) building the Maiia Pro web application. Designed technical architecture and data models, planned and estimated work, mentored backend developers, and delivered agenda management and payment processing. Integrated Stripe and Algolia to support core business workflows.",
-      stack: ["Java", "SpringBoot", "MongoDB", "RabbitMQ", "ReactJS", "Node.js", "JavaScript"],
+      stack: [
+        "Java",
+        "SpringBoot",
+        "MongoDB",
+        "RabbitMQ",
+        "ReactJS",
+        "Node.js",
+        "JavaScript",
+      ],
       link: "https://www.maiia.com/",
     },
     {

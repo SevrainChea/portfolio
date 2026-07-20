@@ -11,10 +11,14 @@
 //   line  — hairline borders
 function NeonBoard({ pal }) {
   const P = window.PORTFOLIO;
-  const { ns, bg, panel, GLOW, ACC, ink, body, line, nameCol, nameHalo, head } = pal;
+  const { ns, bg, panel, GLOW, ACC, ink, body, line, nameCol, nameHalo, head } =
+    pal;
   // Glow strength: 1 = full (dark mode), <1 softens blur + alpha (light mode).
   const g = pal.glow == null ? 1 : pal.glow;
-  const ax = (frac) => Math.round(Math.min(1, Math.max(0, frac * g)) * 255).toString(16).padStart(2, "0");
+  const ax = (frac) =>
+    Math.round(Math.min(1, Math.max(0, frac * g)) * 255)
+      .toString(16)
+      .padStart(2, "0");
   const bl = (px) => +(px * g).toFixed(1);
   const css = `
   .${ns}{position:relative;width:100%;min-height:100vh;overflow:hidden;background:${bg};color:${ink};
@@ -22,9 +26,9 @@ function NeonBoard({ pal }) {
   /* static ambient glow — does NOT move */
   .${ns} .amb{position:absolute;inset:0;z-index:0;pointer-events:none;
     background:
-      radial-gradient(620px 420px at 50% 4%, ${GLOW}${ax(.12)}, transparent 70%),
-      radial-gradient(520px 520px at 88% 38%, ${ACC}${ax(.08)}, transparent 70%),
-      radial-gradient(560px 560px at 8% 72%, ${GLOW}${ax(.07)}, transparent 70%);}
+      radial-gradient(620px 420px at 50% 4%, ${GLOW}${ax(0.12)}, transparent 70%),
+      radial-gradient(520px 520px at 88% 38%, ${ACC}${ax(0.08)}, transparent 70%),
+      radial-gradient(560px 560px at 8% 72%, ${GLOW}${ax(0.07)}, transparent 70%);}
   /* faint static brick/wall texture so neon reads as "on a wall at night" */
   .${ns} .amb::after{content:"";position:absolute;inset:0;opacity:.5;
     background-image:linear-gradient(${line} 1px,transparent 1px),linear-gradient(90deg,${line} 1px,transparent 1px);
@@ -36,12 +40,12 @@ function NeonBoard({ pal }) {
   .${ns} .sign{position:relative;border-radius:22px;background:
       linear-gradient(180deg, ${panel}, ${bg});
     border:2px solid ${GLOW};padding:56px 50px 50px;text-align:center;
-    box-shadow:0 0 0 1px ${GLOW}${ax(.33)}, 0 0 ${bl(22)}px ${GLOW}${ax(.4)}, 0 0 ${bl(70)}px -10px ${GLOW}${ax(.53)},
-      inset 0 0 ${bl(26)}px -6px ${GLOW}${ax(.4)};
+    box-shadow:0 0 0 1px ${GLOW}${ax(0.33)}, 0 0 ${bl(22)}px ${GLOW}${ax(0.4)}, 0 0 ${bl(70)}px -10px ${GLOW}${ax(0.53)},
+      inset 0 0 ${bl(26)}px -6px ${GLOW}${ax(0.4)};
     animation:${ns}-breathe 3.6s ease-in-out infinite;}
   @keyframes ${ns}-breathe{
-    0%,100%{box-shadow:0 0 0 1px ${GLOW}${ax(.27)}, 0 0 ${bl(16)}px ${GLOW}${ax(.33)}, 0 0 ${bl(52)}px -12px ${GLOW}${ax(.47)}, inset 0 0 ${bl(22)}px -8px ${GLOW}${ax(.33)};}
-    50%    {box-shadow:0 0 0 1px ${GLOW}${ax(.47)}, 0 0 ${bl(30)}px ${GLOW}${ax(.53)}, 0 0 ${bl(92)}px -8px ${GLOW}${ax(1)}, inset 0 0 ${bl(30)}px -4px ${GLOW}${ax(.53)};}}
+    0%,100%{box-shadow:0 0 0 1px ${GLOW}${ax(0.27)}, 0 0 ${bl(16)}px ${GLOW}${ax(0.33)}, 0 0 ${bl(52)}px -12px ${GLOW}${ax(0.47)}, inset 0 0 ${bl(22)}px -8px ${GLOW}${ax(0.33)};}
+    50%    {box-shadow:0 0 0 1px ${GLOW}${ax(0.47)}, 0 0 ${bl(30)}px ${GLOW}${ax(0.53)}, 0 0 ${bl(92)}px -8px ${GLOW}${ax(1)}, inset 0 0 ${bl(30)}px -4px ${GLOW}${ax(0.53)};}}
   @media (prefers-reduced-motion: reduce){ .${ns} .sign{animation:none;} }
   /* inner tube outline */
   .${ns} .sign::before{content:"";position:absolute;inset:9px;border:1px solid ${ACC}66;border-radius:15px;
@@ -51,7 +55,7 @@ function NeonBoard({ pal }) {
   .${ns} .open::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:${ACC};
     box-shadow:0 0 10px ${ACC};margin-right:8px;vertical-align:middle;}
   .${ns} .avatar{width:108px;height:108px;border-radius:50%;object-fit:cover;border:2px solid ${ACC};
-    box-shadow:0 0 ${bl(22)}px ${ACC}${ax(1)}, inset 0 0 ${bl(10)}px ${ACC}${ax(.53)};margin-bottom:22px;}
+    box-shadow:0 0 ${bl(22)}px ${ACC}${ax(1)}, inset 0 0 ${bl(10)}px ${ACC}${ax(0.53)};margin-bottom:22px;}
   .${ns} .name{font-size:80px;line-height:.94;font-weight:700;letter-spacing:.01em;margin:0;text-transform:uppercase;
     color:${nameCol};text-shadow:0 0 ${bl(8)}px ${nameHalo}, 0 0 ${bl(20)}px ${GLOW}, 0 0 ${bl(44)}px ${GLOW}${ax(1)}, 0 0 ${bl(78)}px ${GLOW}${ax(1)};}
   .${ns} .role{margin-top:20px;font-size:13px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:${ACC};
@@ -69,7 +73,7 @@ function NeonBoard({ pal }) {
 
   /* ===== STATIC SECTIONS ===== */
   .${ns} .ol{font-size:13px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:${GLOW};
-    text-shadow:0 0 ${bl(10)}px ${GLOW}${ax(.53)};display:flex;align-items:center;gap:16px;margin:0 0 26px;}
+    text-shadow:0 0 ${bl(10)}px ${GLOW}${ax(0.53)};display:flex;align-items:center;gap:16px;margin:0 0 26px;}
   .${ns} .ol::before{content:"";width:9px;height:9px;border-radius:50%;background:${GLOW};box-shadow:0 0 12px ${GLOW};}
   .${ns} .ol::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,${GLOW}88,transparent);}
   .${ns} .about{max-width:760px;margin:62px auto 80px;}
@@ -113,24 +117,56 @@ function NeonBoard({ pal }) {
         <header className="sign">
           <span className="open">Open to work</span>
           <img className="avatar" src={P.photo} alt={P.name} />
-          <h1 className="name">Sévrain<br />Chea</h1>
+          <h1 className="name">
+            Sévrain
+            <br />
+            Chea
+          </h1>
           <div className="role">Tech Lead · Full-Stack Engineer</div>
           <p className="tagline">{P.tagline}</p>
-          <nav>{P.nav.map((n) => <a key={n} href="#">{n}</a>)}</nav>
-          <div className="socials">{P.socials.map((s) => <a key={s} href="#" title={s}>{window.IconFor(s)}</a>)}</div>
+          <nav>
+            {P.nav.map((n) => (
+              <a key={n} href="#">
+                {n}
+              </a>
+            ))}
+          </nav>
+          <div className="socials">
+            {P.socials.map((s) => (
+              <a key={s} href="#" title={s}>
+                {window.IconFor(s)}
+              </a>
+            ))}
+          </div>
         </header>
         <div className="about">
           <div className="ol">About</div>
-          {P.about.map((p, i) => <p key={i} dangerouslySetInnerHTML={{ __html: p }} />)}
+          {P.about.map((p, i) => (
+            <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+          ))}
         </div>
         <div className="ol">Experience</div>
         {P.experiences.map((x, i) => (
           <div className="xp" key={i}>
-            <div className="when"><span>{x.dates}</span><span className="dur">{x.duration}</span></div>
-            <h3>{x.title} <span className="co">@ {x.company}</span></h3>
-            <div className="pos">{x.contract}{x.positions.length ? " · " + x.positions.join(" · ") : ""}</div>
+            <div className="when">
+              <span>{x.dates}</span>
+              <span className="dur">{x.duration}</span>
+            </div>
+            <h3>
+              {x.title} <span className="co">@ {x.company}</span>
+            </h3>
+            <div className="pos">
+              {x.contract}
+              {x.positions.length ? " · " + x.positions.join(" · ") : ""}
+            </div>
             <p className="desc">{x.description}</p>
-            <div className="tags">{x.stack.map((t) => <span className="tag" key={t}>{t}</span>)}</div>
+            <div className="tags">
+              {x.stack.map((t) => (
+                <span className="tag" key={t}>
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </div>
@@ -140,65 +176,126 @@ function NeonBoard({ pal }) {
 
 // VARIANT A — "Hotline": hot-pink primary, teal secondary on deep purple-black.
 const NEON_HOTLINE = {
-  ns: "neon-hot", bg: "#0d0518", panel: "#190a2b",
-  GLOW: "#ff2e88", ACC: "#2de2e6", ink: "#f5e9ff", body: "#c2add9", line: "rgba(255,255,255,.07)",
-  nameCol: "#ffffff", nameHalo: "#ffffff", head: "#ffffff",
+  ns: "neon-hot",
+  bg: "#0d0518",
+  panel: "#190a2b",
+  GLOW: "#ff2e88",
+  ACC: "#2de2e6",
+  ink: "#f5e9ff",
+  body: "#c2add9",
+  line: "rgba(255,255,255,.07)",
+  nameCol: "#ffffff",
+  nameHalo: "#ffffff",
+  head: "#ffffff",
 };
 // VARIANT B — "Acid": toxic lime primary, electric-blue secondary on near-black green.
 const NEON_ACID = {
-  ns: "neon-acid", bg: "#06110b", panel: "#0c2017",
-  GLOW: "#b6ff3c", ACC: "#2f9bff", ink: "#eafff0", body: "#a8c9b6", line: "rgba(255,255,255,.06)",
-  nameCol: "#ffffff", nameHalo: "#ffffff", head: "#ffffff",
+  ns: "neon-acid",
+  bg: "#06110b",
+  panel: "#0c2017",
+  GLOW: "#b6ff3c",
+  ACC: "#2f9bff",
+  ink: "#eafff0",
+  body: "#a8c9b6",
+  line: "rgba(255,255,255,.06)",
+  nameCol: "#ffffff",
+  nameHalo: "#ffffff",
+  head: "#ffffff",
 };
 // VARIANT C — "Electric": electric-blue primary, vivid violet secondary on deep navy-black.
 const NEON_ELECTRIC = {
-  ns: "neon-elec", bg: "#04081c", panel: "#0a1338",
-  GLOW: "#2e9bff", ACC: "#b14bff", ink: "#eaf2ff", body: "#9fb4d8", line: "rgba(255,255,255,.07)",
-  nameCol: "#ffffff", nameHalo: "#ffffff", head: "#ffffff",
+  ns: "neon-elec",
+  bg: "#04081c",
+  panel: "#0a1338",
+  GLOW: "#2e9bff",
+  ACC: "#b14bff",
+  ink: "#eaf2ff",
+  body: "#9fb4d8",
+  line: "rgba(255,255,255,.07)",
+  nameCol: "#ffffff",
+  nameHalo: "#ffffff",
+  head: "#ffffff",
 };
 // LIGHT MODE — "neon sign in daylight": the sign sits on a softly tinted wall
 // (never pure white) and the tube/name glow is dialled back so it reads calm,
 // not blinding. Background saturation + glow are tweakable (see applyTweak).
 const NEON_HOTLINE_LIGHT = {
-  ns: "neon-hot-l", bg: "#f5eef5", panel: "#fbf6fb",
-  GLOW: "#e0247a", ACC: "#0aa1a6", ink: "#2a1f33", body: "#6a5d76", line: "rgba(40,20,60,.07)",
-  nameCol: "#e0247a", nameHalo: "#f7a7c8", head: "#2a1f33", glow: 0.55,
+  ns: "neon-hot-l",
+  bg: "#f5eef5",
+  panel: "#fbf6fb",
+  GLOW: "#e0247a",
+  ACC: "#0aa1a6",
+  ink: "#2a1f33",
+  body: "#6a5d76",
+  line: "rgba(40,20,60,.07)",
+  nameCol: "#e0247a",
+  nameHalo: "#f7a7c8",
+  head: "#2a1f33",
+  glow: 0.55,
 };
 const NEON_ACID_LIGHT = {
-  ns: "neon-acid-l", bg: "#eff5ec", panel: "#f9fcf6",
-  GLOW: "#4fa514", ACC: "#1f78d6", ink: "#1b271e", body: "#5a6b5f", line: "rgba(20,40,25,.07)",
-  nameCol: "#4fa514", nameHalo: "#bfe39a", head: "#1b271e", glow: 0.55,
+  ns: "neon-acid-l",
+  bg: "#eff5ec",
+  panel: "#f9fcf6",
+  GLOW: "#4fa514",
+  ACC: "#1f78d6",
+  ink: "#1b271e",
+  body: "#5a6b5f",
+  line: "rgba(20,40,25,.07)",
+  nameCol: "#4fa514",
+  nameHalo: "#bfe39a",
+  head: "#1b271e",
+  glow: 0.55,
 };
 const NEON_ELECTRIC_LIGHT = {
-  ns: "neon-elec-l", bg: "#edf1fb", panel: "#f7f9fe",
-  GLOW: "#1f5fe0", ACC: "#8b2fdc", ink: "#1a2138", body: "#5a667f", line: "rgba(20,30,60,.07)",
-  nameCol: "#1f5fe0", nameHalo: "#a9c4f7", head: "#1a2138", glow: 0.55,
+  ns: "neon-elec-l",
+  bg: "#edf1fb",
+  panel: "#f7f9fe",
+  GLOW: "#1f5fe0",
+  ACC: "#8b2fdc",
+  ink: "#1a2138",
+  body: "#5a667f",
+  line: "rgba(20,30,60,.07)",
+  nameCol: "#1f5fe0",
+  nameHalo: "#a9c4f7",
+  head: "#1a2138",
+  glow: 0.55,
 };
 
 // Background saturation presets for Neon light mode (tweakable, never #fff).
 const NEON_LIGHT_SAT = {
   hotline: {
-    soft:      { bg: "#f5eef5", panel: "#fbf6fb" },
-    tinted:    { bg: "#f0e4ef", panel: "#f8edf5" },
+    soft: { bg: "#f5eef5", panel: "#fbf6fb" },
+    tinted: { bg: "#f0e4ef", panel: "#f8edf5" },
     saturated: { bg: "#efd6e8", panel: "#f9e4f1" },
   },
   acid: {
-    soft:      { bg: "#eff5ec", panel: "#f9fcf6" },
-    tinted:    { bg: "#e6f0e1", panel: "#f0f8ec" },
+    soft: { bg: "#eff5ec", panel: "#f9fcf6" },
+    tinted: { bg: "#e6f0e1", panel: "#f0f8ec" },
     saturated: { bg: "#daeecf", panel: "#eaf7e0" },
   },
   electric: {
-    soft:      { bg: "#edf1fb", panel: "#f7f9fe" },
-    tinted:    { bg: "#e2e9f8", panel: "#eef3fc" },
+    soft: { bg: "#edf1fb", panel: "#f7f9fe" },
+    tinted: { bg: "#e2e9f8", panel: "#eef3fc" },
     saturated: { bg: "#d2def5", panel: "#e6eefb" },
   },
 };
 
-function DirNeon() { return <NeonBoard pal={NEON_HOTLINE} />; }
-function DirNeonAcid() { return <NeonBoard pal={NEON_ACID} />; }
-function DirNeonElectric() { return <NeonBoard pal={NEON_ELECTRIC} />; }
-function DirNeonLight() { return <NeonBoard pal={NEON_HOTLINE_LIGHT} />; }
-function DirNeonAcidLight() { return <NeonBoard pal={NEON_ACID_LIGHT} />; }
+function DirNeon() {
+  return <NeonBoard pal={NEON_HOTLINE} />;
+}
+function DirNeonAcid() {
+  return <NeonBoard pal={NEON_ACID} />;
+}
+function DirNeonElectric() {
+  return <NeonBoard pal={NEON_ELECTRIC} />;
+}
+function DirNeonLight() {
+  return <NeonBoard pal={NEON_HOTLINE_LIGHT} />;
+}
+function DirNeonAcidLight() {
+  return <NeonBoard pal={NEON_ACID_LIGHT} />;
+}
 window.DirNeon = DirNeon;
 window.DirNeonAcid = DirNeonAcid;
 window.DirNeonLight = DirNeonLight;
@@ -208,12 +305,36 @@ window.DirNeonElectric = DirNeonElectric;
 // Registry for the live portfolio's theme switcher. Each variant carries a
 // dark + light palette; the host picks one based on the family's mode.
 window.NEON_THEME = {
-  id: "neon", name: "Neon", Board: NeonBoard, defaultMode: "dark",
+  id: "neon",
+  name: "Neon",
+  Board: NeonBoard,
+  defaultMode: "dark",
   swatchKeys: ["GLOW", "ACC"],
   variants: [
-    { id: "hotline", name: "Hotline", swatch: ["#ff2e88", "#2de2e6"], accent: { dark: "#ff2e88", light: "#e0247a" }, dark: NEON_HOTLINE, light: NEON_HOTLINE_LIGHT },
-    { id: "acid", name: "Acid", swatch: ["#b6ff3c", "#2f9bff"], accent: { dark: "#b6ff3c", light: "#57b015" }, dark: NEON_ACID, light: NEON_ACID_LIGHT },
-    { id: "electric", name: "Electric", swatch: ["#2e9bff", "#b14bff"], accent: { dark: "#2e9bff", light: "#1f5fe0" }, dark: NEON_ELECTRIC, light: NEON_ELECTRIC_LIGHT },
+    {
+      id: "hotline",
+      name: "Hotline",
+      swatch: ["#ff2e88", "#2de2e6"],
+      accent: { dark: "#ff2e88", light: "#e0247a" },
+      dark: NEON_HOTLINE,
+      light: NEON_HOTLINE_LIGHT,
+    },
+    {
+      id: "acid",
+      name: "Acid",
+      swatch: ["#b6ff3c", "#2f9bff"],
+      accent: { dark: "#b6ff3c", light: "#57b015" },
+      dark: NEON_ACID,
+      light: NEON_ACID_LIGHT,
+    },
+    {
+      id: "electric",
+      name: "Electric",
+      swatch: ["#2e9bff", "#b14bff"],
+      accent: { dark: "#2e9bff", light: "#1f5fe0" },
+      dark: NEON_ELECTRIC,
+      light: NEON_ELECTRIC_LIGHT,
+    },
   ],
   // Tweak defaults the host merges into its panel state.
   tweakDefaults: { neonSat: "soft", neonGlow: 0.55 },

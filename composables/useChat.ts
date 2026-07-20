@@ -56,7 +56,10 @@ export function useChat() {
             ? resumePart.output?.url
             : undefined;
         const content = resumeUrl
-          ? [textContent, `You can view Sévrain's CV here: [Sévrain's CV](${resumeUrl})`]
+          ? [
+              textContent,
+              `You can view Sévrain's CV here: [Sévrain's CV](${resumeUrl})`,
+            ]
               .filter(Boolean)
               .join("\n\n")
           : textContent;
@@ -82,7 +85,11 @@ export function useChat() {
         last.content = last.content || ERROR_COPY;
         last.streaming = false;
       } else {
-        mapped.push({ role: "assistant", content: ERROR_COPY, streaming: false });
+        mapped.push({
+          role: "assistant",
+          content: ERROR_COPY,
+          streaming: false,
+        });
       }
     }
 
@@ -153,7 +160,11 @@ export function useChat() {
   watch(
     () => chat.status,
     (status, prev) => {
-      if (prev === "streaming" && status !== "streaming" && !userAtBottom.value) {
+      if (
+        prev === "streaming" &&
+        status !== "streaming" &&
+        !userAtBottom.value
+      ) {
         showScrollCTA.value = true;
       }
     },

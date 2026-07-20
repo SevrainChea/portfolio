@@ -47,11 +47,11 @@ Nuxt auto-imports are used deliberately — know which is which:
   everything theme-related from `~/composables/useTheme`. Prefer that single
   entry point over importing `~/theme-registry` directly in components.
 
-## Comments — explain the *why*
+## Comments — explain the _why_
 
 This codebase comments **intent and hazards**, not mechanics. Theme/hydration
 code is subtle (FOUC avoidance, SSR/CSR hydration parity, pre-paint scripts), so
-when you touch it, leave a comment explaining *why* the non-obvious choice is
+when you touch it, leave a comment explaining _why_ the non-obvious choice is
 required — mirror the existing density in `app.vue`, `useTheme.ts`,
 `nuxt.config.ts`, and `ThemeSwitcher.vue`. Don't narrate obvious code.
 

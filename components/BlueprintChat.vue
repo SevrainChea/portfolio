@@ -9,10 +9,18 @@
       </div>
 
       <div class="tb">
-        <div class="cell"><span class="k">Doc</span><span class="v">Q&amp;A — Transcript</span></div>
-        <div class="cell"><span class="k">Subject</span><span class="v">S. Chea</span></div>
-        <div class="cell"><span class="k">Rev</span><span class="v">01</span></div>
-        <div class="cell"><span class="k">Status</span><span class="v live"><i />Live</span></div>
+        <div class="cell">
+          <span class="k">Doc</span><span class="v">Q&amp;A — Transcript</span>
+        </div>
+        <div class="cell">
+          <span class="k">Subject</span><span class="v">S. Chea</span>
+        </div>
+        <div class="cell">
+          <span class="k">Rev</span><span class="v">01</span>
+        </div>
+        <div class="cell">
+          <span class="k">Status</span><span class="v live"><i />Live</span>
+        </div>
       </div>
 
       <!-- Empty state -->
@@ -61,7 +69,10 @@
         </div>
 
         <!-- Typing indicator -->
-        <div v-if="loading && !messages.some((m) => m.streaming)" class="awaiting">
+        <div
+          v-if="loading && !messages.some((m) => m.streaming)"
+          class="awaiting"
+        >
           AWAITING RESPONSE<span class="cur sm" />
         </div>
       </div>
@@ -121,7 +132,9 @@ const {
 
 // Number inquiries/responses sequentially, independent of interleaving.
 const figLabel = (i: number, role: Message["role"]) => {
-  const n = messages.value.slice(0, i + 1).filter((m) => m.role === role).length;
+  const n = messages.value
+    .slice(0, i + 1)
+    .filter((m) => m.role === role).length;
   const pad = String(n).padStart(2, "0");
   return role === "user" ? `Q-${pad} · INQUIRY` : `A-${pad} · RESPONSE`;
 };

@@ -13,6 +13,7 @@
 ### Task 1: Update RAG Service to Filter by Similarity Score
 
 **Files:**
+
 - Modify: `chatbot-backend/app/services/rag_service.py:55-83`
 
 **Step 1: Read current retrieve method and understand ChromaDB query response**
@@ -73,9 +74,10 @@ Replace lines 55-83 in rag_service.py
 ### Task 2: Update LLMProvider Base Class with System Prompt Support
 
 **Files:**
+
 - Modify: `chatbot-backend/app/services/llm_service.py:1-39`
 
-**Step 1: Add system prompt constant and update _build_prompt method**
+**Step 1: Add system prompt constant and update \_build_prompt method**
 
 ```python
 SYSTEM_PROMPT = """You are a helpful AI assistant representing Sevrain CHEA's portfolio.
@@ -119,13 +121,14 @@ Question: {prompt}"""
 
 **Step 2: Edit llm_service.py lines 1-39**
 
-Update the LLMProvider class with the new system prompt constant and updated _build_prompt method. Note: context parameter type changes from `List[str]` to `List[Dict[str, str]]`.
+Update the LLMProvider class with the new system prompt constant and updated \_build_prompt method. Note: context parameter type changes from `List[str]` to `List[Dict[str, str]]`.
 
 ---
 
 ### Task 3: Update OllamaProvider
 
 **Files:**
+
 - Modify: `chatbot-backend/app/services/llm_service.py:42-81`
 
 **Step 1: Add system role to generate and generate_stream methods**
@@ -186,6 +189,7 @@ class OllamaProvider(LLMProvider):
 ### Task 4: Update GeminiProvider
 
 **Files:**
+
 - Modify: `chatbot-backend/app/services/llm_service.py:84-121`
 
 **Step 1: Add system instruction to Gemini provider**
@@ -241,6 +245,7 @@ class GeminiProvider(LLMProvider):
 ### Task 5: Update GroqProvider
 
 **Files:**
+
 - Modify: `chatbot-backend/app/services/llm_service.py:124-169`
 
 **Step 1: Add system role to Groq provider**
@@ -307,6 +312,7 @@ class GroqProvider(LLMProvider):
 ### Task 6: Update Chat Router to Pass Filtered Context
 
 **Files:**
+
 - Modify: `chatbot-backend/app/routers/chat.py:15-47` (non-streaming)
 - Modify: `chatbot-backend/app/routers/chat.py:50-94` (streaming)
 
@@ -403,6 +409,7 @@ async def chat_stream(request: ChatRequest):
 ### Task 7: Update LLMService to Accept Context Dicts
 
 **Files:**
+
 - Modify: `chatbot-backend/app/services/llm_service.py:193-206`
 
 **Step 1: Update service method signatures**
@@ -456,6 +463,7 @@ llm_service = LLMService()
 ## Plan Summary
 
 **Key Changes:**
+
 1. RAG service: Filter by similarity ≥0.65, include relevance scores
 2. LLM service: Add system prompt constant, format context with relevance metadata
 3. All 3 providers: Add system role (separate from user message)

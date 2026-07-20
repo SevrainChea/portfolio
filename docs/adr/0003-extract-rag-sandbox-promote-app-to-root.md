@@ -16,7 +16,7 @@ its Railway deploy. That left the repository in an awkward shape:
   beside `chatbot-backend/`, with a root `README.md`/`QUICK_START.md`/`dev.sh`
   describing "two independent projects" and a script to boot both together.
 - After ADR-0002 the two are no longer co-equal. The Nuxt app is the **entire
-  production system** (UI *and* the chat backend, in `server/`); the Python
+  production system** (UI _and_ the chat backend, in `server/`); the Python
   service is a **retired sandbox** with no role in the deployed product.
 - So `portfolio-frontend/` is a misnomer (it is not "the frontend" — it is the
   whole app), and the monorepo framing actively misleads a reader into thinking
@@ -37,11 +37,11 @@ truth.
    (public).** The extraction preserves the backend's git history (its 21
    commits), rewritten so the former `chatbot-backend/` contents sit at that
    repo's root. It stands alone as a learning sandbox and the future home for a
-   *real*, large-corpus RAG (the scenario ADR-0002 named as the point where
+   _real_, large-corpus RAG (the scenario ADR-0002 named as the point where
    retrieval becomes the right tool again).
 
 2. **Promote the Nuxt app to the root of this repo.** Everything under
-   `portfolio-frontend/` moves up one level; the app *is* the project. Colliding
+   `portfolio-frontend/` moves up one level; the app _is_ the project. Colliding
    root files are merged rather than clobbered: `.gitignore` rewritten for a
    root-level Nuxt app, `.vscode/settings.json` kept (Tailwind associations) with
    the dead Python interpreter paths dropped, `docs/` merged, `CLAUDE.md` updated
@@ -59,6 +59,7 @@ context injection on a Nitro route — is unchanged and still in force.
 ## Consequences
 
 **Positive**
+
 - The repository structure is honest: one repo = one deployable Nuxt app, with no
   misleading `portfolio-frontend/` wrapper or dead co-equal sibling.
 - The sandbox keeps its full history and gains an independent lifecycle — it can
@@ -67,6 +68,7 @@ context injection on a Nitro route — is unchanged and still in force.
   and `chroma_db/` were gitignored and excluded from the new repo.
 
 **Negative / costs**
+
 - A large, mechanical rename churn in this repo's history (most of the diff is
   path moves). Git rename detection keeps blame intact for the moved files.
 - **Vercel's "Root Directory" must change** from `portfolio-frontend` to the repo
@@ -77,6 +79,7 @@ context injection on a Nitro route — is unchanged and still in force.
   unedited; this ADR is the pointer to the current layout.
 
 **Boundary of this decision**
+
 - This is a structural/organisational change only — no runtime behaviour changes.
   The split does not preclude folding the sandbox back in later, but the default
   is now two repos.

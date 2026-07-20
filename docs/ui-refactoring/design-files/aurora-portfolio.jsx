@@ -150,60 +150,110 @@ function AuroraSwitcher({ variant, onPick, mode, onToggleMode }) {
   }, [menuOpen]);
   return (
     <div className="aurora-switch">
-      <div className={"fam has-menu"} onClick={(e) => {e.stopPropagation();setMenuOpen((o) => !o);}}>
+      <div
+        className={"fam has-menu"}
+        onClick={(e) => {
+          e.stopPropagation();
+          setMenuOpen((o) => !o);
+        }}
+      >
         <span className="lbl">Theme</span>
-        <span className="val">{T.name}<span className="chev">▾</span></span>
-        {menuOpen &&
-        <div className="aurora-menu" onClick={(e) => e.stopPropagation()}>
-            <button className="active">Aurora<span className="ck">✓</span></button>
-            <button className="soon">Editorial<span className="badge">Soon</span></button>
-            <button className="soon">Console<span className="badge">Soon</span></button>
+        <span className="val">
+          {T.name}
+          <span className="chev">▾</span>
+        </span>
+        {menuOpen && (
+          <div className="aurora-menu" onClick={(e) => e.stopPropagation()}>
+            <button className="active">
+              Aurora<span className="ck">✓</span>
+            </button>
+            <button className="soon">
+              Editorial<span className="badge">Soon</span>
+            </button>
+            <button className="soon">
+              Console<span className="badge">Soon</span>
+            </button>
           </div>
-        }
-      </div>
-      <div className="sep" />
-      <div className="swatches">
-        {T.variants.map((v) =>
-        <button
-          key={v.id}
-          className={"sw" + (v.id === variant ? " active" : "")}
-          onClick={() => onPick(v.id)}
-          aria-label={v.name}>
-          
-            <span className="dot" style={{ background: `linear-gradient(135deg, ${v.swatch[0]} 45%, ${v.swatch[1]} 45%)` }} />
-            <span className="tip">{v.name}</span>
-          </button>
         )}
       </div>
       <div className="sep" />
-      <button className="mode" onClick={onToggleMode} aria-label={mode === "dark" ? "Switch to light" : "Switch to dark"}>
-        {mode === "dark" ?
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" /></svg> :
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.8 6.8 0 0 0 9.8 9.8z" /></svg>}
+      <div className="swatches">
+        {T.variants.map((v) => (
+          <button
+            key={v.id}
+            className={"sw" + (v.id === variant ? " active" : "")}
+            onClick={() => onPick(v.id)}
+            aria-label={v.name}
+          >
+            <span
+              className="dot"
+              style={{
+                background: `linear-gradient(135deg, ${v.swatch[0]} 45%, ${v.swatch[1]} 45%)`,
+              }}
+            />
+            <span className="tip">{v.name}</span>
+          </button>
+        ))}
+      </div>
+      <div className="sep" />
+      <button
+        className="mode"
+        onClick={onToggleMode}
+        aria-label={mode === "dark" ? "Switch to light" : "Switch to dark"}
+      >
+        {mode === "dark" ? (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="12" r="4.2" />
+            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.8 6.8 0 0 0 9.8 9.8z" />
+          </svg>
+        )}
         <span className="tip">{mode === "dark" ? "Light" : "Dark"}</span>
       </button>
-    </div>);
-
+    </div>
+  );
 }
 
 function AuroraPortfolio() {
   const P = window.PORTFOLIO;
   const T = window.AURORA_THEME;
   const [variant, setVariant] = React.useState(() => {
-    try {return localStorage.getItem("aurora-variant") || "cobalt";} catch (e) {return "cobalt";}
+    try {
+      return localStorage.getItem("aurora-variant") || "cobalt";
+    } catch (e) {
+      return "cobalt";
+    }
   });
   const [mode, setMode] = React.useState(() => {
-    try {return localStorage.getItem("aurora-mode") || "dark";} catch (e) {return "dark";}
+    try {
+      return localStorage.getItem("aurora-mode") || "dark";
+    } catch (e) {
+      return "dark";
+    }
   });
   const v = T.variants.find((x) => x.id === variant) || T.variants[0];
   const pick = (id) => {
     setVariant(id);
-    try {localStorage.setItem("aurora-variant", id);} catch (e) {}
+    try {
+      localStorage.setItem("aurora-variant", id);
+    } catch (e) {}
   };
   const toggleMode = () => {
     setMode((m) => {
       const next = m === "dark" ? "light" : "dark";
-      try {localStorage.setItem("aurora-mode", next);} catch (e) {}
+      try {
+        localStorage.setItem("aurora-mode", next);
+      } catch (e) {}
       return next;
     });
   };
@@ -212,40 +262,85 @@ function AuroraPortfolio() {
     <div className="aurora-root" style={style}>
       <style dangerouslySetInnerHTML={{ __html: AURORA_CSS }} />
       <div className="bg-grad" />
-      <div className="aurora"><div className="blob b1" /><div className="blob b2" /><div className="blob b3" /></div>
+      <div className="aurora">
+        <div className="blob b1" />
+        <div className="blob b2" />
+        <div className="blob b3" />
+      </div>
       <div className="grain" />
-      <AuroraSwitcher variant={variant} onPick={pick} mode={mode} onToggleMode={toggleMode} />
+      <AuroraSwitcher
+        variant={variant}
+        onPick={pick}
+        mode={mode}
+        onToggleMode={toggleMode}
+      />
       <div className="wrap">
         <aside className="left">
           <img className="avatar" src={P.photo} alt={P.name} />
-          <h1 className="name">Sévrain<br />CHEA</h1>
+          <h1 className="name">
+            Sévrain
+            <br />
+            CHEA
+          </h1>
           <div className="role">Tech Lead · Full-Stack Engineer</div>
           <p className="tagline">{P.tagline}</p>
           <div className="divrule" />
-          <nav>{P.nav.map((n, i) => <a key={n} className={i === 0 ? "active" : ""} href="#"><span className="ix">{String(i + 1).padStart(2, "0")}</span>{n}</a>)}</nav>
-          <div className="socials">{P.socials.map((s) => <a key={s} href="#" title={s}>{window.IconFor(s)}</a>)}</div>
+          <nav>
+            {P.nav.map((n, i) => (
+              <a key={n} className={i === 0 ? "active" : ""} href="#">
+                <span className="ix">{String(i + 1).padStart(2, "0")}</span>
+                {n}
+              </a>
+            ))}
+          </nav>
+          <div className="socials">
+            {P.socials.map((s) => (
+              <a key={s} href="#" title={s}>
+                {window.IconFor(s)}
+              </a>
+            ))}
+          </div>
         </aside>
         <main className="right">
           <div className="overline">About</div>
-          <div className="about">{P.about.map((p, i) => <p key={i} dangerouslySetInnerHTML={{ __html: p }} />)}</div>
+          <div className="about">
+            {P.about.map((p, i) => (
+              <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+            ))}
+          </div>
           <div className="section">
             <div className="overline">Experience</div>
             <div className="tl">
-              {P.experiences.map((x, i) =>
-              <div className="xp" key={i}>
-                  <div className="when"><span>{x.dates}</span><span className="dur">{x.duration}</span></div>
-                  <h3>{x.title} <span className="co">@ {x.company}</span> <span className="ext">↗</span></h3>
-                  <div className="pos">{x.contract}{x.positions.length ? " · " + x.positions.join(" · ") : ""}</div>
+              {P.experiences.map((x, i) => (
+                <div className="xp" key={i}>
+                  <div className="when">
+                    <span>{x.dates}</span>
+                    <span className="dur">{x.duration}</span>
+                  </div>
+                  <h3>
+                    {x.title} <span className="co">@ {x.company}</span>{" "}
+                    <span className="ext">↗</span>
+                  </h3>
+                  <div className="pos">
+                    {x.contract}
+                    {x.positions.length ? " · " + x.positions.join(" · ") : ""}
+                  </div>
                   <p className="desc">{x.description}</p>
-                  <div className="tags">{x.stack.map((t) => <span className="tag" key={t}>{t}</span>)}</div>
+                  <div className="tags">
+                    {x.stack.map((t) => (
+                      <span className="tag" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              )}
+              ))}
             </div>
           </div>
         </main>
       </div>
-    </div>);
-
+    </div>
+  );
 }
 
 // Body only (no switcher) — used by the unified PortfolioHost switcher.
@@ -258,47 +353,107 @@ function AuroraBody({ variantId, mode }) {
     <div className="aurora-root" style={style}>
       <style dangerouslySetInnerHTML={{ __html: AURORA_CSS }} />
       <div className="bg-grad" />
-      <div className="aurora"><div className="blob b1" /><div className="blob b2" /><div className="blob b3" /></div>
+      <div className="aurora">
+        <div className="blob b1" />
+        <div className="blob b2" />
+        <div className="blob b3" />
+      </div>
       <div className="grain" />
       <div className="wrap">
         <aside className="left">
           <img className="avatar" src={P.photo} alt={P.name} />
-          <h1 className="name">Sévrain<br />CHEA</h1>
+          <h1 className="name">
+            Sévrain
+            <br />
+            CHEA
+          </h1>
           <div className="role">Tech Lead · Full-Stack Engineer</div>
           <p className="tagline">{P.tagline}</p>
           <div className="divrule" />
-          <nav>{P.nav.map((n, i) => <a key={n} className={i === 0 ? "active" : ""} href="#"><span className="ix">{String(i + 1).padStart(2, "0")}</span>{n}</a>)}</nav>
-          <div className="socials">{P.socials.map((s) => <a key={s} href="#" title={s}>{window.IconFor(s)}</a>)}</div>
+          <nav>
+            {P.nav.map((n, i) => (
+              <a key={n} className={i === 0 ? "active" : ""} href="#">
+                <span className="ix">{String(i + 1).padStart(2, "0")}</span>
+                {n}
+              </a>
+            ))}
+          </nav>
+          <div className="socials">
+            {P.socials.map((s) => (
+              <a key={s} href="#" title={s}>
+                {window.IconFor(s)}
+              </a>
+            ))}
+          </div>
         </aside>
         <main className="right">
           <div className="overline">About</div>
-          <div className="about">{P.about.map((p, i) => <p key={i} dangerouslySetInnerHTML={{ __html: p }} />)}</div>
+          <div className="about">
+            {P.about.map((p, i) => (
+              <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+            ))}
+          </div>
           <div className="section">
             <div className="overline">Experience</div>
             <div className="tl">
-              {P.experiences.map((x, i) =>
-              <div className="xp" key={i}>
-                  <div className="when"><span>{x.dates}</span><span className="dur">{x.duration}</span></div>
-                  <h3>{x.title} <span className="co">@ {x.company}</span> <span className="ext">↗</span></h3>
-                  <div className="pos">{x.contract}{x.positions.length ? " · " + x.positions.join(" · ") : ""}</div>
+              {P.experiences.map((x, i) => (
+                <div className="xp" key={i}>
+                  <div className="when">
+                    <span>{x.dates}</span>
+                    <span className="dur">{x.duration}</span>
+                  </div>
+                  <h3>
+                    {x.title} <span className="co">@ {x.company}</span>{" "}
+                    <span className="ext">↗</span>
+                  </h3>
+                  <div className="pos">
+                    {x.contract}
+                    {x.positions.length ? " · " + x.positions.join(" · ") : ""}
+                  </div>
                   <p className="desc">{x.description}</p>
-                  <div className="tags">{x.stack.map((t) => <span className="tag" key={t}>{t}</span>)}</div>
+                  <div className="tags">
+                    {x.stack.map((t) => (
+                      <span className="tag" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              )}
+              ))}
             </div>
           </div>
         </main>
       </div>
-    </div>);
+    </div>
+  );
 }
 window.AuroraBody = AuroraBody;
 
 // Icon helper (self-contained so this file doesn't depend on the canvas files).
 function IconFor(s) {
-  const c = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "currentColor" };
-  if (s === "GitHub") return <svg {...c}><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.2-4.6-5.1 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9 9 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.8-4.6 5.1.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 4-1.3 6.8-5.1 6.8-9.7C22 6.6 17.5 2 12 2z" /></svg>;
-  if (s === "LinkedIn") return <svg {...c}><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.3 18V10H5.7v8h2.6zM7 8.8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM18.3 18v-4.4c0-2.4-1.3-3.5-3-3.5-1.4 0-2 .8-2.3 1.3V10h-2.6v8h2.6v-4.5c0-1.2.8-1.6 1.5-1.6.7 0 1.2.5 1.2 1.6V18h2.6z" /></svg>;
-  return <svg {...c}><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7L4 7v1l8 5 8-5V7l-8 5z" /></svg>;
+  const c = {
+    width: 18,
+    height: 18,
+    viewBox: "0 0 24 24",
+    fill: "currentColor",
+  };
+  if (s === "GitHub")
+    return (
+      <svg {...c}>
+        <path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.2-4.6-5.1 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9 9 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.8-4.6 5.1.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 4-1.3 6.8-5.1 6.8-9.7C22 6.6 17.5 2 12 2z" />
+      </svg>
+    );
+  if (s === "LinkedIn")
+    return (
+      <svg {...c}>
+        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.3 18V10H5.7v8h2.6zM7 8.8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM18.3 18v-4.4c0-2.4-1.3-3.5-3-3.5-1.4 0-2 .8-2.3 1.3V10h-2.6v8h2.6v-4.5c0-1.2.8-1.6 1.5-1.6.7 0 1.2.5 1.2 1.6V18h2.6z" />
+      </svg>
+    );
+  return (
+    <svg {...c}>
+      <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7L4 7v1l8 5 8-5V7l-8 5z" />
+    </svg>
+  );
 }
 window.IconFor = IconFor;
 window.AuroraPortfolio = AuroraPortfolio;

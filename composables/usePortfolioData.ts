@@ -55,7 +55,11 @@ const portfolio = {
   ] as string[],
 
   socials: [
-    { label: "GitHub", url: "https://github.com/SevrainChea", icon: "mdi:github" },
+    {
+      label: "GitHub",
+      url: "https://github.com/SevrainChea",
+      icon: "mdi:github",
+    },
     {
       label: "LinkedIn",
       url: "https://www.linkedin.com/in/sevrainchea/",
@@ -140,7 +144,9 @@ const portfolio = {
         "jQuery",
       ],
       companyLink: "https://www.soprasteria.com/",
-      projectLinks: [{ name: "GIP-MDS", url: "https://www.net-entreprises.fr/" }],
+      projectLinks: [
+        { name: "GIP-MDS", url: "https://www.net-entreprises.fr/" },
+      ],
     },
     {
       title: "Software Engineer",

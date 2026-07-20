@@ -48,7 +48,7 @@ mismatch. Keep all of these intact:
 
 - **Pre-paint inline script** (`nuxt.config.ts` → `app.head.script`) reads
   `localStorage` (→ OS `prefers-color-scheme` → family default) and sets the
-  `<html>` attributes *before* first paint. Its storage keys and default map are
+  `<html>` attributes _before_ first paint. Its storage keys and default map are
   injected from `theme-registry.ts` so they can't drift from `useTheme`.
 - **`useTheme` hydrates state in `onMounted`, not during setup** — so the first
   client render matches the SSR default render (no hydration mismatch). The
@@ -61,7 +61,7 @@ mismatch. Keep all of these intact:
   `ALL_VARIANT_IDS`). Prefer this CSS-driven approach over JS that runs
   post-mount.
 
-If you change anything about *what* gets written to `<html>` or *which* storage
+If you change anything about _what_ gets written to `<html>` or _which_ storage
 keys are used, update **all four** touch points together: `theme-registry.ts`,
 `useTheme.ts`, `app.vue`, and the inline script in `nuxt.config.ts`.
 
