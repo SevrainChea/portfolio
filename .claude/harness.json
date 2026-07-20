@@ -1,0 +1,13 @@
+{
+  "$note": "portfolio: Nuxt/Vue + pnpm. By design (see CLAUDE.md) the only tooling is Prettier — no lint, no tests; vue-tsc is not installed, so `tsc --noEmit` is NOT a valid typecheck for a Nuxt project. Files are auto-formatted on edit by the global format hook. `build` is `nuxt build`.",
+
+  "checks": {
+    "format": "pnpm exec prettier --write .",
+    "build": "pnpm build"
+  },
+
+  "stopCheck": [],
+  "$stopCheck_note": "Empty = no blocking stop-gate (portfolio has no fast, deterministic correctness check yet, and the repo is not fully Prettier-clean). To turn one on: run `pnpm exec prettier --write .` once to clean the tree, then set stopCheck to [\"format\"] and change checks.format to `pnpm exec prettier --check .`; OR install vue-tsc and set checks.typecheck to `pnpm exec nuxt typecheck`, then stopCheck to [\"typecheck\"].",
+
+  "defaultBranch": "main"
+}

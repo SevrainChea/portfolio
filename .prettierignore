@@ -1,0 +1,9 @@
+# Generated / vendored — Prettier should never rewrite these
+pnpm-lock.yaml
+node_modules/
+.nuxt/
+.output/
+dist/
+
+# Editor config — not app source
+.vscode/
