@@ -1,13 +1,13 @@
 {
-  "$note": "portfolio: Nuxt/Vue + pnpm. By design (see CLAUDE.md) the only tooling is Prettier — no lint, no tests; vue-tsc is not installed, so `tsc --noEmit` is NOT a valid typecheck for a Nuxt project. Files are auto-formatted on edit by the global format hook. `build` is `nuxt build`.",
+  "$note": "portfolio: Nuxt/Vue + pnpm. Only tooling is Prettier (no lint, no tests; vue-tsc is not installed, so tsc --noEmit is NOT a valid typecheck here). checks.format is verify-only (--check) so it can double as the stop-gate; the global format-on-edit hook does the actual writing. build is nuxt build.",
 
   "checks": {
-    "format": "pnpm exec prettier --write .",
+    "format": "pnpm exec prettier --check .",
     "build": "pnpm build"
   },
 
-  "stopCheck": [],
-  "$stopCheck_note": "Empty = no blocking stop-gate (portfolio has no fast, deterministic correctness check yet, and the repo is not fully Prettier-clean). To turn one on: run `pnpm exec prettier --write .` once to clean the tree, then set stopCheck to [\"format\"] and change checks.format to `pnpm exec prettier --check .`; OR install vue-tsc and set checks.typecheck to `pnpm exec nuxt typecheck`, then stopCheck to [\"typecheck\"].",
+  "stopCheck": ["format"],
+  "$stopCheck_note": "Prettier cleanliness is the fast, deterministic gate: you cannot finish with a dirty tree while any file is unformatted. To fix, run `pnpm exec prettier --write .` (or just edit the file, the format-on-edit hook handles it). Exclusions live in .prettierignore (lockfile, build dirs, .vscode).",
 
   "defaultBranch": "main"
 }
