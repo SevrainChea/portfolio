@@ -34,7 +34,6 @@
 | `components/NeonChat.vue` (new)      | Hotline / neon-tube skin.                                                             |
 | `components/EditorialChat.vue` (new) | Correspondence-column skin.                                                           |
 | `components/BlueprintChat.vue` (new) | Transcript / spec-sheet skin.                                                         |
-| `components/GlassCard.vue`           | Becomes dead code (no consumers after this) — left in place, noted in final task.     |
 
 ---
 
@@ -884,17 +883,12 @@ For each: confirm no console errors, no hardcoded-color regressions (everything 
 
 On any one family: confirm Enter sends, Shift+Enter inserts a newline (does not send), send disabled while empty/loading, textarea auto-resizes then resets after send, scroll-to-latest CTA appears when you scroll up during streaming and dismisses on click/scroll-to-bottom, back link routes to `/`, ThemeSwitcher works on `/chat`.
 
-- [ ] **Step 3: Confirm GlassCard is now dead code**
-
-Run: `cd portfolio-frontend && grep -rn "GlassCard" --include=*.vue --include=*.ts . | grep -v "components/GlassCard.vue"`
-Expected: no matches (chat was its last consumer). Leave the file in place (out of scope to delete); this step just records the fact. If matches remain, they are pre-existing and out of scope — note them and move on.
-
-- [ ] **Step 4: Final typecheck (if available)**
+- [ ] **Step 3: Final typecheck (if available)**
 
 Run: `cd portfolio-frontend && pnpm exec nuxi typecheck 2>&1 | head -40`
 Expected: no new errors in `composables/useChat.ts` or the four chat components.
 
-- [ ] **Step 5: Commit any sweep fixes**
+- [ ] **Step 4: Commit any sweep fixes**
 
 ```bash
 cd /Users/sevrainchea/Documents/projects/portfolio
@@ -908,7 +902,7 @@ git commit -m "fix(chat): cross-family verification sweep adjustments"
 
 ## Self-Review notes (author)
 
-- **Spec coverage:** useChat (Task 1) ✓; chat.vue switch (Task 2) ✓; four skins (Tasks 2–5) ✓; sources/model per theme (each skin's "sources/model" step) ✓; themed back link (each skin) ✓; streaming caret + typing indicator per theme (each skin) ✓; scroll CTA (each skin) ✓; responsive breakpoints (each skin's `@media`) ✓; Neon/Blueprint `html:not(.dark)` ports (Tasks 3 & 5 dedicated steps) ✓; verification matrix (Task 6) ✓; GlassCard dead-code note (Task 6) ✓.
+- **Spec coverage:** useChat (Task 1) ✓; chat.vue switch (Task 2) ✓; four skins (Tasks 2–5) ✓; sources/model per theme (each skin's "sources/model" step) ✓; themed back link (each skin) ✓; streaming caret + typing indicator per theme (each skin) ✓; scroll CTA (each skin) ✓; responsive breakpoints (each skin's `@media`) ✓; Neon/Blueprint `html:not(.dark)` ports (Tasks 3 & 5 dedicated steps) ✓; verification matrix (Task 6) ✓.
 - **Type consistency:** `useChat()` returns the exact names destructured in every component (`messages`, `input`, `loading`, `messagesEl`, `inputEl`, `showScrollCTA`, `autoResize`, `send`, `scrollToBottomFromCTA`); `Message`/`SSEEvent` defined once in the composable.
 - **Known dependency:** `scrollToBottom`/`handleScroll`/`userAtBottom`/`conversationId` are used internally by `useChat`; components only need the subset they bind. Each component MUST set `ref="messagesEl"` on its scroll container and `ref="inputEl"` on its textarea, or scroll/auto-resize no-op (fails safe).
 - **CSS-as-port rationale:** prototype CSS lives in-repo (`chat-themes.jsx`) with an exhaustive hex→token table per task, so "port verbatim, substitute tokens" is a deterministic instruction, not a placeholder.

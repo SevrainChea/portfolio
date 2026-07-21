@@ -280,7 +280,7 @@ Find the `<!-- Messages -->` section (line 21). Right after the closing `</div>`
       </Transition>
 ```
 
-**Important:** This button must be a child of the `<GlassCard>` to position absolutely within it. Place it as a sibling to the messages container `</div>` but inside the GlassCard, after line 96.
+**Important:** This button must live inside the relatively-positioned chat container so it can position absolutely within it. Place it as a sibling to the messages container `</div>`, after line 96.
 
 **Explanation:**
 
