@@ -35,13 +35,22 @@ Package manager is **pnpm** (v10.11.1); Node is pinned in `.nvmrc` (v22.16.0).
 - `pnpm dev` — dev server at localhost:3000 (the user keeps one running; **do
   not start your own** — changes hot-reload)
 - `pnpm build` / `pnpm generate` / `pnpm preview`
+- `pnpm lint` / `pnpm lint:fix` — ESLint (behavior-only; see below)
 - `pnpm eval` — run the chat-assistant eval harness (`evals/`, needs a Groq key
   in `.env`; slow on the free tier). `pnpm eval:align <label-csv>` reports
   judge↔human agreement. See [docs/EVALS.md](docs/EVALS.md).
 
-No test framework or linter is configured. Formatting is **Prettier** with
+No test framework is configured. **Formatting** is **Prettier** with
 `prettier-plugin-tailwindcss` (defaults: 2-space, double quotes, semicolons,
-trailing commas).
+trailing commas). **Linting** is **ESLint** via
+[`@nuxt/eslint`](https://eslint.nuxt.com) — a project-aware flat config
+(`eslint.config.mjs` wraps the generated `.nuxt/eslint.config.mjs`). It is
+**behavior-only**: Prettier owns formatting, so `stylistic` is off and
+`vue/html-self-closing` is disabled (it fights Prettier's void-element form).
+The linter fails only on errors; warnings (sanitized `v-html`, deprecated
+`GlassCard.vue`) are informational. `typescript` is installed solely so the
+parser can read `<script lang="ts">` — there is still no `.vue`-aware
+typecheck (`vue-tsc` is not installed).
 
 ## Architecture at a glance
 

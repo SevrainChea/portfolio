@@ -68,5 +68,8 @@ Good (from the codebase):
 - Prettier defaults + `prettier-plugin-tailwindcss` (auto-sorts Tailwind
   classes). 2-space indent, double quotes, semicolons, trailing commas.
 - Don't hand-order Tailwind classes — let the plugin do it.
-- No ESLint is configured; there's nothing to satisfy beyond Prettier and
-  `tsc`/Volar via the editor.
+- **ESLint** (`@nuxt/eslint`) runs as a **behavior-only** linter — Prettier keeps
+  formatting, so ESLint's `stylistic` set is off and `vue/html-self-closing` is
+  disabled. Run `pnpm lint` (or `pnpm lint:fix`). Fix errors; the remaining
+  warnings (`vue/no-v-html` on the sanitized chat markdown, `require-default-prop`
+  on the deprecated `GlassCard.vue`) are known and non-blocking.

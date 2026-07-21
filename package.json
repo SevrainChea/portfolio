@@ -8,6 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "eval": "node --env-file=.env --import tsx evals/run.ts",
     "eval:align": "node --import tsx evals/align.ts"
   },
@@ -32,8 +34,11 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/uil": "^1.2.3",
+    "@nuxt/eslint": "^1.16.0",
+    "eslint": "^10.7.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "tsx": "^4.23.0"
+    "tsx": "^4.23.0",
+    "typescript": "^7.0.2"
   }
 }
