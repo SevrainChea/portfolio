@@ -67,10 +67,9 @@ Tailwind setup. Exact hex/rgba values for every variant are in the **Design Toke
 - Existing `--th-*` token system with a `.dark` custom variant
   (`@custom-variant dark (&:where(.dark, .dark *))`)
 - `@nuxt/icon` (Iconify) for icons, `@nuxt/image` for images
-- `@glace-ui/vue` glassmorphism components
 - Pages: `pages/index.vue` (portfolio), `pages/chat.vue` (streaming chatbot — out of scope here)
 - Existing components: `HeaderCard`, `AboutSection`, `ExperiencesSection`, `ExperienceCard`,
-  `StackTag`, `NavLink`, `GlassCard`, `BgGradient`, `DarkModeToggle`, `FooterSection`
+  `StackTag`, `NavLink`, `DarkModeToggle`, `FooterSection`
 - Package manager **pnpm**; Node pinned in `.nvmrc` (v22.16.0); Prettier + `prettier-plugin-tailwindcss`
 
 ### Recommended integration approach
@@ -410,8 +409,8 @@ files — copy them directly; do not eyeball:
 > **Mapping to the repo's `--th-*` tokens:** the repo currently exposes `--th-primary`,
 > `--th-fg-light/accent/highlight/muted`, `--th-primary-bg1/2/3`, `--th-circle1..5`,
 > `--th-interactive`, `--th-blending`. Aurora's `--name/--ink/--body/--muted/--accent` map onto
-> `--th-fg-light/…/--th-fg-accent`; the aurora blob colors map onto the `--th-circleN` /
-> `BgGradient` system the site already animates. The other three families introduce additional
+> `--th-fg-light/…/--th-fg-accent`; the aurora blob colors map onto the `--th-circleN`
+> system the site already animates. The other three families introduce additional
 > role tokens (e.g. `GLOW/ACC`, `paper/ink/acc`, `CY/AM`) — add them as new `--th-*` names under
 > the per-family selectors.
 

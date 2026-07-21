@@ -8,7 +8,7 @@
 
 The portfolio's single chat feature (`pages/chat.vue`, a RAG "Ask me anything"
 assistant backed by `POST {apiBase}/api/chat/stream`) is styled in one fixed
-look (deprecated Aurora-ish glass via `GlassCard`) regardless of the active
+look regardless of the active
 theme. The home page already adapts to each theme family via per-family
 `*Layout.vue` components; the chat does not.
 
@@ -97,9 +97,6 @@ knows nothing about presentation.
 const { family } = useTheme();
 </script>
 ```
-
-`GlassCard` is no longer referenced anywhere after this change (chat was its last
-consumer).
 
 ### 3. `components/{Aurora,Neon,Editorial,Blueprint}Chat.vue` (new, 4 files)
 
@@ -212,7 +209,6 @@ var(--th-border)`; marker Playfair italic 30px (`Q.` `--th-accent`, `A.`
 - **Reference only (do not change):** `assets/css/tailwind.css`,
   `composables/useTheme.ts`, `theme-registry.ts`, the four `*Layout.vue` files,
   `composables/usePortfolioData.ts` (avatar via `usePortfolioData().photo`).
-- **Becomes dead code:** `components/GlassCard.vue` (no remaining consumers).
 
 ## Verification
 
