@@ -1,14 +1,14 @@
 {
-  "$note": "portfolio: Nuxt/Vue + pnpm. Tooling is Prettier (formatting) + ESLint via @nuxt/eslint (behavior-only lint; project-aware flat config in eslint.config.mjs). `typescript` is installed ONLY so typescript-eslint can parse `<script lang=ts>` — vue-tsc is still NOT installed, so there is still no `.vue`-aware typecheck (tsc --noEmit is NOT valid here). checks.format is verify-only (--check) so it can double as a stop-gate; the global format-on-edit hook does the actual writing. checks.lint fails only on errors (warnings are informational). build is nuxt build.",
+  "$note": "portfolio: Nuxt/Vue + pnpm. Tooling is Prettier (formatting) + ESLint via @nuxt/eslint (behavior-only lint; project-aware flat config in eslint.config.mjs). `typescript` is installed ONLY so typescript-eslint can parse `<script lang=ts>` — vue-tsc is still NOT installed, so there is still no `.vue`-aware typecheck (tsc --noEmit is NOT valid here). checks.format is verify-only (--check) so it can double as a stop-gate; the global format-on-edit hook does the actual writing. checks.lint is `--max-warnings 0`: the tree is warning-clean, so ANY new warning (not just errors) fails the gate. build is nuxt build.",
 
   "checks": {
     "format": "pnpm exec prettier --check .",
-    "lint": "pnpm lint",
+    "lint": "pnpm lint --max-warnings 0",
     "build": "pnpm build"
   },
 
   "stopCheck": ["format", "lint"],
-  "$stopCheck_note": "Prettier cleanliness + zero ESLint errors are the fast, deterministic gate: you cannot finish with a dirty tree while any file is unformatted or ESLint reports an error. Fix formatting with `pnpm exec prettier --write .` (or let the format-on-edit hook do it); fix lint with `pnpm lint:fix` or by hand. ESLint WARNINGS do not block (there are known ones: sanitized `v-html` in the *Chat.vue skins, and deprecated GlassCard.vue). To make warnings blocking later, switch checks.lint to `pnpm lint --max-warnings 0` once those are resolved. Prettier owns formatting; the linter is stylistic-off and vue/html-self-closing is disabled to avoid fighting it. Prettier exclusions live in .prettierignore.",
+  "$stopCheck_note": "Prettier cleanliness + a zero-warning ESLint run are the fast, deterministic gate: you cannot finish with a dirty tree while any file is unformatted or ESLint reports anything (`--max-warnings 0`). Fix formatting with `pnpm exec prettier --write .` (or let the format-on-edit hook do it); fix lint with `pnpm lint:fix` or by hand. If a new warning is a deliberate, justified exception, suppress it inline with a documented `eslint-disable … -- reason` (see the sanitized `v-html` block comments in the *Chat.vue skins) rather than loosening this gate. Prettier owns formatting; the linter is stylistic-off and vue/html-self-closing is disabled to avoid fighting it. Prettier exclusions live in .prettierignore.",
 
   "defaultBranch": "main"
 }

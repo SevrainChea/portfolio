@@ -70,6 +70,9 @@ Good (from the codebase):
 - Don't hand-order Tailwind classes — let the plugin do it.
 - **ESLint** (`@nuxt/eslint`) runs as a **behavior-only** linter — Prettier keeps
   formatting, so ESLint's `stylistic` set is off and `vue/html-self-closing` is
-  disabled. Run `pnpm lint` (or `pnpm lint:fix`). Fix errors; the remaining
-  warnings (`vue/no-v-html` on the sanitized chat markdown, `require-default-prop`
-  on the deprecated `GlassCard.vue`) are known and non-blocking.
+  disabled. Run `pnpm lint` (or `pnpm lint:fix`). The tree is warning-clean and
+  the harness gate runs `--max-warnings 0`, so treat every warning as blocking.
+  The only standing exception is the sanitized `v-html` in the `*Chat.vue` skins,
+  suppressed inline with a documented `eslint-disable vue/no-v-html -- … dompurify`
+  block comment — follow that pattern for any justified exception rather than
+  loosening the gate.

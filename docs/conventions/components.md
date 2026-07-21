@@ -11,8 +11,6 @@ Conventions for components in `components/`. All components are auto-imported.
 | `AuroraBackground.vue`                        | Fixed full-bleed animated background (blobs + grain)                         | Scoped plain CSS            |
 | `ThemeSwitcher.vue`                           | Family dropdown + variant swatches + light/dark toggle                       | Scoped plain CSS            |
 | `StackTag.vue`                                | Small inline tech-stack pill                                                 | Tailwind utilities → tokens |
-| `GlassCard.vue`                               | **Dead code** — no references since the themed chat redesign                 | _Deprecated_                |
-| `BgGradient.vue`                              | **Dead code** — no references; do not reuse                                  | _Deprecated_                |
 
 ## The two styling approaches
 
