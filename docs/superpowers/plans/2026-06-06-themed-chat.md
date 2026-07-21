@@ -26,21 +26,22 @@
 
 ## File Structure
 
-| File | Responsibility |
-|---|---|
-| `composables/useChat.ts` (new) | All chat state + behavior (SSE stream, scroll, send, auto-resize). Zero presentation. |
-| `pages/chat.vue` (rewrite) | Thin switch: render the active family's chat component. |
-| `components/AuroraChat.vue` (new) | Frameless-glass skin. |
-| `components/NeonChat.vue` (new) | Hotline / neon-tube skin. |
-| `components/EditorialChat.vue` (new) | Correspondence-column skin. |
-| `components/BlueprintChat.vue` (new) | Transcript / spec-sheet skin. |
-| `components/GlassCard.vue` | Becomes dead code (no consumers after this) — left in place, noted in final task. |
+| File                                 | Responsibility                                                                        |
+| ------------------------------------ | ------------------------------------------------------------------------------------- |
+| `composables/useChat.ts` (new)       | All chat state + behavior (SSE stream, scroll, send, auto-resize). Zero presentation. |
+| `pages/chat.vue` (rewrite)           | Thin switch: render the active family's chat component.                               |
+| `components/AuroraChat.vue` (new)    | Frameless-glass skin.                                                                 |
+| `components/NeonChat.vue` (new)      | Hotline / neon-tube skin.                                                             |
+| `components/EditorialChat.vue` (new) | Correspondence-column skin.                                                           |
+| `components/BlueprintChat.vue` (new) | Transcript / spec-sheet skin.                                                         |
+| `components/GlassCard.vue`           | Becomes dead code (no consumers after this) — left in place, noted in final task.     |
 
 ---
 
 ## Task 1: Extract `useChat()` composable
 
 **Files:**
+
 - Create: `composables/useChat.ts`
 
 This is a **verbatim move** of the logic in the current `pages/chat.vue` `<script setup>` (lines 161–344). No behavior changes. The composable owns the refs and returns everything a skin needs.
@@ -262,6 +263,7 @@ git commit -m "feat(chat): extract chat logic into useChat composable"
 Aurora is closest to today's chat. Build it first and wire the switch so `/chat` renders it. The other three branches are added in their own tasks.
 
 **Files:**
+
 - Create: `components/AuroraChat.vue`
 - Rewrite: `pages/chat.vue`
 
@@ -269,38 +271,38 @@ Aurora is closest to today's chat. Build it first and wire the switch so `/chat`
 
 Translate the `.ac` CSS in `chat-themes.jsx` (lines 33–75) verbatim into the component's namespaced `<style>`, substituting each hex with the token below. Keep all radii/spacing/blur/shadow geometry exactly as in the prototype.
 
-| Prototype value | Replace with |
-|---|---|
-| `.ac` bg `#06080f` | `var(--th-bg)` |
-| `.bgg` radial gradient | `var(--th-bg-grad)` |
-| `.b1` blue blob `#2b5bff` | `var(--th-blob-1)`; opacity → `var(--th-blob-op)` |
-| `.b2` purple blob `#7c3aed` | `var(--th-blob-2)` |
-| `.b3` cyan blob `#06b6d4` | `var(--th-blob-3)` |
-| `.blob` `mix-blend-mode:screen` | `mix-blend-mode: var(--th-blob-blend)` |
-| `.grain` `opacity:.05` | `opacity: var(--th-grain-op)` |
-| body text `#f2f6ff` | `var(--th-ink)` |
-| `.top img` border `rgba(255,255,255,.18)` | `var(--th-avatar-ring)` |
-| `.top img` shadow `rgba(90,209,255,.10)` | `color-mix(in srgb, var(--th-accent) 10%, transparent)` |
-| `.nm` `#fff` | `var(--th-name)` |
-| `.sub` / `.live` `#8b93a7` | `var(--th-muted)` |
-| `.live i` `#5ad1ff` + glow | `var(--th-accent)`; `box-shadow: 0 0 10px var(--th-accent)` |
-| `.top` border `rgba(255,255,255,.08)` | `var(--th-border)` |
-| `.bot` bg `rgba(255,255,255,.045)` | `color-mix(in srgb, var(--th-ink) 5%, transparent)` |
-| `.bot` border `rgba(255,255,255,.10)` | `var(--th-border)` |
-| `.bot` color `#cdd3e2` | `var(--th-body)` |
-| `.user` bg `color-mix(#5ad1ff 15%)` | `color-mix(in srgb, var(--th-accent) 15%, transparent)` |
-| `.user` border `color-mix(#5ad1ff 34%)` | `color-mix(in srgb, var(--th-accent) 34%, transparent)` |
-| `.user` color `#eaf7ff` | `var(--th-ink)` |
-| `.hero-av` shadows `rgba(90,209,255,.08/.55)` | `color-mix(... var(--th-accent) 8%/55% ...)`; ring `var(--th-avatar-ring)` |
-| `.hero-h` `#fff` | `var(--th-name)` |
-| `.hero-h em` `#9fd9ff` | `var(--th-accent-soft)` |
-| `.hero-sub` `#8b93a7` | `var(--th-muted)` |
-| `.composer` bg `rgba(255,255,255,.05)` | `color-mix(in srgb, var(--th-ink) 5%, transparent)` |
-| `.composer` border `rgba(255,255,255,.16)` | `var(--th-border-strong)` |
-| `.composer .ph` (textarea text) | `var(--th-ink)`; placeholder `var(--th-muted)` |
-| `.send` bg `#5ad1ff` | `var(--th-accent)`; icon color `var(--th-bg)`; shadow `color-mix(... var(--th-accent) 70% ...)` |
-| `.hint` `#5a6172` | `var(--th-muted)` |
-| font-family `'Inter'…` | `var(--font-inter)`; `.nm`/`.hero-h` → `var(--font-playfair-display)` |
+| Prototype value                               | Replace with                                                                                    |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `.ac` bg `#06080f`                            | `var(--th-bg)`                                                                                  |
+| `.bgg` radial gradient                        | `var(--th-bg-grad)`                                                                             |
+| `.b1` blue blob `#2b5bff`                     | `var(--th-blob-1)`; opacity → `var(--th-blob-op)`                                               |
+| `.b2` purple blob `#7c3aed`                   | `var(--th-blob-2)`                                                                              |
+| `.b3` cyan blob `#06b6d4`                     | `var(--th-blob-3)`                                                                              |
+| `.blob` `mix-blend-mode:screen`               | `mix-blend-mode: var(--th-blob-blend)`                                                          |
+| `.grain` `opacity:.05`                        | `opacity: var(--th-grain-op)`                                                                   |
+| body text `#f2f6ff`                           | `var(--th-ink)`                                                                                 |
+| `.top img` border `rgba(255,255,255,.18)`     | `var(--th-avatar-ring)`                                                                         |
+| `.top img` shadow `rgba(90,209,255,.10)`      | `color-mix(in srgb, var(--th-accent) 10%, transparent)`                                         |
+| `.nm` `#fff`                                  | `var(--th-name)`                                                                                |
+| `.sub` / `.live` `#8b93a7`                    | `var(--th-muted)`                                                                               |
+| `.live i` `#5ad1ff` + glow                    | `var(--th-accent)`; `box-shadow: 0 0 10px var(--th-accent)`                                     |
+| `.top` border `rgba(255,255,255,.08)`         | `var(--th-border)`                                                                              |
+| `.bot` bg `rgba(255,255,255,.045)`            | `color-mix(in srgb, var(--th-ink) 5%, transparent)`                                             |
+| `.bot` border `rgba(255,255,255,.10)`         | `var(--th-border)`                                                                              |
+| `.bot` color `#cdd3e2`                        | `var(--th-body)`                                                                                |
+| `.user` bg `color-mix(#5ad1ff 15%)`           | `color-mix(in srgb, var(--th-accent) 15%, transparent)`                                         |
+| `.user` border `color-mix(#5ad1ff 34%)`       | `color-mix(in srgb, var(--th-accent) 34%, transparent)`                                         |
+| `.user` color `#eaf7ff`                       | `var(--th-ink)`                                                                                 |
+| `.hero-av` shadows `rgba(90,209,255,.08/.55)` | `color-mix(... var(--th-accent) 8%/55% ...)`; ring `var(--th-avatar-ring)`                      |
+| `.hero-h` `#fff`                              | `var(--th-name)`                                                                                |
+| `.hero-h em` `#9fd9ff`                        | `var(--th-accent-soft)`                                                                         |
+| `.hero-sub` `#8b93a7`                         | `var(--th-muted)`                                                                               |
+| `.composer` bg `rgba(255,255,255,.05)`        | `color-mix(in srgb, var(--th-ink) 5%, transparent)`                                             |
+| `.composer` border `rgba(255,255,255,.16)`    | `var(--th-border-strong)`                                                                       |
+| `.composer .ph` (textarea text)               | `var(--th-ink)`; placeholder `var(--th-muted)`                                                  |
+| `.send` bg `#5ad1ff`                          | `var(--th-accent)`; icon color `var(--th-bg)`; shadow `color-mix(... var(--th-accent) 70% ...)` |
+| `.hint` `#5a6172`                             | `var(--th-muted)`                                                                               |
+| font-family `'Inter'…`                        | `var(--font-inter)`; `.nm`/`.hero-h` → `var(--font-playfair-display)`                           |
 
 - [ ] **Step 1: Create `components/AuroraChat.vue`**
 
@@ -361,12 +363,17 @@ Structure: root `.aurora-chat-root` containing `<ThemeSwitcher />`, the bg layer
             class="meta"
           >
             <span v-for="s in msg.sources" :key="s" class="chip">{{ s }}</span>
-            <span v-if="msg.model_used" class="model">{{ msg.model_used }}</span>
+            <span v-if="msg.model_used" class="model">{{
+              msg.model_used
+            }}</span>
           </div>
         </div>
 
         <!-- Typing indicator (before first chunk) -->
-        <div v-if="loading && !messages.some((m) => m.streaming)" class="msg-row bot-row">
+        <div
+          v-if="loading && !messages.some((m) => m.streaming)"
+          class="msg-row bot-row"
+        >
           <div class="msg bot typing">
             <span class="dot" /><span class="dot" /><span class="dot" />
           </div>
@@ -375,7 +382,11 @@ Structure: root `.aurora-chat-root` containing `<ThemeSwitcher />`, the bg layer
 
       <!-- Scroll-to-latest CTA -->
       <Transition name="cta">
-        <button v-if="showScrollCTA" class="scroll-cta" @click="scrollToBottomFromCTA">
+        <button
+          v-if="showScrollCTA"
+          class="scroll-cta"
+          @click="scrollToBottomFromCTA"
+        >
           <Icon name="uil:arrow-down" size="16" /> Scroll to latest
         </button>
       </Transition>
@@ -391,7 +402,12 @@ Structure: root `.aurora-chat-root` containing `<ThemeSwitcher />`, the bg layer
           @keydown.enter.exact.prevent="send"
           @input="autoResize"
         />
-        <button type="submit" class="send" :disabled="!input.trim() || loading" aria-label="Send">
+        <button
+          type="submit"
+          class="send"
+          :disabled="!input.trim() || loading"
+          aria-label="Send"
+        >
           <Icon name="uil:message" size="18" />
         </button>
       </form>
@@ -420,70 +436,176 @@ Then add the **non-scoped** `<style>` block: port the `.ac …` rules from `chat
 
 ```css
 /* in the non-scoped <style>, all under .aurora-chat-root */
-.aurora-chat-root { position: relative; min-height: 100vh; }
-.aurora-chat-root .col { height: 100vh; }
-.aurora-chat-root .feed { position: relative; overflow-y: auto; }
-.aurora-chat-root .msg-row { display: flex; flex-direction: column; }
-.aurora-chat-root .user-row { align-items: flex-end; }
-.aurora-chat-root .bot-row { align-items: flex-start; }
+.aurora-chat-root {
+  position: relative;
+  min-height: 100vh;
+}
+.aurora-chat-root .col {
+  height: 100vh;
+}
+.aurora-chat-root .feed {
+  position: relative;
+  overflow-y: auto;
+}
+.aurora-chat-root .msg-row {
+  display: flex;
+  flex-direction: column;
+}
+.aurora-chat-root .user-row {
+  align-items: flex-end;
+}
+.aurora-chat-root .bot-row {
+  align-items: flex-start;
+}
 .aurora-chat-root .back {
   color: var(--th-muted);
-  display: grid; place-items: center;
-  width: 32px; height: 32px; border-radius: 50%;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   border: 1px solid var(--th-border);
-  transition: color .2s, border-color .2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 }
-.aurora-chat-root .back:hover { color: var(--th-accent); border-color: var(--th-accent); }
+.aurora-chat-root .back:hover {
+  color: var(--th-accent);
+  border-color: var(--th-accent);
+}
 .aurora-chat-root .composer textarea {
-  flex: 1; resize: none; max-height: 160px; background: transparent;
-  border: none; outline: none; color: var(--th-ink);
-  font: inherit; font-size: 15px; line-height: 1.5;
+  flex: 1;
+  resize: none;
+  max-height: 160px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--th-ink);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
 }
-.aurora-chat-root .composer textarea::placeholder { color: var(--th-muted); }
-.aurora-chat-root .send { border: none; cursor: pointer; }
-.aurora-chat-root .send:disabled { opacity: .4; cursor: default; }
+.aurora-chat-root .composer textarea::placeholder {
+  color: var(--th-muted);
+}
+.aurora-chat-root .send {
+  border: none;
+  cursor: pointer;
+}
+.aurora-chat-root .send:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
 /* streaming caret — thin pulsing bar */
 .aurora-chat-root .caret {
-  display: inline-block; width: 2px; height: 1em; margin-left: 2px;
-  background: var(--th-accent); vertical-align: text-bottom;
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  background: var(--th-accent);
+  vertical-align: text-bottom;
   animation: ac-pulse 1s ease-in-out infinite;
 }
-@keyframes ac-pulse { 0%,100% { opacity: 1; } 50% { opacity: .2; } }
+@keyframes ac-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
 /* typing dots */
-.aurora-chat-root .typing { display: flex; gap: 6px; align-items: center; }
+.aurora-chat-root .typing {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
 .aurora-chat-root .typing .dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--th-muted);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--th-muted);
   animation: ac-bounce 1s infinite;
 }
-.aurora-chat-root .typing .dot:nth-child(2) { animation-delay: .15s; }
-.aurora-chat-root .typing .dot:nth-child(3) { animation-delay: .3s; }
-@keyframes ac-bounce { 0%,60%,100% { transform: translateY(0); opacity: .5; } 30% { transform: translateY(-4px); opacity: 1; } }
+.aurora-chat-root .typing .dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.aurora-chat-root .typing .dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes ac-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
 /* sources + model */
-.aurora-chat-root .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 6px 2px 0; }
+.aurora-chat-root .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 6px 2px 0;
+}
 .aurora-chat-root .chip {
-  font-size: 11px; padding: 2px 8px; border-radius: 999px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
   border: 1px solid var(--th-border);
   background: color-mix(in srgb, var(--th-accent) 8%, transparent);
   color: var(--th-muted);
 }
-.aurora-chat-root .model { font-size: 11px; color: var(--th-muted); opacity: .7; }
+.aurora-chat-root .model {
+  font-size: 11px;
+  color: var(--th-muted);
+  opacity: 0.7;
+}
 /* CTA pill */
 .aurora-chat-root .scroll-cta {
-  position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 6px; cursor: pointer;
-  font-size: 12px; padding: 8px 14px; border-radius: 999px;
-  color: var(--th-ink); border: 1px solid color-mix(in srgb, var(--th-accent) 34%, transparent);
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: var(--th-ink);
+  border: 1px solid color-mix(in srgb, var(--th-accent) 34%, transparent);
   background: color-mix(in srgb, var(--th-accent) 15%, transparent);
   backdrop-filter: blur(8px);
 }
-.cta-enter-active, .cta-leave-active { transition: opacity .2s; }
-.cta-enter-from, .cta-leave-to { opacity: 0; }
+.cta-enter-active,
+.cta-leave-active {
+  transition: opacity 0.2s;
+}
+.cta-enter-from,
+.cta-leave-to {
+  opacity: 0;
+}
 @media (prefers-reduced-motion: reduce) {
-  .aurora-chat-root .caret, .aurora-chat-root .typing .dot { animation: none; }
+  .aurora-chat-root .caret,
+  .aurora-chat-root .typing .dot {
+    animation: none;
+  }
 }
 @media (max-width: 880px) {
-  .aurora-chat-root .col { padding: 0 20px; }
-  .aurora-chat-root .hero-h { font-size: 30px; }
+  .aurora-chat-root .col {
+    padding: 0 20px;
+  }
+  .aurora-chat-root .hero-h {
+    font-size: 30px;
+  }
 }
 ```
 
@@ -520,8 +642,9 @@ const { family } = useTheme();
 - [ ] **Step 3: Verify Aurora live (Chrome DevTools MCP)**
 
 Server is already running. Steps:
+
 1. `navigate_page` → `http://localhost:3000/chat`. Ensure family is `aurora` (default).
-2. `take_screenshot` — expect: aurora background (gradient + blobs + grain), header with back arrow + avatar + "Sévrain Chea" + "Ask me anything" sublabel + "Online" dot, centered empty hero ("Ask me *anything*"), pill composer pinned at bottom, hint line. No card frame.
+2. `take_screenshot` — expect: aurora background (gradient + blobs + grain), header with back arrow + avatar + "Sévrain Chea" + "Ask me anything" sublabel + "Online" dot, centered empty hero ("Ask me _anything_"), pill composer pinned at bottom, hint line. No card frame.
 3. `list_console_messages` — expect: no errors (especially no "failed to resolve component").
 4. Type a message in the textarea and submit (use `fill` + `press_key Enter`, or click send). Expect: user bubble right-aligned (accent tint), assistant bubble left-aligned, typing dots before first chunk, a pulsing caret while streaming, then a sources/model `.meta` line under the answer once `done` arrives. (Backend must be reachable; if not, the fallback "Sorry, something went wrong" message proves the wiring without the stream.)
 5. Click the back arrow → routes to `/`. Navigate back to `/chat`.
@@ -540,6 +663,7 @@ git commit -m "feat(chat): Aurora chat skin + family switch on /chat"
 ## Task 3: `NeonChat.vue` + wire neon branch
 
 **Files:**
+
 - Create: `components/NeonChat.vue`
 - (No edit to `chat.vue` — the `neon` branch already references `<NeonChat>`, now resolvable.)
 
@@ -547,28 +671,28 @@ git commit -m "feat(chat): Aurora chat skin + family switch on /chat"
 
 Port the `.nc` CSS in `chat-themes.jsx` (lines 117–160), substituting. The ambient `.amb` block (lines 120–126) should be copied from `NeonLayout.vue` **verbatim** (it already uses the tokens) rather than from the prototype's hardcoded version — open `NeonLayout.vue`, find its `.amb` rule, and reuse it namespaced under `.neon-chat-root`.
 
-| Prototype `GLOW=#ff2e88` / `ACC=#2de2e6` etc. | Replace with |
-|---|---|
-| `.nc` bg `#0d0518` | `var(--th-bg)` |
-| `.nc` body color `#f5e9ff` | `var(--th-body)` |
-| `.amb` (whole block) | copy `NeonLayout.vue`'s `.amb` rule (uses `--th-glow`, `--th-acc`, `--th-line`) |
-| `.sign` `#fff` | `var(--th-name-col)` |
-| `.sign` text-shadow `GLOW` | `var(--th-glow)` (keep `#fff` core highlight literal — it is intentional white, matches `NeonLayout`) |
-| `nc-breathe` keyframe | reuse `NeonLayout.vue`'s breathe keyframe name if present; else define `neon-breathe` with `var(--th-glow)` |
-| `.status` / `.status i` `ACC` | `var(--th-acc)` |
-| `.tag` (`.row.b`) `ACC` | `var(--th-acc)` |
-| `.tag` (`.row.u`) `GLOW` | `var(--th-glow)` |
-| `.msg` bg `#190a2b` | `var(--th-panel)` |
-| `.bot` border/glow `ACC` | `var(--th-acc)`; shadows via `color-mix(in srgb, var(--th-acc) 40%, transparent)` (and inset 33%) |
-| `.bot` color `#eafdff` | `var(--th-ink)` |
-| `.user` border/glow `GLOW` | `var(--th-glow)`; shadows via `color-mix(... var(--th-glow) …)` |
-| `.user` color `#ffeaf4` | `var(--th-ink)` |
-| `.halo` border/glow `ACC` | `var(--th-acc)` |
-| `.e-h` `#fff` + `GLOW` glow | `var(--th-name-col)` + `var(--th-glow)` |
-| `.e-sub` `#c2add9` | `var(--th-body)` |
-| `.composer` bg `#190a2b`, border/glow `GLOW` | `var(--th-panel)`, `var(--th-glow)` |
-| `.composer .ph` (textarea) `#9b7fae` | text `var(--th-ink)`, placeholder `var(--th-muted)` |
-| `.send` `#0d0518` on `ACC` | icon `var(--th-bg)` on `var(--th-acc)` |
+| Prototype `GLOW=#ff2e88` / `ACC=#2de2e6` etc. | Replace with                                                                                                |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `.nc` bg `#0d0518`                            | `var(--th-bg)`                                                                                              |
+| `.nc` body color `#f5e9ff`                    | `var(--th-body)`                                                                                            |
+| `.amb` (whole block)                          | copy `NeonLayout.vue`'s `.amb` rule (uses `--th-glow`, `--th-acc`, `--th-line`)                             |
+| `.sign` `#fff`                                | `var(--th-name-col)`                                                                                        |
+| `.sign` text-shadow `GLOW`                    | `var(--th-glow)` (keep `#fff` core highlight literal — it is intentional white, matches `NeonLayout`)       |
+| `nc-breathe` keyframe                         | reuse `NeonLayout.vue`'s breathe keyframe name if present; else define `neon-breathe` with `var(--th-glow)` |
+| `.status` / `.status i` `ACC`                 | `var(--th-acc)`                                                                                             |
+| `.tag` (`.row.b`) `ACC`                       | `var(--th-acc)`                                                                                             |
+| `.tag` (`.row.u`) `GLOW`                      | `var(--th-glow)`                                                                                            |
+| `.msg` bg `#190a2b`                           | `var(--th-panel)`                                                                                           |
+| `.bot` border/glow `ACC`                      | `var(--th-acc)`; shadows via `color-mix(in srgb, var(--th-acc) 40%, transparent)` (and inset 33%)           |
+| `.bot` color `#eafdff`                        | `var(--th-ink)`                                                                                             |
+| `.user` border/glow `GLOW`                    | `var(--th-glow)`; shadows via `color-mix(... var(--th-glow) …)`                                             |
+| `.user` color `#ffeaf4`                       | `var(--th-ink)`                                                                                             |
+| `.halo` border/glow `ACC`                     | `var(--th-acc)`                                                                                             |
+| `.e-h` `#fff` + `GLOW` glow                   | `var(--th-name-col)` + `var(--th-glow)`                                                                     |
+| `.e-sub` `#c2add9`                            | `var(--th-body)`                                                                                            |
+| `.composer` bg `#190a2b`, border/glow `GLOW`  | `var(--th-panel)`, `var(--th-glow)`                                                                         |
+| `.composer .ph` (textarea) `#9b7fae`          | text `var(--th-ink)`, placeholder `var(--th-muted)`                                                         |
+| `.send` `#0d0518` on `ACC`                    | icon `var(--th-bg)` on `var(--th-acc)`                                                                      |
 
 - [ ] **Step 1: Create `components/NeonChat.vue`**
 
@@ -610,29 +734,31 @@ git commit -m "feat(chat): Neon hotline chat skin"
 ## Task 4: `EditorialChat.vue` + wire editorial branch
 
 **Files:**
+
 - Create: `components/EditorialChat.vue`
 
 ### Token map (Editorial) — prototype hex → token
 
 Port the `.ec` CSS in `chat-themes.jsx` (lines 200–234). Editorial **defaults to light**.
 
-| Prototype const | Replace with |
-|---|---|
-| `.ec` bg `#f4efe4` | `var(--th-bg)` |
-| `ink #23201a` | `var(--th-ink)` |
-| `acc #b8472b` | `var(--th-accent)` |
-| `mut #6f6557` | `var(--th-muted)` |
-| `rule #cbb89a` | `var(--th-border)` |
-| `body #3a342b` | `var(--th-body)` |
-| `.paper` `opacity:.5` | `opacity: var(--th-grain-op)` (keep the SVG noise data-URI) |
-| `.send` light text `#f8f3e8` | `var(--th-bg)` |
-| display fonts | `var(--font-playfair-display)`; body `var(--font-inter)` |
+| Prototype const              | Replace with                                                |
+| ---------------------------- | ----------------------------------------------------------- |
+| `.ec` bg `#f4efe4`           | `var(--th-bg)`                                              |
+| `ink #23201a`                | `var(--th-ink)`                                             |
+| `acc #b8472b`                | `var(--th-accent)`                                          |
+| `mut #6f6557`                | `var(--th-muted)`                                           |
+| `rule #cbb89a`               | `var(--th-border)`                                          |
+| `body #3a342b`               | `var(--th-body)`                                            |
+| `.paper` `opacity:.5`        | `opacity: var(--th-grain-op)` (keep the SVG noise data-URI) |
+| `.send` light text `#f8f3e8` | `var(--th-bg)`                                              |
+| display fonts                | `var(--font-playfair-display)`; body `var(--font-inter)`    |
 
 - [ ] **Step 1: Create `components/EditorialChat.vue`**
 
 Root `.editorial-chat-root`, contains `<ThemeSwitcher />`, `.paper`, `.sheet` with `.mast` (masthead) → feed → composer. Script identical shape (`usePortfolioData()` + `useChat()`).
 
 Template mirrors the `.ec` JSX — **not bubbles**, a typeset Q/A column:
+
 - **Back link:** small-caps rule link in the masthead meta area: `<NuxtLink to="/" class="back">← Back</NuxtLink>`, `font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--th-muted);` hover `var(--th-accent)`.
 - **Masthead:** kicker "Correspondence" `var(--th-accent)`, title "In Conversation" Playfair 42px, meta block right (`With Sévrain Chea`, role from `usePortfolioData()`).
 - **Empty state:** the invitation — drop-cap "A" 120px `var(--th-accent)` + Playfair standfirst + byline "An open column · **write below**".
@@ -666,32 +792,34 @@ git commit -m "feat(chat): Editorial correspondence chat skin"
 ## Task 5: `BlueprintChat.vue` + wire blueprint branch
 
 **Files:**
+
 - Create: `components/BlueprintChat.vue`
 
 ### Token map (Blueprint) — prototype hex → token
 
 Port the `.bc` CSS in `chat-themes.jsx` (lines 288–331). Copy the **frame/grid scaffold** (`.frame`, `.frame::before`, the body `background-image` grid, `.sheet::before` backing) from `BlueprintLayout.vue` verbatim — it already uses `--th-line1`/`--th-line2`/`--th-panel`.
 
-| Prototype const | Replace with |
-|---|---|
-| `bg #0d2236` | `var(--th-bg)` |
-| `CY #5bb4e8` (primary) | `var(--th-accent)` |
-| `AM #f0a652` (secondary) | `var(--th-am)` |
-| `INK #c6dcee` | `var(--th-ink)` |
-| `MUT #7fa6c4` | `var(--th-muted)` |
-| `HEAD #fff` | `var(--th-head)` |
-| `line1 rgba(120,180,220,.14)` | `var(--th-line1)` |
-| `line2 rgba(120,180,220,.05)` | `var(--th-line2)` |
-| `panel rgba(9,26,42,.86)` | `var(--th-panel)` |
-| `.entry::before` notch bg `#10293f` | `var(--th-notch)` |
+| Prototype const                                    | Replace with                                                                                             |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `bg #0d2236`                                       | `var(--th-bg)`                                                                                           |
+| `CY #5bb4e8` (primary)                             | `var(--th-accent)`                                                                                       |
+| `AM #f0a652` (secondary)                           | `var(--th-am)`                                                                                           |
+| `INK #c6dcee`                                      | `var(--th-ink)`                                                                                          |
+| `MUT #7fa6c4`                                      | `var(--th-muted)`                                                                                        |
+| `HEAD #fff`                                        | `var(--th-head)`                                                                                         |
+| `line1 rgba(120,180,220,.14)`                      | `var(--th-line1)`                                                                                        |
+| `line2 rgba(120,180,220,.05)`                      | `var(--th-line2)`                                                                                        |
+| `panel rgba(9,26,42,.86)`                          | `var(--th-panel)`                                                                                        |
+| `.entry::before` notch bg `#10293f`                | `var(--th-notch)`                                                                                        |
 | `CY55` / `CY0c` / `CY07` / `CY33` etc. alpha tints | `color-mix(in srgb, var(--th-accent) {55/5/7/20}%, transparent)` (match the prototype's alpha → percent) |
-| mono font | `var(--font-jetbrains-mono)`; response body `var(--font-inter)` |
+| mono font                                          | `var(--font-jetbrains-mono)`; response body `var(--font-inter)`                                          |
 
 - [ ] **Step 1: Create `components/BlueprintChat.vue`**
 
 Root `.blueprint-chat-root`, contains `<ThemeSwitcher />`, `.frame`, `.sheet` with title block `.tb` → feed → composer. Script identical shape.
 
 Template mirrors the `.bc` JSX — a numbered transcript:
+
 - **Back link:** mono `[ ← BACK ]` in the title block or top corner: `<NuxtLink to="/" class="back">[ ← BACK ]</NuxtLink>`, `font-family: var(--font-jetbrains-mono); font-size:11px; color: var(--th-accent);`.
 - **Title block:** cells `Doc: Q&A — Transcript` · `Subject: S. Chea` · `Rev: 01` · `Status: ● Live` (dot+label `var(--th-accent)`).
 - **Empty state:** `// Session ready` label, big `AWAITING QUERY` Mono 40px `var(--th-head)` + blinking 18×38 cursor block `var(--th-accent)`, one-line note `var(--th-muted)`.
@@ -705,10 +833,12 @@ Template mirrors the `.bc` JSX — a numbered transcript:
 `<style>` non-scoped under `.blueprint-chat-root`; reuse `bc-blink` keyframe; `prefers-reduced-motion`; `@media (max-width:760px)` reductions.
 
 > **Helper for sequential numbering** (put in `<script setup>`):
+>
 > ```ts
 > const figNo = (i: number, role: "user" | "assistant") =>
 >   messages.value.slice(0, i + 1).filter((m) => m.role === role).length;
 > ```
+>
 > Use `String(figNo(i, msg.role)).padStart(2, "0")` for the `Q-NN`/`A-NN` label.
 
 - [ ] **Step 2: Port Blueprint's `html:not(.dark)` overrides**
@@ -736,6 +866,7 @@ git commit -m "feat(chat): Blueprint transcript chat skin"
 ## Task 6: Cross-family verification sweep + cleanup
 
 **Files:**
+
 - Possibly modify: any of the four chat components (fixes found during the sweep).
 
 - [ ] **Step 1: Full matrix screenshot sweep (Chrome DevTools MCP)**

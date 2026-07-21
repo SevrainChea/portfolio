@@ -23,6 +23,7 @@
 ### Task 1: Add `generate_stream` to LLM providers
 
 **Files:**
+
 - Modify: `chatbot-backend/app/services/llm_service.py`
 
 **Step 1: Read the current file**
@@ -152,6 +153,7 @@ async def generate_response_stream(self, prompt: str, context: List[str]) -> Asy
 ```
 
 Also update the `generate_response_stream` return type annotation at the method signature:
+
 ```python
 async def generate_response_stream(self, prompt: str, context: List[str]) -> AsyncGenerator[str, None]:
 ```
@@ -159,9 +161,11 @@ async def generate_response_stream(self, prompt: str, context: List[str]) -> Asy
 **Step 7: Verify backend syntax**
 
 Run from `chatbot-backend/` with venv active:
+
 ```bash
 python -c "from app.services.llm_service import llm_service; print('OK')"
 ```
+
 Expected: `OK` with no errors.
 
 **Step 8: Commit**
@@ -176,6 +180,7 @@ git commit -m "feat(backend): add generate_stream to all LLM providers"
 ### Task 2: Add `/api/chat/stream` endpoint
 
 **Files:**
+
 - Modify: `chatbot-backend/app/routers/chat.py`
 
 **Step 1: Read the current file**
@@ -185,6 +190,7 @@ Read `chatbot-backend/app/routers/chat.py` in full.
 **Step 2: Add imports**
 
 Add to the top of the file:
+
 ```python
 import json
 from fastapi.responses import StreamingResponse
@@ -245,6 +251,7 @@ async def chat_stream(request: ChatRequest):
 ```bash
 python -c "from app.routers.chat import router; print('OK')"
 ```
+
 Expected: `OK`
 
 **Step 5: Manual test (if backend server is running)**
@@ -255,6 +262,7 @@ curl -X POST http://localhost:8000/api/chat/stream \
   -d '{"message": "What are your skills?"}' \
   --no-buffer
 ```
+
 Expected: Lines of `data: {"type":"chunk",...}` followed by `data: {"type":"done",...}`
 
 **Step 6: Commit**
@@ -269,6 +277,7 @@ git commit -m "feat(backend): add POST /api/chat/stream SSE endpoint"
 ### Task 3: Update frontend — streaming fetch and message model
 
 **Files:**
+
 - Modify: `portfolio-frontend/pages/chat.vue`
 
 **Step 1: Read the current file**
@@ -278,13 +287,16 @@ Read `portfolio-frontend/pages/chat.vue` in full before making any edits.
 **Step 2: Update the `Message` interface**
 
 Replace:
+
 ```ts
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 ```
+
 With:
+
 ```ts
 interface Message {
   role: "user" | "assistant";
@@ -311,7 +323,11 @@ const send = async () => {
   scrollToBottom();
 
   // Add an empty assistant message to stream into
-  const assistantMsg: Message = { role: "assistant", content: "", streaming: true };
+  const assistantMsg: Message = {
+    role: "assistant",
+    content: "",
+    streaming: true,
+  };
   messages.value.push(assistantMsg);
   const msgIndex = messages.value.length - 1;
 
@@ -344,7 +360,14 @@ const send = async () => {
         const raw = line.slice(5).trim();
         if (!raw) continue;
 
-        let event: { type: string; content?: string; conversation_id?: string; sources?: string[]; model_used?: string; message?: string };
+        let event: {
+          type: string;
+          content?: string;
+          conversation_id?: string;
+          sources?: string[];
+          model_used?: string;
+          message?: string;
+        };
         try {
           event = JSON.parse(raw);
         } catch {
@@ -361,13 +384,15 @@ const send = async () => {
           conversationId.value = event.conversation_id ?? null;
           scrollToBottom();
         } else if (event.type === "error") {
-          messages.value[msgIndex].content = "Sorry, something went wrong. Please try again.";
+          messages.value[msgIndex].content =
+            "Sorry, something went wrong. Please try again.";
           messages.value[msgIndex].streaming = false;
         }
       }
     }
   } catch {
-    messages.value[msgIndex].content = "Sorry, something went wrong. Please try again.";
+    messages.value[msgIndex].content =
+      "Sorry, something went wrong. Please try again.";
     messages.value[msgIndex].streaming = false;
   } finally {
     loading.value = false;
@@ -388,6 +413,7 @@ git commit -m "feat(frontend): replace fetch with SSE streaming reader"
 ### Task 4: Update frontend UI — streaming cursor and metadata chips
 
 **Files:**
+
 - Modify: `portfolio-frontend/pages/chat.vue`
 
 **Step 1: Update the message bubble template**
@@ -395,6 +421,7 @@ git commit -m "feat(frontend): replace fetch with SSE streaming reader"
 Find the message bubble section in the template and replace it with this version that adds the cursor and metadata:
 
 Current section to find (the `v-for` message loop):
+
 ```html
 <!-- Message bubbles -->
 <div
@@ -411,9 +438,7 @@ Current section to find (the `v-for` message loop):
     "
     class="max-w-[85%] rounded-2xl border px-4 py-3 backdrop-blur-sm"
   >
-    <p
-      class="text-fg-light text-sm leading-relaxed whitespace-pre-wrap"
-    >
+    <p class="text-fg-light text-sm leading-relaxed whitespace-pre-wrap">
       {{ msg.content }}
     </p>
   </div>
@@ -421,6 +446,7 @@ Current section to find (the `v-for` message loop):
 ```
 
 Replace with:
+
 ```html
 <!-- Message bubbles -->
 <div
@@ -457,10 +483,7 @@ Replace with:
     >
       {{ source }}
     </span>
-    <span
-      v-if="msg.model_used"
-      class="text-xs text-white/20"
-    >
+    <span v-if="msg.model_used" class="text-xs text-white/20">
       {{ msg.model_used }}
     </span>
   </div>
@@ -470,6 +493,7 @@ Replace with:
 **Step 2: Verify in browser**
 
 Open `http://localhost:3000/chat`, send a message, and confirm:
+
 - Tokens appear progressively in the bubble
 - Blinking cursor appears while streaming
 - Cursor disappears and source chips + model name appear below the bubble after done

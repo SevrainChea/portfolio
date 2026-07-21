@@ -30,6 +30,7 @@ data: {"type":"done","conversation_id":"<uuid>","sources":["about","skills"],"mo
 ```
 
 **Flow:**
+
 1. Receive `ChatRequest`
 2. Retrieve RAG context (k=3, same as today)
 3. Generate `conversation_id` upfront
@@ -41,6 +42,7 @@ data: {"type":"done","conversation_id":"<uuid>","sources":["about","skills"],"mo
 Add `generate_stream(prompt, context) -> AsyncGenerator[str, None]` abstract method to `LLMProvider`.
 
 Provider implementations:
+
 - **Groq**: `client.chat.completions.create(..., stream=True)` → yield `chunk.choices[0].delta.content`
 - **Gemini**: `model.generate_content(..., stream=True)` → yield `chunk.text`
 - **Ollama**: `ollama.chat(..., stream=True)` → yield `chunk['message']['content']`
@@ -65,6 +67,7 @@ interface Message {
 ### Streaming fetch
 
 Replace `$fetch` with native `fetch()` + `response.body.getReader()`. Parse SSE:
+
 - Split chunks by `\n`
 - Strip `data:` prefix, parse JSON
 - `chunk` → append `content` to current message in-place

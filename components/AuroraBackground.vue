@@ -52,7 +52,11 @@
   height: 680px;
   left: -220px;
   top: -200px;
-  background: radial-gradient(circle at 40% 40%, var(--th-blob-1), transparent 60%);
+  background: radial-gradient(
+    circle at 40% 40%,
+    var(--th-blob-1),
+    transparent 60%
+  );
   animation: flA 38s ease-in-out infinite;
 }
 .b2 {
@@ -60,7 +64,11 @@
   height: 560px;
   left: 120px;
   top: 60px;
-  background: radial-gradient(circle at 50% 50%, var(--th-blob-2), transparent 60%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--th-blob-2),
+    transparent 60%
+  );
   animation: flB 46s ease-in-out infinite;
   opacity: calc(var(--th-blob-op) * 0.64);
 }
@@ -69,7 +77,11 @@
   height: 520px;
   left: -120px;
   top: 340px;
-  background: radial-gradient(circle at 50% 50%, var(--th-blob-3), transparent 60%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--th-blob-3),
+    transparent 60%
+  );
   animation: flC 50s ease-in-out infinite;
   opacity: calc(var(--th-blob-op) * 0.6);
 }

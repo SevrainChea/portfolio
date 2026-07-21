@@ -21,12 +21,12 @@ existing chat behavior. No new design tokens — every color binds to the existi
 
 ### The four skins (default variant · mode shown for reference)
 
-| Family | Metaphor | Default |
-|---|---|---|
-| **Aurora** | Frameless glass — conversation floats on the aurora | `cobalt` · dark |
-| **Neon** | The hotline — breathing "ASK ME ANYTHING" sign, glow tubes | `hotline` · dark |
-| **Editorial** | Correspondence column — typeset Q./A. interview, "write in" field | `issue` · light |
-| **Blueprint** | The transcript — figure-numbered inquiry/response log, command-line composer | `azure` · dark |
+| Family        | Metaphor                                                                     | Default          |
+| ------------- | ---------------------------------------------------------------------------- | ---------------- |
+| **Aurora**    | Frameless glass — conversation floats on the aurora                          | `cobalt` · dark  |
+| **Neon**      | The hotline — breathing "ASK ME ANYTHING" sign, glow tubes                   | `hotline` · dark |
+| **Editorial** | Correspondence column — typeset Q./A. interview, "write in" field            | `issue` · light  |
+| **Blueprint** | The transcript — figure-numbered inquiry/response log, command-line composer | `azure` · dark   |
 
 ## Non-goals
 
@@ -88,8 +88,8 @@ knows nothing about presentation.
 
 ```vue
 <template>
-  <AuroraChat    v-if="family === 'aurora'" />
-  <NeonChat      v-else-if="family === 'neon'" />
+  <AuroraChat v-if="family === 'aurora'" />
+  <NeonChat v-else-if="family === 'neon'" />
   <EditorialChat v-else-if="family === 'editorial'" />
   <BlueprintChat v-else-if="family === 'blueprint'" />
 </template>
@@ -137,7 +137,7 @@ Views) and `chat-themes.jsx`. Token bindings per family (all tokens already exis
   `--th-border-strong`; send circle `--th-accent`, icon `--th-bg`. Header avatar
   ring `--th-avatar-ring`, name Playfair `--th-name`, sublabel `--th-muted`,
   "Online" dot `--th-accent`. Empty hero: 92px avatar halo, Playfair 38px with
-  *anything* italic in `--th-accent-soft`. Breakpoint 880.
+  _anything_ italic in `--th-accent-soft`. Breakpoint 880.
 - **Neon** — `--th-bg` + ambient `.amb` block copied from `NeonLayout.vue`
   (`--th-glow`/`--th-acc` glows, masked wall grid `--th-line`). Sign uses
   `--th-name-col` + `neon-breathe` keyframe (reuse from layout). Bubble fill
@@ -149,7 +149,7 @@ Views) and `chat-themes.jsx`. Token bindings per family (all tokens already exis
 - **Editorial** — paper `--th-bg`, grain `--th-grain-op` at opacity .5. Masthead
   `border-top:3px var(--th-ink)` / `border-bottom:1px var(--th-ink)`, kicker
   `--th-accent`, title Playfair 42px. Turn = grid `50px 1fr`, `border-bottom:1px
-  var(--th-border)`; marker Playfair italic 30px (`Q.` `--th-accent`, `A.`
+var(--th-border)`; marker Playfair italic 30px (`Q.` `--th-accent`, `A.`
   `--th-ink`); question Playfair italic 22px `--th-ink`; answer Inter 15px
   `--th-body` max 60ch. Composer `border-top:2px var(--th-ink)`, "Write in" label
   `--th-accent`, field `border-bottom:1px var(--th-border)` Playfair italic, send
@@ -167,7 +167,7 @@ Views) and `chat-themes.jsx`. Token bindings per family (all tokens already exis
   Inquiry text Mono `--th-head`; response Inter `--th-ink` max 64ch. Composer
   command line: `>` prompt `--th-accent`, blinking caret (`bc-blink`), `[ SEND ]`
   `--th-accent`. Empty: `// Session ready` + `AWAITING QUERY` Mono 40px `--th-head`
-  + blinking cursor block. Breakpoint 760.
+  - blinking cursor block. Breakpoint 760.
 
 ## Behavior (preserved exactly — lives in `useChat()`)
 

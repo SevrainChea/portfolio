@@ -19,7 +19,10 @@ export function getModel(event?: H3Event): {
   switch (provider) {
     case "groq": {
       const groq = createGroq({ apiKey: config.groqApiKey });
-      return { model: groq(config.groqModel), modelId: `groq/${config.groqModel}` };
+      return {
+        model: groq(config.groqModel),
+        modelId: `groq/${config.groqModel}`,
+      };
     }
     case "gemini": {
       const google = createGoogleGenerativeAI({ apiKey: config.geminiApiKey });

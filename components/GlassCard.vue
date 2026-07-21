@@ -5,7 +5,7 @@
     :class="[
       props.glassOnHover
         ? 'transition-all duration-300 hover:border-white/20 hover:bg-black/40 hover:backdrop-blur-xl'
-        : 'border-white/20 border bg-black/40 shadow-2xl backdrop-blur-xl',
+        : 'border border-white/20 bg-black/40 shadow-2xl backdrop-blur-xl',
     ]"
     v-bind="$props"
   >

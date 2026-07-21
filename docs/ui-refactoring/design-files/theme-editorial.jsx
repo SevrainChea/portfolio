@@ -73,7 +73,13 @@ function EditorialBoard({ pal }) {
             <div className="kicker">Portfolio — Vol. {vol}</div>
             <h1>Sévrain Chea</h1>
           </div>
-          <div className="meta">Tech Lead<br /><b>Full-Stack Engineer</b><br />{place} · 2025</div>
+          <div className="meta">
+            Tech Lead
+            <br />
+            <b>Full-Stack Engineer</b>
+            <br />
+            {place} · 2025
+          </div>
         </div>
         <div className="lead">
           <div className="figure">
@@ -83,20 +89,50 @@ function EditorialBoard({ pal }) {
           <div>
             <div className="role">On building &amp; leading</div>
             <p className="standfirst">{P.tagline}</p>
-            <nav>{P.nav.map((n, i) => <a key={n} href="#"><span className="n">{String(i + 1).padStart(2, "0")}</span>{n}</a>)}</nav>
+            <nav>
+              {P.nav.map((n, i) => (
+                <a key={n} href="#">
+                  <span className="n">{String(i + 1).padStart(2, "0")}</span>
+                  {n}
+                </a>
+              ))}
+            </nav>
           </div>
         </div>
         <div className="sectlabel">About</div>
-        <div className="about">{P.about.map((p, i) => <p key={i} dangerouslySetInnerHTML={{ __html: p }} />)}</div>
+        <div className="about">
+          {P.about.map((p, i) => (
+            <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+          ))}
+        </div>
         <div className="sectlabel">Experience</div>
         {P.experiences.map((x, i) => (
           <div className="xp" key={i}>
-            <div className="when">{x.dates}<span className="dur">{x.duration}</span></div>
+            <div className="when">
+              {x.dates}
+              <span className="dur">{x.duration}</span>
+            </div>
             <div>
-              <h3>{x.title} <span className="co">{x.company}</span></h3>
-              <div className="pos">{x.contract}{x.positions.length ? " — " + x.positions.join(", ") : ""}</div>
+              <h3>
+                {x.title} <span className="co">{x.company}</span>
+              </h3>
+              <div className="pos">
+                {x.contract}
+                {x.positions.length ? " — " + x.positions.join(", ") : ""}
+              </div>
               <p className="desc">{x.description}</p>
-              <div className="tags">{x.stack.map((t, j) => <span key={t}>{t}{j < x.stack.length - 1 ? <span className="sep">/</span> : ""}</span>)}</div>
+              <div className="tags">
+                {x.stack.map((t, j) => (
+                  <span key={t}>
+                    {t}
+                    {j < x.stack.length - 1 ? (
+                      <span className="sep">/</span>
+                    ) : (
+                      ""
+                    )}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         ))}
@@ -107,40 +143,100 @@ function EditorialBoard({ pal }) {
 
 // VARIANT A — "The Issue": warm paper, rust accent (the original).
 const ED_ISSUE = {
-  ns: "ed-issue", paper: "#f4efe4", ink: "#23201a", acc: "#b8472b",
-  mut: "#6f6557", rule: "#cbb89a", body: "#3a342b", grain: 0.5, vol: "7", place: "Paris",
+  ns: "ed-issue",
+  paper: "#f4efe4",
+  ink: "#23201a",
+  acc: "#b8472b",
+  mut: "#6f6557",
+  rule: "#cbb89a",
+  body: "#3a342b",
+  grain: 0.5,
+  vol: "7",
+  place: "Paris",
 };
 // VARIANT B — "Broadsheet": near B&W, accent = ink. Restrained, classic newsprint.
 const ED_NOIR = {
-  ns: "ed-noir", paper: "#faf8f1", ink: "#16130d", acc: "#14110c",
-  mut: "#6b6354", rule: "#d8cdb8", body: "#2c281f", grain: 0.4, vol: "II", place: "Paris",
+  ns: "ed-noir",
+  paper: "#faf8f1",
+  ink: "#16130d",
+  acc: "#14110c",
+  mut: "#6b6354",
+  rule: "#d8cdb8",
+  body: "#2c281f",
+  grain: 0.4,
+  vol: "II",
+  place: "Paris",
 };
 // VARIANT C — "Quarterly": cool ivory, deep-forest accent. Calmer, greener.
 const ED_FOREST = {
-  ns: "ed-forest", paper: "#eef0e9", ink: "#1b211c", acc: "#2f6d52",
-  mut: "#5f6b60", rule: "#c4ccc1", body: "#2f372f", grain: 0.32, vol: "04", place: "Paris",
+  ns: "ed-forest",
+  paper: "#eef0e9",
+  ink: "#1b211c",
+  acc: "#2f6d52",
+  mut: "#5f6b60",
+  rule: "#c4ccc1",
+  body: "#2f372f",
+  grain: 0.32,
+  vol: "04",
+  place: "Paris",
 };
 // DARK MODE — "the night edition": same press, lights out. Warm dark stock,
 // cream ink, the accent brightened so it carries on a dark page.
 const ED_ISSUE_DARK = {
-  ns: "ed-issue-d", paper: "#191510", ink: "#f3ece0", acc: "#e07a4a",
-  mut: "#9a8d7c", rule: "#3a3228", body: "#d6cabb", grain: 0.6, vol: "7", place: "Paris",
+  ns: "ed-issue-d",
+  paper: "#191510",
+  ink: "#f3ece0",
+  acc: "#e07a4a",
+  mut: "#9a8d7c",
+  rule: "#3a3228",
+  body: "#d6cabb",
+  grain: 0.6,
+  vol: "7",
+  place: "Paris",
 };
 const ED_NOIR_DARK = {
-  ns: "ed-noir-d", paper: "#141413", ink: "#f5f3ec", acc: "#f5f3ec",
-  mut: "#8f897e", rule: "#33312b", body: "#d9d6cc", grain: 0.5, vol: "II", place: "Paris",
+  ns: "ed-noir-d",
+  paper: "#141413",
+  ink: "#f5f3ec",
+  acc: "#f5f3ec",
+  mut: "#8f897e",
+  rule: "#33312b",
+  body: "#d9d6cc",
+  grain: 0.5,
+  vol: "II",
+  place: "Paris",
 };
 const ED_FOREST_DARK = {
-  ns: "ed-forest-d", paper: "#121712", ink: "#eef2e9", acc: "#6fbb8c",
-  mut: "#8a958a", rule: "#2a322a", body: "#ccd6cb", grain: 0.4, vol: "04", place: "Paris",
+  ns: "ed-forest-d",
+  paper: "#121712",
+  ink: "#eef2e9",
+  acc: "#6fbb8c",
+  mut: "#8a958a",
+  rule: "#2a322a",
+  body: "#ccd6cb",
+  grain: 0.4,
+  vol: "04",
+  place: "Paris",
 };
 
-function DirEditorialMag() { return <EditorialBoard pal={ED_ISSUE} />; }
-function DirEditorialNoir() { return <EditorialBoard pal={ED_NOIR} />; }
-function DirEditorialForest() { return <EditorialBoard pal={ED_FOREST} />; }
-function DirEditorialMagDark() { return <EditorialBoard pal={ED_ISSUE_DARK} />; }
-function DirEditorialNoirDark() { return <EditorialBoard pal={ED_NOIR_DARK} />; }
-function DirEditorialForestDark() { return <EditorialBoard pal={ED_FOREST_DARK} />; }
+function DirEditorialMag() {
+  return <EditorialBoard pal={ED_ISSUE} />;
+}
+function DirEditorialNoir() {
+  return <EditorialBoard pal={ED_NOIR} />;
+}
+function DirEditorialForest() {
+  return <EditorialBoard pal={ED_FOREST} />;
+}
+function DirEditorialMagDark() {
+  return <EditorialBoard pal={ED_ISSUE_DARK} />;
+}
+function DirEditorialNoirDark() {
+  return <EditorialBoard pal={ED_NOIR_DARK} />;
+}
+function DirEditorialForestDark() {
+  return <EditorialBoard pal={ED_FOREST_DARK} />;
+}
 window.DirEditorialMag = DirEditorialMag;
 window.DirEditorialNoir = DirEditorialNoir;
 window.DirEditorialForest = DirEditorialForest;
@@ -150,11 +246,35 @@ window.DirEditorialForestDark = DirEditorialForestDark;
 
 // Registry — light is the natural default; dark is the night edition.
 window.EDITORIAL_THEME = {
-  id: "editorial", name: "Editorial", Board: EditorialBoard, defaultMode: "light",
+  id: "editorial",
+  name: "Editorial",
+  Board: EditorialBoard,
+  defaultMode: "light",
   swatchKeys: ["acc", "paper"],
   variants: [
-    { id: "issue", name: "The Issue", swatch: ["#f4efe4", "#b8472b"], accent: { light: "#b8472b", dark: "#e07a4a" }, light: ED_ISSUE, dark: ED_ISSUE_DARK },
-    { id: "noir", name: "Broadsheet", swatch: ["#faf8f1", "#3a342b"], accent: { light: "#16130d", dark: "#f5f3ec" }, light: ED_NOIR, dark: ED_NOIR_DARK },
-    { id: "forest", name: "Quarterly", swatch: ["#eef0e9", "#2f6d52"], accent: { light: "#2f6d52", dark: "#6fbb8c" }, light: ED_FOREST, dark: ED_FOREST_DARK },
+    {
+      id: "issue",
+      name: "The Issue",
+      swatch: ["#f4efe4", "#b8472b"],
+      accent: { light: "#b8472b", dark: "#e07a4a" },
+      light: ED_ISSUE,
+      dark: ED_ISSUE_DARK,
+    },
+    {
+      id: "noir",
+      name: "Broadsheet",
+      swatch: ["#faf8f1", "#3a342b"],
+      accent: { light: "#16130d", dark: "#f5f3ec" },
+      light: ED_NOIR,
+      dark: ED_NOIR_DARK,
+    },
+    {
+      id: "forest",
+      name: "Quarterly",
+      swatch: ["#eef0e9", "#2f6d52"],
+      accent: { light: "#2f6d52", dark: "#6fbb8c" },
+      light: ED_FOREST,
+      dark: ED_FOREST_DARK,
+    },
   ],
 };

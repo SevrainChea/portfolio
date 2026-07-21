@@ -47,11 +47,11 @@ Nuxt auto-imports are used deliberately — know which is which:
   everything theme-related from `~/composables/useTheme`. Prefer that single
   entry point over importing `~/theme-registry` directly in components.
 
-## Comments — explain the *why*
+## Comments — explain the _why_
 
 This codebase comments **intent and hazards**, not mechanics. Theme/hydration
 code is subtle (FOUC avoidance, SSR/CSR hydration parity, pre-paint scripts), so
-when you touch it, leave a comment explaining *why* the non-obvious choice is
+when you touch it, leave a comment explaining _why_ the non-obvious choice is
 required — mirror the existing density in `app.vue`, `useTheme.ts`,
 `nuxt.config.ts`, and `ThemeSwitcher.vue`. Don't narrate obvious code.
 
@@ -68,5 +68,8 @@ Good (from the codebase):
 - Prettier defaults + `prettier-plugin-tailwindcss` (auto-sorts Tailwind
   classes). 2-space indent, double quotes, semicolons, trailing commas.
 - Don't hand-order Tailwind classes — let the plugin do it.
-- No ESLint is configured; there's nothing to satisfy beyond Prettier and
-  `tsc`/Volar via the editor.
+- **ESLint** (`@nuxt/eslint`) runs as a **behavior-only** linter — Prettier keeps
+  formatting, so ESLint's `stylistic` set is off and `vue/html-self-closing` is
+  disabled. Run `pnpm lint` (or `pnpm lint:fix`). Fix errors; the remaining
+  warnings (`vue/no-v-html` on the sanitized chat markdown, `require-default-prop`
+  on the deprecated `GlassCard.vue`) are known and non-blocking.

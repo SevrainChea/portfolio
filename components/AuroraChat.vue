@@ -40,7 +40,9 @@
           :class="['msg-row', msg.role === 'user' ? 'user-row' : 'bot-row']"
         >
           <div :class="['msg', msg.role === 'user' ? 'user' : 'bot']">
-            <span v-if="msg.role === 'user'" class="txt">{{ msg.content }}</span>
+            <span v-if="msg.role === 'user'" class="txt">{{
+              msg.content
+            }}</span>
             <div
               v-else
               class="md"
@@ -57,7 +59,9 @@
             class="meta"
           >
             <span v-for="s in msg.sources" :key="s" class="chip">{{ s }}</span>
-            <span v-if="msg.model_used" class="model">{{ msg.model_used }}</span>
+            <span v-if="msg.model_used" class="model">{{
+              msg.model_used
+            }}</span>
           </div>
         </div>
 
@@ -599,7 +603,8 @@ const {
   flex: 0 0 auto;
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 22px -4px color-mix(in srgb, var(--th-accent) 70%, transparent);
+  box-shadow: 0 0 22px -4px
+    color-mix(in srgb, var(--th-accent) 70%, transparent);
 }
 .aurora-chat-root .send:disabled {
   opacity: 0.4;

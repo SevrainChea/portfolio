@@ -9,7 +9,7 @@
 [ADR-0001](0001-python-rag-chatbot-backend.md) recorded that the standalone
 Python FastAPI + ChromaDB RAG backend is over-engineered for this site's
 knowledge base (~2.6k tokens across 21 short documents). At that scale retrieval
-adds failure modes — top-`k` and the relevance threshold can *exclude* documents
+adds failure modes — top-`k` and the relevance threshold can _exclude_ documents
 the model needed — while costing a second runtime, a separate Railway deploy,
 CORS between origins, a vector store to persist, and a manual re-ingest step on
 every data edit. None of it buys anything the context window can't hold directly.
@@ -43,24 +43,26 @@ Three sub-decisions frame the work:
 Verified against AI SDK **v6 (beta)** docs.
 
 **Server — `portfolio-frontend/server/`**
+
 - `server/api/chat.post.ts` — `defineEventHandler`; read `{ messages }` (UIMessages)
   from the body and:
 
   ```ts
   const result = streamText({
-    model: getModel(),                       // server/utils/llm.ts
-    system: buildSystemPrompt(),             // server/utils/prompt.ts
+    model: getModel(), // server/utils/llm.ts
+    system: buildSystemPrompt(), // server/utils/prompt.ts
     messages: convertToModelMessages(messages),
   });
   return result.toUIMessageStreamResponse({
     messageMetadata: ({ part }) =>
-      part.type === 'start' ? { model: getModelId() } : undefined,
-    onError: (e) => (e instanceof Error ? e.message : 'chat error'),
+      part.type === "start" ? { model: getModelId() } : undefined,
+    onError: (e) => (e instanceof Error ? e.message : "chat error"),
   });
   ```
 
   No `sources` (retrieval is gone); the model name rides along as message
   metadata so the UI can still show it.
+
 - `server/utils/llm.ts` — provider factory returning an AI SDK `LanguageModel`
   from `LLM_PROVIDER`: `groq` (`createGroq`, `GROQ_API_KEY`, `GROQ_MODEL`),
   `gemini` (`@ai-sdk/google`), `ollama` (community `ollama-ai-provider`, local
@@ -73,10 +75,13 @@ Verified against AI SDK **v6 (beta)** docs.
   `portfolio-frontend/server/data/personal_data.json` (server-side only).
 
 **Client — `portfolio-frontend/`**
+
 - Rewrite `composables/useChat.ts` as a thin wrapper over the `Chat` class:
 
   ```ts
-  const chat = new Chat({ transport: new DefaultChatTransport({ api: '/api/chat' }) });
+  const chat = new Chat({
+    transport: new DefaultChatTransport({ api: "/api/chat" }),
+  });
   ```
 
   **Preserve** the UX helpers the SDK does not provide — `input` ref,
@@ -84,6 +89,7 @@ Verified against AI SDK **v6 (beta)** docs.
   `messagesEl`/`inputEl`. Map `loading` ← `chat.status !== 'ready'`;
   `send()` → `chat.sendMessage({ text: input.value })`. Keep the exposed API
   close to today's to minimise per-skin churn.
+
 - The four skins (`AuroraChat` / `NeonChat` / `EditorialChat` / `BlueprintChat.vue`)
   render message text from `parts`
   (`m.parts.filter(p => p.type === 'text').map(p => p.text).join('')`) instead of
@@ -95,6 +101,7 @@ Verified against AI SDK **v6 (beta)** docs.
   `@ai-sdk/google`, `ollama-ai-provider`.
 
 **Deployment**
+
 - Vercel (Nitro `vercel` preset). Env in the Vercel project: `LLM_PROVIDER`,
   `GROQ_API_KEY`, `GROQ_MODEL` (+ `GOOGLE_GENERATIVE_AI_API_KEY` if Gemini is used).
 - The Railway service for `chatbot-backend/` is taken down; the code stays.
@@ -102,15 +109,17 @@ Verified against AI SDK **v6 (beta)** docs.
 ## Consequences
 
 **Positive**
+
 - One repo, one language, one deploy. The chat ships with the site; no second
   runtime, no CORS, no vector store, no re-ingest step.
-- Better answers at this scale: the model sees the *entire* knowledge base every
+- Better answers at this scale: the model sees the _entire_ knowledge base every
   turn, so it can no longer miss a relevant document the way top-`k` retrieval can.
 - **Multi-turn context for free:** the `Chat` class sends full message history by
   default, whereas the Python flow only ever sent the latest message.
 - Editing knowledge is now just editing one JSON file — no ingestion to re-run.
 
 **Negative / costs**
+
 - Real frontend churn: `composables/useChat.ts` is rewritten and all four themed
   skins are touched (parts rendering, sources removed). Mitigated by keeping the
   wrapper's API close to today's.
@@ -122,6 +131,7 @@ Verified against AI SDK **v6 (beta)** docs.
 - AI SDK v6 is in beta; pin versions and watch for breaking changes.
 
 **Boundary of this decision**
-- This is right *because the corpus is tiny*. If the knowledge base grows large
+
+- This is right _because the corpus is tiny_. If the knowledge base grows large
   (e.g. a real Notion export), revisit retrieval — that is exactly the scenario
   the `chatbot-backend/` sandbox is preserved to explore.

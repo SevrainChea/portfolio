@@ -11,9 +11,13 @@
           <h1>In Conversation</h1>
         </div>
         <div class="meta">
-          <div>With <b>{{ data.name }}</b></div>
+          <div>
+            With <b>{{ data.name }}</b>
+          </div>
           <div>An open column</div>
-          <div><b>{{ data.role }}</b></div>
+          <div>
+            <b>{{ data.role }}</b>
+          </div>
         </div>
       </div>
 
@@ -65,7 +69,10 @@
         </div>
 
         <!-- Typing indicator -->
-        <div v-if="loading && !messages.some((m) => m.streaming)" class="turn a">
+        <div
+          v-if="loading && !messages.some((m) => m.streaming)"
+          class="turn a"
+        >
           <div class="mark">A.</div>
           <div class="body"><p class="atext composing">composing…</p></div>
         </div>

@@ -101,29 +101,83 @@ const HOST_CSS = `
 .ph-switch.is-mobile[data-chrome="light"] .ph-nav a{background:rgba(20,20,30,.05);}
 `;
 
-function lsGet(k, d) {try {return localStorage.getItem(k) || d;} catch (e) {return d;}}
-function lsSet(k, v) {try {localStorage.setItem(k, v);} catch (e) {}}
+function lsGet(k, d) {
+  try {
+    return localStorage.getItem(k) || d;
+  } catch (e) {
+    return d;
+  }
+}
+function lsSet(k, v) {
+  try {
+    localStorage.setItem(k, v);
+  } catch (e) {}
+}
 
 function PortfolioHost() {
-  const { useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakSlider } = window;
+  const { useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakSlider } =
+    window;
   const AURORA = window.AURORA_THEME;
   const families = [
-  { id: "aurora", name: "Aurora", sub: "Frameless", kind: "aurora", bp: 880, swatch: AURORA.variants[0].swatch },
-  { id: "neon", name: window.NEON_THEME.name, sub: "Neon sign", kind: "board", bp: 760, reg: window.NEON_THEME, swatch: window.NEON_THEME.variants[0].swatch },
-  { id: "editorial", name: window.EDITORIAL_THEME.name, sub: "The issue", kind: "board", bp: 760, reg: window.EDITORIAL_THEME, swatch: window.EDITORIAL_THEME.variants[0].swatch },
-  { id: "blueprint", name: window.BLUEPRINT_THEME.name, sub: "Spec sheet", kind: "board", bp: 760, reg: window.BLUEPRINT_THEME, swatch: window.BLUEPRINT_THEME.variants[0].swatch }];
+    {
+      id: "aurora",
+      name: "Aurora",
+      sub: "Frameless",
+      kind: "aurora",
+      bp: 880,
+      swatch: AURORA.variants[0].swatch,
+    },
+    {
+      id: "neon",
+      name: window.NEON_THEME.name,
+      sub: "Neon sign",
+      kind: "board",
+      bp: 760,
+      reg: window.NEON_THEME,
+      swatch: window.NEON_THEME.variants[0].swatch,
+    },
+    {
+      id: "editorial",
+      name: window.EDITORIAL_THEME.name,
+      sub: "The issue",
+      kind: "board",
+      bp: 760,
+      reg: window.EDITORIAL_THEME,
+      swatch: window.EDITORIAL_THEME.variants[0].swatch,
+    },
+    {
+      id: "blueprint",
+      name: window.BLUEPRINT_THEME.name,
+      sub: "Spec sheet",
+      kind: "board",
+      bp: 760,
+      reg: window.BLUEPRINT_THEME,
+      swatch: window.BLUEPRINT_THEME.variants[0].swatch,
+    },
+  ];
 
-
-  const [family, setFamily] = React.useState(() => lsGet("pf-family", "aurora"));
+  const [family, setFamily] = React.useState(() =>
+    lsGet("pf-family", "aurora"),
+  );
   const [variants, setVariants] = React.useState(() => {
-    try {return JSON.parse(localStorage.getItem("pf-variants")) || {};} catch (e) {return {};}
+    try {
+      return JSON.parse(localStorage.getItem("pf-variants")) || {};
+    } catch (e) {
+      return {};
+    }
   });
   const [modes, setModes] = React.useState(() => {
-    try {return JSON.parse(localStorage.getItem("pf-modes")) || {};} catch (e) {return {};}
+    try {
+      return JSON.parse(localStorage.getItem("pf-modes")) || {};
+    } catch (e) {
+      return {};
+    }
   });
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [condensed, setCondensed] = React.useState(false);
-  const [winW, setWinW] = React.useState(() => typeof window !== "undefined" ? window.innerWidth : 1200);
+  const [winW, setWinW] = React.useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : 1200,
+  );
   const P = window.PORTFOLIO;
   const [tw, setTweak] = useTweaks({ neonSat: "soft", neonGlow: 0.55 });
 
@@ -150,26 +204,35 @@ function PortfolioHost() {
 
   const fam = families.find((f) => f.id === family) || families[0];
   const isMobile = winW <= (fam.bp || 760);
-  const defVar = (f) => f.kind === "aurora" ? AURORA.variants[0].id : f.reg.variants[0].id;
+  const defVar = (f) =>
+    f.kind === "aurora" ? AURORA.variants[0].id : f.reg.variants[0].id;
   const variantId = variants[family] || defVar(fam);
-  const defMode = (f) => f.kind === "aurora" ? "dark" : f.reg.defaultMode || "dark";
+  const defMode = (f) =>
+    f.kind === "aurora" ? "dark" : f.reg.defaultMode || "dark";
   const mode = modes[family] || defMode(fam);
 
-  const pickFamily = (id) => {setFamily(id);lsSet("pf-family", id);setMenuOpen(false);};
+  const pickFamily = (id) => {
+    setFamily(id);
+    lsSet("pf-family", id);
+    setMenuOpen(false);
+  };
   const pickVariant = (id) => {
     const nv = { ...variants, [family]: id };
-    setVariants(nv);lsSet("pf-variants", JSON.stringify(nv));
+    setVariants(nv);
+    lsSet("pf-variants", JSON.stringify(nv));
   };
   const toggleMode = () => {
     const next = mode === "dark" ? "light" : "dark";
     const nm = { ...modes, [family]: next };
-    setModes(nm);lsSet("pf-modes", JSON.stringify(nm));
+    setModes(nm);
+    lsSet("pf-modes", JSON.stringify(nm));
   };
 
   // Derive switcher chrome / accent / swatches + the body to render.
   let chrome, accent, swatchList, body;
   if (fam.kind === "aurora") {
-    const v = AURORA.variants.find((x) => x.id === variantId) || AURORA.variants[0];
+    const v =
+      AURORA.variants.find((x) => x.id === variantId) || AURORA.variants[0];
     chrome = mode;
     accent = (v[mode] || v.dark)["--accent"];
     swatchList = AURORA.variants.map((x) => {
@@ -178,15 +241,23 @@ function PortfolioHost() {
     });
     body = <window.AuroraBody variantId={variantId} mode={mode} />;
   } else {
-    const v = fam.reg.variants.find((x) => x.id === variantId) || fam.reg.variants[0];
-    chrome = mode;accent = v.accent[mode];
+    const v =
+      fam.reg.variants.find((x) => x.id === variantId) || fam.reg.variants[0];
+    chrome = mode;
+    accent = v.accent[mode];
     const sk = fam.reg.swatchKeys;
     swatchList = fam.reg.variants.map((x) => {
       const p = x[mode] || x.dark || x.light;
-      return { id: x.id, name: x.name, swatch: sk ? [p[sk[0]], p[sk[1]]] : x.swatch };
+      return {
+        id: x.id,
+        name: x.name,
+        swatch: sk ? [p[sk[0]], p[sk[1]]] : x.swatch,
+      };
     });
     const Board = fam.reg.Board;
-    const pal = fam.reg.applyTweak ? fam.reg.applyTweak(variantId, mode, tw) : v[mode];
+    const pal = fam.reg.applyTweak
+      ? fam.reg.applyTweak(variantId, mode, tw)
+      : v[mode];
     body = <Board pal={pal} />;
   }
 
@@ -194,58 +265,128 @@ function PortfolioHost() {
     <React.Fragment>
       <style dangerouslySetInnerHTML={{ __html: HOST_CSS }} />
       {body}
-      <div className={"ph-switch" + (isMobile ? " is-mobile" : "") + (condensed ? " cond" : "")} data-chrome={chrome} style={{ "--acc": accent }}>
+      <div
+        className={
+          "ph-switch" +
+          (isMobile ? " is-mobile" : "") +
+          (condensed ? " cond" : "")
+        }
+        data-chrome={chrome}
+        style={{ "--acc": accent }}
+      >
         <div className="ph-row">
-        <div className={"fam" + (menuOpen ? " open" : "")} onClick={(e) => {e.stopPropagation();setMenuOpen((o) => !o);}}>
-          <span className="lbl">Theme</span>
-          <span className="val">{fam.name}<span className="chev">▾</span></span>
-          {menuOpen &&
-          <div className="ph-menu" onClick={(e) => e.stopPropagation()}>
-              {families.map((f) =>
-            <button key={f.id} onClick={() => pickFamily(f.id)}>
-                  <span className="mini" style={{ background: `linear-gradient(135deg, ${f.swatch[0]} 45%, ${f.swatch[1]} 45%)` }} />
-                  <span className="mname">{f.name}</span>
-                  {f.id === family ? <span className="ck">✓</span> : <span className="msub">{f.sub}</span>}
-                </button>
+          <div
+            className={"fam" + (menuOpen ? " open" : "")}
+            onClick={(e) => {
+              e.stopPropagation();
+              setMenuOpen((o) => !o);
+            }}
+          >
+            <span className="lbl">Theme</span>
+            <span className="val">
+              {fam.name}
+              <span className="chev">▾</span>
+            </span>
+            {menuOpen && (
+              <div className="ph-menu" onClick={(e) => e.stopPropagation()}>
+                {families.map((f) => (
+                  <button key={f.id} onClick={() => pickFamily(f.id)}>
+                    <span
+                      className="mini"
+                      style={{
+                        background: `linear-gradient(135deg, ${f.swatch[0]} 45%, ${f.swatch[1]} 45%)`,
+                      }}
+                    />
+                    <span className="mname">{f.name}</span>
+                    {f.id === family ? (
+                      <span className="ck">✓</span>
+                    ) : (
+                      <span className="msub">{f.sub}</span>
+                    )}
+                  </button>
+                ))}
+              </div>
             )}
-            </div>
-          }
-        </div>
-        <div className="sep" />
-        <div className="swatches">
-          {swatchList.map((s) =>
-          <button key={s.id} className={"sw" + (s.id === variantId ? " active" : "")} onClick={() => pickVariant(s.id)} aria-label={s.name}>
-              <span className="dot" style={{ background: `linear-gradient(135deg, ${s.swatch[0]} 45%, ${s.swatch[1]} 45%)` }} />
-              <span className="tip">{s.name}</span>
-            </button>
-          )}
-        </div>
-        <div className="sep" />
-        <button className="mode" onClick={toggleMode} aria-label={mode === "dark" ? "Switch to light" : "Switch to dark"}>
-          {mode === "dark" ?
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" /></svg> :
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.8 6.8 0 0 0 9.8 9.8z" /></svg>}
-        </button>
+          </div>
+          <div className="sep" />
+          <div className="swatches">
+            {swatchList.map((s) => (
+              <button
+                key={s.id}
+                className={"sw" + (s.id === variantId ? " active" : "")}
+                onClick={() => pickVariant(s.id)}
+                aria-label={s.name}
+              >
+                <span
+                  className="dot"
+                  style={{
+                    background: `linear-gradient(135deg, ${s.swatch[0]} 45%, ${s.swatch[1]} 45%)`,
+                  }}
+                />
+                <span className="tip">{s.name}</span>
+              </button>
+            ))}
+          </div>
+          <div className="sep" />
+          <button
+            className="mode"
+            onClick={toggleMode}
+            aria-label={mode === "dark" ? "Switch to light" : "Switch to dark"}
+          >
+            {mode === "dark" ? (
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="4.2" />
+                <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.8 6.8 0 0 0 9.8 9.8z" />
+              </svg>
+            )}
+          </button>
         </div>
         <nav className="ph-nav">
           <div className="mini">
             <img src={P.photo} alt={P.name} style={{ borderColor: accent }} />
             <span className="nm">Sévrain Chea</span>
           </div>
-          {P.nav.map((n, i) =>
-          <a key={n} href="#" className={i === 0 ? "active" : ""} style={i === 0 ? { color: accent } : null}>{n}</a>
-          )}
+          {P.nav.map((n, i) => (
+            <a
+              key={n}
+              href="#"
+              className={i === 0 ? "active" : ""}
+              style={i === 0 ? { color: accent } : null}
+            >
+              {n}
+            </a>
+          ))}
         </nav>
       </div>
       <TweaksPanel>
         <TweakSection label="Neon — light mode" />
-        <TweakRadio label="Background" value={tw.neonSat}
-        options={["soft", "tinted", "saturated"]}
-        onChange={(v) => setTweak("neonSat", v)} />
-        <TweakSlider label="Glow" value={tw.neonGlow} min={0.2} max={1} step={0.05}
-        onChange={(v) => setTweak("neonGlow", v)} />
+        <TweakRadio
+          label="Background"
+          value={tw.neonSat}
+          options={["soft", "tinted", "saturated"]}
+          onChange={(v) => setTweak("neonSat", v)}
+        />
+        <TweakSlider
+          label="Glow"
+          value={tw.neonGlow}
+          min={0.2}
+          max={1}
+          step={0.05}
+          onChange={(v) => setTweak("neonGlow", v)}
+        />
       </TweaksPanel>
-    </React.Fragment>);
-
+    </React.Fragment>
+  );
 }
 window.PortfolioHost = PortfolioHost;
