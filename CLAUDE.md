@@ -22,11 +22,10 @@ light/dark) whose single source of truth is `theme-registry.ts`. `pages/chat.vue
 is the chatbot page; it mirrors that pattern, switching on `family` to render the
 matching per-family `*Chat.vue` skin over a shared `useChat()` composable.
 
-> **Deprecated — do not extend:** glass morphism / "glass-ui" (`GlassCard.vue`,
-> `backdrop-blur` card surfaces) and `BgGradient.vue` are now **unreferenced dead
-> code** (GlassCard's last consumer, `chat.vue`, was replaced by the `*Chat.vue`
-> skins). New work uses the token-driven per-family system instead. See
-> [styling-and-themes.md](docs/conventions/styling-and-themes.md).
+> **Removed — don't reintroduce:** the old glass-morphism / "glass-ui" surfaces
+> (`GlassCard.vue`, `BgGradient.vue`) were **deleted** once the themed `*Chat.vue`
+> skins replaced their last consumer (`chat.vue`). New work uses the token-driven
+> per-family system — see [styling-and-themes.md](docs/conventions/styling-and-themes.md).
 
 ## Commands
 
@@ -47,11 +46,12 @@ trailing commas). **Linting** is **ESLint** via
 (`eslint.config.mjs` wraps the generated `.nuxt/eslint.config.mjs`). It is
 **behavior-only**: Prettier owns formatting, so `stylistic` is off and
 `vue/html-self-closing` is disabled (it fights Prettier's void-element form).
-The linter fails only on errors; the remaining warnings are all in deprecated
-`GlassCard.vue` (`require-default-prop`). The sanitized `v-html` in the
-`*Chat.vue` skins is suppressed inline with `<!-- eslint-disable vue/no-v-html
--- … dompurify … -->` block comments (the rule stays on to catch any _new_,
-unsanitized `v-html`). `typescript` is installed solely so the parser can read
+The tree is **warning-clean** and the gate enforces it (`pnpm lint
+--max-warnings 0`), so any new warning fails, not just errors. The sanitized
+`v-html` in the `*Chat.vue` skins is suppressed inline with `<!-- eslint-disable
+vue/no-v-html -- … dompurify … -->` block comments (the rule stays on to catch
+any _new_, unsanitized `v-html`); prefer a documented inline disable over
+loosening the gate. `typescript` is installed solely so the parser can read
 `<script lang="ts">` — there is still no `.vue`-aware typecheck (`vue-tsc` is
 not installed). **Keep it pinned to 5.x:** `typescript-eslint` 8.x does not
 support TS 7 yet, and a bare `pnpm add typescript` grabs TS 7 (now the `latest`

@@ -100,10 +100,10 @@ from the registry.
   media queries; `880` matches the family's registry `breakpoint`. Keep them in
   sync if you change one.
 
-## Deprecated
+## Removed — don't reintroduce
 
 Glass morphism / "glass-ui" (`GlassCard.vue`, `backdrop-blur` card surfaces) and
-`BgGradient.vue` are **deprecated**. Both are now unreferenced dead code —
-`GlassCard`'s last consumer (`chat.vue`) was replaced by the per-family
-`*Chat.vue` skins in the themed-chat redesign. Don't build new surfaces on them —
-use the token-driven per-family approach.
+`BgGradient.vue` have been **removed**. The themed-chat redesign replaced their
+last consumer (`chat.vue`) with the per-family `*Chat.vue` skins, leaving them
+unreferenced dead code, and they were then deleted. Don't reintroduce glass
+surfaces — use the token-driven per-family approach.
