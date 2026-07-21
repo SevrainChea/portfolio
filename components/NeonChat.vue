@@ -34,12 +34,14 @@
             <span v-if="msg.role === 'user'" class="txt">{{
               msg.content
             }}</span>
+            <!-- eslint-disable vue/no-v-html -- assistant markdown is sanitized by dompurify in renderMarkdown() -->
             <div
               v-else
               class="md"
               :class="{ streaming: msg.streaming }"
               v-html="renderMarkdown(msg.content)"
             />
+            <!-- eslint-enable vue/no-v-html -->
           </div>
           <div
             v-if="

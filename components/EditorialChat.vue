@@ -45,12 +45,14 @@
           <div class="mark">{{ msg.role === "user" ? "Q." : "A." }}</div>
           <div class="body">
             <p v-if="msg.role === 'user'" class="qtext">{{ msg.content }}</p>
+            <!-- eslint-disable vue/no-v-html -- assistant markdown is sanitized by dompurify in renderMarkdown() -->
             <div
               v-else
               class="atext"
               :class="{ streaming: msg.streaming }"
               v-html="renderMarkdown(msg.content)"
             />
+            <!-- eslint-enable vue/no-v-html -->
             <div
               v-if="
                 msg.role === 'assistant' &&
