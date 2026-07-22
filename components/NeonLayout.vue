@@ -7,7 +7,9 @@
 
     <div class="wrap">
       <header class="sign">
-        <span class="otw">Open to work</span>
+        <span v-if="data.availability.open" class="otw">{{
+          data.availability.label
+        }}</span>
         <img class="avatar" :src="data.photo" :alt="data.name" />
         <h1 class="name">{{ data.firstName }}<br />{{ data.lastName }}</h1>
         <div class="role">{{ data.role }}</div>

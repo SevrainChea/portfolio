@@ -12,7 +12,10 @@
           <h1>{{ data.name }}</h1>
         </div>
         <div class="meta">
-          Tech Lead<br /><b>Full-Stack Engineer</b><br />Paris · 2025
+          Founding Engineer<br /><b>Product Builder</b>
+          <span v-if="data.availability.open" class="avail"
+            ><span class="dot" />{{ data.availability.label }}</span
+          >
         </div>
       </header>
 
@@ -169,6 +172,38 @@ function positionLine(xp: Experience): string {
 }
 .ed-root .masthead .meta b {
   color: var(--th-ink);
+}
+.ed-root .masthead .meta .avail {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  color: var(--th-accent);
+  font-weight: 700;
+}
+.ed-root .masthead .meta .avail .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--th-accent);
+  animation: ed-otw-pulse 2.4s ease-out infinite;
+}
+@keyframes ed-otw-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--th-accent) 50%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ed-root .masthead .meta .avail .dot {
+    animation: none;
+  }
 }
 
 /* top intro row */
