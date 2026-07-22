@@ -14,6 +14,15 @@ const themeInitScript = `(function(){try{var FV=${JSON.stringify(FAMILY_VARIANT_
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
+
+  // Never watch nested git worktrees. `claude --worktree` / EnterWorktree create
+  // a full second checkout (its own node_modules/.nuxt — tens of thousands of
+  // files) under .worktrees/. Nuxt's dev watcher doesn't read .gitignore, so it
+  // would try to watch all of them and crash `pnpm dev` with EMFILE (too many
+  // open files). .worktrees is already git-ignored; this keeps it out of the
+  // file watcher too.
+  ignore: ["**/.worktrees/**"],
+
   devtools: { enabled: true },
   css: ["~/assets/css/main.css", "~/assets/css/tailwind.css"],
 
