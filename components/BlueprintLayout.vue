@@ -20,16 +20,20 @@
               <span class="k">Discipline</span><span class="v">Full-Stack</span>
             </div>
             <div class="cell">
-              <span class="k">Exp.</span><span class="v">7 Years</span>
+              <span class="k">Exp.</span><span class="v">8 Years</span>
             </div>
           </div>
           <div class="tbrow">
             <div class="cell">
-              <span class="k">Scale</span><span class="v">0 → 10 team</span>
+              <span class="k">Scale</span><span class="v">0 → €7M ARR</span>
             </div>
             <div class="cell">
               <span class="k">Status</span
-              ><span class="v status">Available</span>
+              ><span class="v status"
+                ><span class="sdot" />{{
+                  data.availability.open ? "Available" : "Closed"
+                }}</span
+              >
             </div>
           </div>
         </div>
@@ -285,7 +289,33 @@ function positionLine(xp: Experience): string {
   font-weight: 500;
 }
 .bp-root .titleblock .v.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--th-accent);
+}
+.bp-root .titleblock .v.status .sdot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--th-accent);
+  animation: bp-otw-pulse 2.4s ease-out infinite;
+}
+@keyframes bp-otw-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--th-accent) 50%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bp-root .titleblock .v.status .sdot {
+    animation: none;
+  }
 }
 
 /* nav */

@@ -6,6 +6,9 @@
       <aside class="left">
         <img class="avatar" :src="data.photo" :alt="data.name" />
         <h1 class="name">{{ data.firstName }}<br />{{ data.lastName }}</h1>
+        <div v-if="data.availability.open" class="otw">
+          <span class="dot" />{{ data.availability.label }}
+        </div>
         <div class="role">{{ data.role }}</div>
         <p class="tagline">{{ data.tagline }}</p>
         <div class="divrule" />
@@ -155,6 +158,44 @@ function positionLine(xp: Experience): string {
   letter-spacing: -0.015em;
   color: var(--th-name);
   transition: color 0.6s ease;
+}
+.aurora-root .otw {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--th-tag-bg);
+  border: 1px solid var(--th-tag-border);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--th-accent);
+}
+.aurora-root .otw .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--th-accent);
+  animation: aurora-otw-pulse 2.4s ease-out infinite;
+}
+@keyframes aurora-otw-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--th-accent) 50%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aurora-root .otw .dot {
+    animation: none;
+  }
 }
 .aurora-root .role {
   font-size: 12.5px;

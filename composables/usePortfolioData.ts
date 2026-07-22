@@ -31,14 +31,26 @@ export interface NavItem {
   href: string;
 }
 
+export interface Availability {
+  open: boolean;
+  label: string;
+}
+
 const portfolio = {
   name: "Sévrain Chea",
   firstName: "Sévrain",
   lastName: "Chea",
-  role: "Tech Lead · Full-Stack Engineer",
+  role: "Founding Engineer · Product Builder",
   tagline:
-    "Start-up mindset — shipping fast, iterating on product, and building scalable processes for high-performing engineering teams.",
+    "Took Mayday from zero to a €7M-ARR acquisition. Happiest owning a product end to end — close to the code, and most energized by where AI is taking software.",
   photo: "/images/profile_home.jpeg",
+
+  // Single source of truth for the "open to work" signal each family renders in
+  // its own voice (Neon pill, Blueprint status cell, Aurora/Editorial chip).
+  availability: {
+    open: true,
+    label: "Open to work",
+  } as Availability,
 
   nav: [
     { label: "About", href: "#about" },
@@ -48,8 +60,8 @@ const portfolio = {
 
   // HTML strings — inline <b> emphasis (e.g. Mayday) is preserved via v-html.
   about: [
-    "I am a full-stack engineer with 7 years of experience building and scaling web applications. I specialize in system architecture, leading engineering teams, and driving product development from concept to launch.",
-    "I'm currently a Tech Lead at <b>Mayday</b>, where I joined as the first engineer and helped grow the team from 0 to 10. I started by building core product features, then moved into designing scalable systems and leading technical architecture — driving direction, mentoring, and shipping high-impact features.",
+    "I'm a hands-on full-stack engineer and product builder with 8 years of experience building and scaling web applications. I love owning a product from concept to launch — designing the architecture, shipping the features, and staying close to both the code and the users.",
+    "I joined <b>Mayday</b> as its founding engineer and helped take it from zero to a €7M-ARR acquisition by USU GmbH. I built both the product and the team along the way — growing from Senior Engineer to Tech Lead to Head of Engineering — while still spending about half my time hands-on, most recently building an agentic AI coding system for the team.",
     "Before Mayday I worked primarily in startups across diverse domains — monitoring tools for cinema hardware, web apps for French tax workflows, and healthcare platforms for teleconsultation and scheduling.",
     "Outside of work I'm a dad to one awesome little boy. I love cooking for my family, sneaking in quick getaways, and a geeky side that runs from side projects to video games.",
   ] as string[],
@@ -70,24 +82,27 @@ const portfolio = {
 
   experiences: [
     {
-      title: "Tech Lead",
+      title: "Head of Engineering",
       company: "Mayday",
       contract: "Full-Time",
-      dates: "2021 — 2025",
-      duration: "Present",
-      positions: ["Senior Engineer", "Full-Stack Engineer"],
+      dates: "2021 — Present",
+      duration: "5 yrs",
+      positions: ["Founding Engineer", "Senior Engineer", "Tech Lead"],
       description:
-        "Led two squads (7 engineers) building a SaaS platform at a fast-growing startup. Shaped scalable architecture, spearheaded technical discoveries (collaborative editor with Y.js), refactored the notification system with RabbitMQ, and initiated the LMS product. Implemented single/multi-tenant DB architecture and defined onboarding for rapid team growth.",
+        "Joined as the founding engineer and helped grow Mayday from zero to a €7M-ARR acquisition by USU GmbH (Sept 2025), building both the product and an engineering team of 8. Shaped scalable architecture, spearheaded a collaborative editor with Y.js, refactored the notification system with RabbitMQ, and shipped single/multi-tenant DB architecture and the LMS product. Now driving the team's adoption of agentic AI coding while staying hands-on about half my time.",
       stack: [
-        "VueJS",
+        "Vue 3",
+        "Nuxt",
         "TailwindCSS",
-        "NodeJS",
+        "Node.js",
         "NestJS",
         "TypeScript",
         "GraphQL",
-        "MongoDB",
         "PostgreSQL",
+        "MongoDB",
+        "Redis",
         "RabbitMQ",
+        "Python",
       ],
       companyLink: "https://www.mayday.fr/",
     },
