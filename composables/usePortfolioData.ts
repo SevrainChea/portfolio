@@ -42,7 +42,7 @@ const portfolio = {
   lastName: "Chea",
   role: "Founding Engineer · Product Builder",
   tagline:
-    "Took Mayday from zero to a €7M-ARR acquisition. Happiest owning a product end to end — close to the code, and most energized by where AI is taking software.",
+    "Took Mayday from zero to a €7M-ARR acquisition. I like being the person who owns a product outright and stays close to the code. Lately that's meant going deep on building with AI.",
   photo: "/images/profile_home.jpeg",
 
   // Single source of truth for the "open to work" signal each family renders in
@@ -60,10 +60,10 @@ const portfolio = {
 
   // HTML strings — inline <b> emphasis (e.g. Mayday) is preserved via v-html.
   about: [
-    "I'm a hands-on full-stack engineer and product builder with 8 years of experience building and scaling web applications. I love owning a product from concept to launch — designing the architecture, shipping the features, and staying close to both the code and the users.",
-    "I joined <b>Mayday</b> as its founding engineer and helped take it from zero to a €7M-ARR acquisition by USU GmbH. I built both the product and the team along the way — growing from Senior Engineer to Tech Lead to Head of Engineering — while still spending about half my time hands-on, most recently building an agentic AI coding system for the team.",
-    "Before Mayday I worked primarily in startups across diverse domains — monitoring tools for cinema hardware, web apps for French tax workflows, and healthcare platforms for teleconsultation and scheduling.",
-    "Outside of work I'm a dad to one awesome little boy. I love cooking for my family, sneaking in quick getaways, and a geeky side that runs from side projects to video games.",
+    "I'm a full-stack engineer, and after eight years the work I care about most is taking a product from the first architecture calls all the way to watching real people use it. I'd rather not be far from either the code or the users for long.",
+    "I was <b>Mayday</b>'s founding engineer. I wrote the first version and stayed through its €7M-ARR acquisition by USU GmbH, moving from Senior Engineer to Tech Lead to Head of Engineering as the company grew. Even running the team I kept coding about half the week, and the last thing I built there was an agentic AI coding system for the team.",
+    "Before that it was mostly startups, and the domains were all over the map: monitoring software for cinema hardware, web tools for French tax paperwork, telehealth for scheduling and consultations.",
+    "Away from work I'm dad to a little boy who keeps me plenty busy. I cook for my family, grab a short trip whenever I can, and stay reliably geeky — side projects when I've got the energy, video games when I don't.",
   ] as string[],
 
   socials: [
@@ -89,7 +89,7 @@ const portfolio = {
       duration: "5 yrs",
       positions: ["Founding Engineer", "Senior Engineer", "Tech Lead"],
       description:
-        "Joined as the founding engineer and helped grow Mayday from zero to a €7M-ARR acquisition by USU GmbH (Sept 2025), building both the product and an engineering team of 8. Shaped scalable architecture, spearheaded a collaborative editor with Y.js, refactored the notification system with RabbitMQ, and shipped single/multi-tenant DB architecture and the LMS product. Now driving the team's adoption of agentic AI coding while staying hands-on about half my time.",
+        "Founding engineer through the €7M-ARR acquisition by USU GmbH in September 2025, building out the engineering team to eight along the way. I built the real-time collaborative editor on Y.js, rebuilt the notification system on RabbitMQ, and shipped the single- and multi-tenant database architecture and the LMS product. These days I'm moving the team onto agentic AI coding, and I still write code about half the week.",
       stack: [
         "Vue 3",
         "Nuxt",
@@ -114,7 +114,7 @@ const portfolio = {
       duration: "22 months",
       positions: ["Full-Stack Engineer"],
       description:
-        "Led a backend team (3 developers) building the Maiia Pro web application. Designed technical architecture and data models, planned and estimated work, mentored backend developers, and delivered agenda management and payment processing. Integrated Stripe and Algolia to support core business workflows.",
+        "Ran a three-person backend team on the Maiia Pro web app. I owned the architecture and data models, planned and estimated the work, and mentored the other backend developers. On the product side I built the scheduling and payment features, wiring in Stripe for payments and Algolia for search.",
       stack: [
         "Java",
         "SpringBoot",
@@ -134,7 +134,7 @@ const portfolio = {
       duration: "10 months",
       positions: [],
       description:
-        "Embedded software engineer at Cobham in aerospace — developed unit tests in C using RTRT and validated technical requirements. Later a technical consultant for Renault and Akka on an autonomous-vehicle PoC, authoring test plans and leading functional validation in safety-critical environments.",
+        "Started out in aerospace, embedded at Cobham, writing unit tests in C with RTRT and checking work against the technical requirements. Then a stint on an autonomous-vehicle proof of concept for Renault with Akka, where I wrote the test plans and ran functional validation on code that couldn't afford to fail.",
       stack: ["C", "RTRT", "Functional QA"],
       companyLink: "https://www.viveris.fr/",
     },
@@ -146,7 +146,7 @@ const portfolio = {
       duration: "6 months",
       positions: [],
       description:
-        "Contributed to the GIP-MDS project on the net-entreprises.fr portal. Developed new features, ensured reliability through unit testing, and built a Circuit Breaker PoC using Hystrix. Led a task force of 4 developers, reducing the backlog from 50 to under 20 tickets within one month.",
+        "Worked on the GIP-MDS project behind the net-entreprises.fr portal: shipped features, covered them with unit tests, and prototyped a circuit breaker with Hystrix. I also led a four-person task force that cut the ticket backlog from 50 to under 20 in a single month.",
       stack: [
         "Java",
         "JEE",
@@ -171,7 +171,7 @@ const portfolio = {
       duration: "6 months",
       positions: [],
       description:
-        "Led development of a Java-based monitoring tool for Twavox, a cinema accessibility device for hearing- and visually-impaired audiences. Handled the full cycle from requirements gathering to deployment at client sites, authored technical documentation and user manuals, and supported training for smooth adoption.",
+        "Built a Java monitoring tool for Twavox, a cinema accessibility device for hearing- and visually-impaired audiences. I ran it from requirements through to installing it on-site, wrote the documentation and user manuals, and trained the people who'd end up running it.",
       stack: ["Java", "Swing", "Linux"],
       companyLink: "https://www.linkedin.com/company/cineapps/",
       projectLinks: [{ name: "Twavox", url: "https://www.twavox.com/" }],
