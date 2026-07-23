@@ -101,9 +101,17 @@ function positionLine(xp: Experience): string {
 </script>
 
 <!-- Not scoped: namespaced under .neon-root; v-html About paragraphs need real
-     selectors. Glow uses color-mix on --th-glow/--th-acc. The hero "breathes";
-     in light mode the glow is dialed back (the prototype's 0.55 scalar,
-     precomputed into the html:not(.dark) overrides) so it isn't blinding. -->
+     selectors. Glow uses color-mix on --th-glow/--th-acc. The hero "breathes"
+     in dark mode.
+
+     LIGHT MODE IS NOT A DIMMED DARK MODE. It used to be (every glow scaled by
+     ~0.55), and that is exactly what made it hurt: a colored bloom behind large
+     type on a pale ground reads as chromatic fringing, and the breathing kept
+     the eye from ever settling. Light instead switches the tube off — the neon
+     survives as geometry (outlines, pills, rails, rail dots) drawn in the
+     darkened ink hues from tailwind.css, with the emission removed outright and
+     depth carried by one neutral elevation shadow. The kill-switch rules live
+     together at the bottom of this block. -->
 <style>
 .neon-root {
   position: relative;
@@ -141,21 +149,23 @@ function positionLine(xp: Experience): string {
       transparent 70%
     );
 }
+/* Daylight: the wall is lit, not glowing. Just enough tint to keep the page
+   from going flat grey — the hues are now ink-weight, so even 4% reads. */
 html:not(.dark) .neon-root .amb {
   background:
     radial-gradient(
       620px 420px at 50% 4%,
-      color-mix(in srgb, var(--th-glow) 7%, transparent),
+      color-mix(in srgb, var(--th-glow) 4%, transparent),
       transparent 70%
     ),
     radial-gradient(
       520px 520px at 88% 38%,
-      color-mix(in srgb, var(--th-acc) 5%, transparent),
+      color-mix(in srgb, var(--th-acc) 3%, transparent),
       transparent 70%
     ),
     radial-gradient(
       560px 560px at 8% 72%,
-      color-mix(in srgb, var(--th-glow) 4%, transparent),
+      color-mix(in srgb, var(--th-glow) 2.5%, transparent),
       transparent 70%
     );
 }
@@ -213,32 +223,6 @@ html:not(.dark) .neon-root .amb {
       inset 0 0 30px -4px color-mix(in srgb, var(--th-glow) 53%, transparent);
   }
 }
-/* light mode = neon sign in daylight: glow dialed back (~0.55) */
-html:not(.dark) .neon-root .sign {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--th-glow) 18%, transparent),
-    0 0 12px color-mix(in srgb, var(--th-glow) 22%, transparent),
-    0 0 38px -10px color-mix(in srgb, var(--th-glow) 29%, transparent),
-    inset 0 0 14px -6px color-mix(in srgb, var(--th-glow) 22%, transparent);
-  animation-name: neon-breathe-soft;
-}
-@keyframes neon-breathe-soft {
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 1px color-mix(in srgb, var(--th-glow) 15%, transparent),
-      0 0 9px color-mix(in srgb, var(--th-glow) 18%, transparent),
-      0 0 29px -12px color-mix(in srgb, var(--th-glow) 26%, transparent),
-      inset 0 0 12px -8px color-mix(in srgb, var(--th-glow) 18%, transparent);
-  }
-  50% {
-    box-shadow:
-      0 0 0 1px color-mix(in srgb, var(--th-glow) 26%, transparent),
-      0 0 16px color-mix(in srgb, var(--th-glow) 29%, transparent),
-      0 0 51px -8px color-mix(in srgb, var(--th-glow) 55%, transparent),
-      inset 0 0 16px -4px color-mix(in srgb, var(--th-glow) 29%, transparent);
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .neon-root .sign {
     animation: none;
@@ -289,11 +273,6 @@ html:not(.dark) .neon-root .sign {
     inset 0 0 10px color-mix(in srgb, var(--th-acc) 53%, transparent);
   margin-bottom: 22px;
 }
-html:not(.dark) .neon-root .avatar {
-  box-shadow:
-    0 0 12px color-mix(in srgb, var(--th-acc) 55%, transparent),
-    inset 0 0 6px color-mix(in srgb, var(--th-acc) 29%, transparent);
-}
 .neon-root .name {
   font-size: 80px;
   line-height: 0.94;
@@ -307,13 +286,6 @@ html:not(.dark) .neon-root .avatar {
     0 0 20px var(--th-glow),
     0 0 44px var(--th-glow),
     0 0 78px var(--th-glow);
-}
-html:not(.dark) .neon-root .name {
-  text-shadow:
-    0 0 4px var(--th-name-halo),
-    0 0 11px var(--th-glow),
-    0 0 24px color-mix(in srgb, var(--th-glow) 55%, transparent),
-    0 0 43px color-mix(in srgb, var(--th-glow) 55%, transparent);
 }
 .neon-root .role {
   margin-top: 20px;
@@ -406,9 +378,6 @@ html:not(.dark) .neon-root .name {
   align-items: center;
   gap: 16px;
   margin: 0 0 26px;
-}
-html:not(.dark) .neon-root .ol {
-  text-shadow: 0 0 6px color-mix(in srgb, var(--th-glow) 29%, transparent);
 }
 .neon-root .ol::before {
   content: "";
@@ -540,6 +509,39 @@ html:not(.dark) .neon-root .ol {
   background: color-mix(in srgb, var(--th-acc) 7%, transparent);
   border: 1px solid color-mix(in srgb, var(--th-acc) 27%, transparent);
   color: var(--th-acc);
+}
+
+/* ════ LIGHT MODE: TUBE OFF ════
+   Every rule below is a subtraction. `:is()` (not `:where()`) is deliberate —
+   it inherits the specificity of its most specific argument, so this single
+   rule still outranks nested base selectors like `.neon-root .xp h3 .co`. */
+html:not(.dark) .neon-root :is(.name, .otw, .role, .ol, .about b, .xp h3 .co) {
+  text-shadow: none;
+}
+html:not(.dark)
+  .neon-root
+  :is(.otw::before, .ol::before, .socials a, .sign::before) {
+  box-shadow: none;
+}
+/* The sign becomes a card: keep the 2px tube outline, swap the bloom for one
+   neutral elevation shadow, and stop breathing (nothing glows in daylight). */
+html:not(.dark) .neon-root .sign {
+  border-width: 1.5px;
+  box-shadow:
+    0 1px 2px rgba(15, 12, 20, 0.04),
+    0 12px 32px -20px rgba(15, 12, 20, 0.28);
+  animation: none;
+}
+html:not(.dark) .neon-root .avatar {
+  box-shadow: 0 2px 10px -4px rgba(15, 12, 20, 0.3);
+}
+html:not(.dark) .neon-root nav a {
+  text-shadow: none;
+  box-shadow: none;
+  border-color: color-mix(in srgb, var(--th-glow) 32%, transparent);
+}
+html:not(.dark) .neon-root .xp:hover {
+  box-shadow: 0 6px 20px -14px rgba(15, 12, 20, 0.45);
 }
 
 @media (max-width: 760px) {
