@@ -178,6 +178,7 @@ async function main() {
     async (c): Promise<CaseResult> => {
       const started = Date.now();
       let text = "";
+      let toolCalls: CaseResult["toolCalls"] = [];
       let error: string | undefined;
 
       // The Assistant issues a streaming call (server/utils/assistant.ts). Unlike
@@ -199,6 +200,19 @@ async function main() {
       });
       try {
         text = await turn.text;
+        // Record the Action calls alongside the prose: join the streamed tool
+        // calls with their results by call id — which Action fired, its args,
+        // and what it returned. Empty for a text-only answer.
+        const [calls, toolResults] = await Promise.all([
+          turn.toolCalls,
+          turn.toolResults,
+        ]);
+        toolCalls = calls.map((call) => ({
+          toolName: call.toolName,
+          input: call.input,
+          output: toolResults.find((r) => r.toolCallId === call.toolCallId)
+            ?.output,
+        }));
       } catch (e) {
         error ??= e instanceof Error ? e.message : String(e);
       }
@@ -224,6 +238,7 @@ async function main() {
         latencyMs: Date.now() - started,
         asserts,
         assertsPass: !error && assertsPass(asserts),
+        toolCalls,
         judge,
         judgeError,
       };
@@ -262,7 +277,7 @@ async function main() {
   const header =
     "id,persona,category,expected,question,answer,asserts_pass," +
     "judge_scope,judge_scope_critique,judge_grounding,judge_grounding_critique," +
-    "human_scope,human_grounding,notes";
+    "human_scope,human_grounding,notes,tool_calls";
   const rows = results.map((r) =>
     [
       r.case.id,
@@ -279,6 +294,8 @@ async function main() {
       "", // human_scope — pass/fail, you fill this in
       "", // human_grounding — pass/fail, you fill this in
       "", // notes — open-coding observations
+      // tool_calls — the Action calls (JSON); empty when none fired.
+      csvField(r.toolCalls.length ? JSON.stringify(r.toolCalls) : ""),
     ].join(","),
   );
   writeFileSync(csvPath, [header, ...rows].join("\n") + "\n");
