@@ -87,10 +87,13 @@ your working set before a local run, or just run the bot on Groq with a small
 `EVAL_LIMIT`. The runner unloads the model from RAM the instant the run finishes
 (Ollama would otherwise pin it for 5 min) — but nothing frees it _during_ a run.
 
-Grades the assistant at the **direct seam** — the real `buildSystemPrompt()` +
-one `generateText` call — so no dev server is involved and the graded prompt is
-byte-identical to production's. Outputs land in `evals/results/` (gitignored):
-`run-<ts>.jsonl` (machine) and `label-<ts>.csv` (for spreadsheet work).
+Grades the Assistant at its **interface** — it calls `runAssistant`
+(`server/utils/assistant.ts`), the same pure assembly production crosses (system
+prompt + Actions + step policy), so the harness now exercises the whole
+production turn, not just the prompt. No dev server is involved and the graded
+assembly is byte-identical to production's. Outputs land in `evals/results/`
+(gitignored): `run-<ts>.jsonl` (machine — including each case's Action calls) and
+`label-<ts>.csv` (for spreadsheet work).
 
 ### 3. Error analysis — the highest-ROI step
 
