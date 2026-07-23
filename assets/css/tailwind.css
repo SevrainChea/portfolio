@@ -308,11 +308,24 @@
 
 /* ════════════════════════════════════════════════════════════════════
    NEON — a glowing neon sign at night. Roles: bg, panel, glow (primary),
-   acc (secondary), ink, body, line, name-col, name-halo, head.
+   acc (secondary), ink, body, muted, line, name-col, name-halo, head.
    --th-accent is set to the primary glow so the shared switcher ring/hover
-   picks up the neon color. Light = "neon sign in daylight": softly tinted
-   wall, glow dialed back in NeonLayout's :not(.dark) rules. Values verbatim
-   from design-files/theme-neon.jsx (NEON_* / NEON_*_LIGHT, soft saturation).
+   picks up the neon color.
+
+   DARK is emission: saturated tubes glowing against near-black.
+
+   LIGHT is NOT that recipe dimmed — it's "the tube is off, in daylight".
+   Emission doesn't survive a translation to a white wall: a bloom behind
+   large type on a pale ground reads as chromatic fringing, not as light,
+   and that is what makes the light variants painful to look at. So light
+   treats the neon as *pigment and glass* instead: hues darkened to ink
+   weight (all ≥5:1 on the panel, so they can carry small caps and tags),
+   a white panel for real luminance separation from the tinted wall, and
+   the tube geometry (outlines, pills, rails) kept while the glow itself
+   is dropped in NeonLayout/NeonChat's :not(.dark) rules.
+
+   --th-name-halo is therefore dark-only in practice; light keeps a pale
+   value defined so every block satisfies the same role contract.
    ════════════════════════════════════════════════════════════════════ */
 
 /* ─── Neon · Hotline (hot-pink + teal) ─── */
@@ -323,6 +336,7 @@
   --th-acc: #2de2e6;
   --th-ink: #f5e9ff;
   --th-body: #c2add9;
+  --th-muted: #9184a0;
   --th-line: rgba(255, 255, 255, 0.07);
   --th-name-col: #ffffff;
   --th-name-halo: #ffffff;
@@ -330,16 +344,17 @@
   --th-accent: var(--th-glow);
 }
 [data-family="neon"][data-variant="hotline"]:not(.dark) {
-  --th-bg: #f5eef5;
-  --th-panel: #fbf6fb;
-  --th-glow: #e0247a;
-  --th-acc: #0aa1a6;
-  --th-ink: #2a1f33;
-  --th-body: #6a5d76;
-  --th-line: rgba(40, 20, 60, 0.07);
-  --th-name-col: #e0247a;
-  --th-name-halo: #f7a7c8;
-  --th-head: #2a1f33;
+  --th-bg: #f3eff3;
+  --th-panel: #ffffff;
+  --th-glow: #b81b60;
+  --th-acc: #08767a;
+  --th-ink: #241a2c;
+  --th-body: #5c5166;
+  --th-muted: #7d7288;
+  --th-line: rgba(40, 20, 60, 0.08);
+  --th-name-col: #b81b60;
+  --th-name-halo: #f7d7e4;
+  --th-head: #241a2c;
   --th-accent: var(--th-glow);
 }
 
@@ -351,6 +366,7 @@
   --th-acc: #2f9bff;
   --th-ink: #eafff0;
   --th-body: #a8c9b6;
+  --th-muted: #7d9a89;
   --th-line: rgba(255, 255, 255, 0.06);
   --th-name-col: #ffffff;
   --th-name-halo: #ffffff;
@@ -358,16 +374,17 @@
   --th-accent: var(--th-glow);
 }
 [data-family="neon"][data-variant="acid"]:not(.dark) {
-  --th-bg: #eff5ec;
-  --th-panel: #f9fcf6;
-  --th-glow: #4fa514;
-  --th-acc: #1f78d6;
-  --th-ink: #1b271e;
-  --th-body: #5a6b5f;
-  --th-line: rgba(20, 40, 25, 0.07);
-  --th-name-col: #4fa514;
-  --th-name-halo: #bfe39a;
-  --th-head: #1b271e;
+  --th-bg: #eef2ec;
+  --th-panel: #ffffff;
+  --th-glow: #3d7d10;
+  --th-acc: #1a5fa8;
+  --th-ink: #17211a;
+  --th-body: #4e5c53;
+  --th-muted: #6e7c73;
+  --th-line: rgba(20, 40, 25, 0.08);
+  --th-name-col: #3d7d10;
+  --th-name-halo: #d8ecc4;
+  --th-head: #17211a;
   --th-accent: var(--th-glow);
 }
 
@@ -379,6 +396,7 @@
   --th-acc: #b14bff;
   --th-ink: #eaf2ff;
   --th-body: #9fb4d8;
+  --th-muted: #7889a8;
   --th-line: rgba(255, 255, 255, 0.07);
   --th-name-col: #ffffff;
   --th-name-halo: #ffffff;
@@ -386,16 +404,17 @@
   --th-accent: var(--th-glow);
 }
 [data-family="neon"][data-variant="electric"]:not(.dark) {
-  --th-bg: #edf1fb;
-  --th-panel: #f7f9fe;
-  --th-glow: #1f5fe0;
-  --th-acc: #8b2fdc;
-  --th-ink: #1a2138;
-  --th-body: #5a667f;
-  --th-line: rgba(20, 30, 60, 0.07);
-  --th-name-col: #1f5fe0;
-  --th-name-halo: #a9c4f7;
-  --th-head: #1a2138;
+  --th-bg: #edf0f7;
+  --th-panel: #ffffff;
+  --th-glow: #1f4fb8;
+  --th-acc: #6f2ab0;
+  --th-ink: #171d2e;
+  --th-body: #4f5a70;
+  --th-muted: #6f7a90;
+  --th-line: rgba(20, 30, 60, 0.08);
+  --th-name-col: #1f4fb8;
+  --th-name-halo: #ccd9f5;
+  --th-head: #171d2e;
   --th-accent: var(--th-glow);
 }
 

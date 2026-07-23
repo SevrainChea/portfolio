@@ -118,8 +118,14 @@ const {
 </script>
 
 <!-- Not scoped: namespaced under .neon-chat-root. Glow uses color-mix on
-     --th-glow/--th-acc; light mode dials the glow back (~0.55), mirroring
-     NeonLayout.vue's html:not(.dark) treatment. -->
+     --th-glow/--th-acc.
+
+     Light mode switches the tube OFF rather than dimming it, mirroring
+     NeonLayout.vue — see the long rationale there. Short version: a colored
+     bloom on a pale ground reads as fringing, not light, so light keeps the
+     tube geometry (bubble outlines, the avatar ring, the composer frame) in
+     the ink-weight hues from tailwind.css and drops the emission. The
+     kill-switch rules live together at the bottom of this block. -->
 <style>
 .neon-chat-root {
   position: relative;
@@ -158,17 +164,17 @@ html:not(.dark) .neon-chat-root .amb {
   background:
     radial-gradient(
       620px 420px at 50% 4%,
-      color-mix(in srgb, var(--th-glow) 7%, transparent),
+      color-mix(in srgb, var(--th-glow) 4%, transparent),
       transparent 70%
     ),
     radial-gradient(
       520px 520px at 88% 38%,
-      color-mix(in srgb, var(--th-acc) 5%, transparent),
+      color-mix(in srgb, var(--th-acc) 3%, transparent),
       transparent 70%
     ),
     radial-gradient(
       560px 560px at 8% 72%,
-      color-mix(in srgb, var(--th-glow) 4%, transparent),
+      color-mix(in srgb, var(--th-glow) 2.5%, transparent),
       transparent 70%
     );
 }
@@ -243,28 +249,6 @@ html:not(.dark) .neon-chat-root .amb {
       0 0 8px var(--th-name-halo),
       0 0 22px var(--th-glow),
       0 0 52px var(--th-glow);
-  }
-}
-html:not(.dark) .neon-chat-root .sign {
-  text-shadow:
-    0 0 4px var(--th-name-halo),
-    0 0 11px color-mix(in srgb, var(--th-glow) 55%, transparent),
-    0 0 24px color-mix(in srgb, var(--th-glow) 55%, transparent);
-  animation-name: nc-sign-breathe-soft;
-}
-@keyframes nc-sign-breathe-soft {
-  0%,
-  100% {
-    text-shadow:
-      0 0 3px var(--th-name-halo),
-      0 0 9px color-mix(in srgb, var(--th-glow) 47%, transparent),
-      0 0 18px color-mix(in srgb, var(--th-glow) 47%, transparent);
-  }
-  50% {
-    text-shadow:
-      0 0 5px var(--th-name-halo),
-      0 0 14px color-mix(in srgb, var(--th-glow) 55%, transparent),
-      0 0 30px color-mix(in srgb, var(--th-glow) 55%, transparent);
   }
 }
 .neon-chat-root .status {
@@ -349,16 +333,6 @@ html:not(.dark) .neon-chat-root .sign {
   box-shadow:
     0 0 16px -3px color-mix(in srgb, var(--th-glow) 40%, transparent),
     inset 0 0 14px -5px color-mix(in srgb, var(--th-glow) 33%, transparent);
-}
-html:not(.dark) .neon-chat-root .bot {
-  box-shadow:
-    0 0 10px -4px color-mix(in srgb, var(--th-acc) 29%, transparent),
-    inset 0 0 8px -5px color-mix(in srgb, var(--th-acc) 18%, transparent);
-}
-html:not(.dark) .neon-chat-root .user {
-  box-shadow:
-    0 0 10px -4px color-mix(in srgb, var(--th-glow) 29%, transparent),
-    inset 0 0 8px -5px color-mix(in srgb, var(--th-glow) 18%, transparent);
 }
 /* rendered markdown (assistant bubbles) */
 .neon-chat-root .md {
@@ -568,12 +542,6 @@ html:not(.dark) .neon-chat-root .user {
       inset 0 0 26px color-mix(in srgb, var(--th-acc) 40%, transparent);
   }
 }
-html:not(.dark) .neon-chat-root .halo {
-  box-shadow:
-    0 0 14px color-mix(in srgb, var(--th-acc) 33%, transparent),
-    inset 0 0 10px color-mix(in srgb, var(--th-acc) 18%, transparent);
-  animation: none;
-}
 .neon-chat-root .halo img {
   width: 96px;
   height: 96px;
@@ -608,13 +576,6 @@ html:not(.dark) .neon-chat-root .halo {
       0 0 30px var(--th-glow),
       0 0 70px var(--th-glow);
   }
-}
-html:not(.dark) .neon-chat-root .e-h {
-  text-shadow:
-    0 0 5px var(--th-name-halo),
-    0 0 13px color-mix(in srgb, var(--th-glow) 55%, transparent),
-    0 0 30px color-mix(in srgb, var(--th-glow) 55%, transparent);
-  animation: none;
 }
 .neon-chat-root .e-sub {
   font-size: 14px;
@@ -666,11 +627,6 @@ html:not(.dark) .neon-chat-root .e-h {
     0 0 20px -4px color-mix(in srgb, var(--th-glow) 33%, transparent),
     inset 0 0 16px -6px color-mix(in srgb, var(--th-glow) 27%, transparent);
 }
-html:not(.dark) .neon-chat-root .composer {
-  box-shadow:
-    0 0 12px -4px color-mix(in srgb, var(--th-glow) 22%, transparent),
-    inset 0 0 10px -6px color-mix(in srgb, var(--th-glow) 15%, transparent);
-}
 .neon-chat-root .composer textarea {
   flex: 1;
   resize: none;
@@ -714,6 +670,34 @@ html:not(.dark) .neon-chat-root .composer {
   .neon-chat-root .typing .tube {
     animation: none;
   }
+}
+
+/* ════ LIGHT MODE: TUBE OFF ════
+   Subtractions only. `:is()` (not `:where()`) is deliberate — it inherits the
+   specificity of its most specific argument, so one rule still outranks nested
+   base selectors like `.neon-chat-root .row.b .tag`. */
+html:not(.dark)
+  .neon-chat-root
+  :is(.back, .sign, .status, .e-h, .row.b .tag, .row.u .tag) {
+  text-shadow: none;
+}
+html:not(.dark) .neon-chat-root :is(.status i, .typing .tube, .send) {
+  box-shadow: none;
+}
+html:not(.dark) .neon-chat-root .md.streaming > :last-child::after {
+  box-shadow: none;
+}
+/* Nothing pulses in daylight — the caret still blinks (it signals streaming),
+   but the tube/halo/headline breathing stops. */
+html:not(.dark) .neon-chat-root :is(.sign, .e-h, .halo) {
+  animation: none;
+}
+/* Bubbles and frames become outlined cards: keep the tube border, swap the
+   colored bloom for one neutral elevation shadow. */
+html:not(.dark)
+  .neon-chat-root
+  :is(.bot, .user, .composer, .scroll-cta, .halo) {
+  box-shadow: 0 1px 2px rgba(15, 12, 20, 0.05);
 }
 @media (max-width: 760px) {
   /* Clear the fixed mobile ThemeSwitcher bar that overlays the top. */
