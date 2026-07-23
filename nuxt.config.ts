@@ -17,11 +17,11 @@ export default defineNuxtConfig({
 
   // Never watch nested git worktrees. `claude --worktree` / EnterWorktree create
   // a full second checkout (its own node_modules/.nuxt — tens of thousands of
-  // files) under .worktrees/. Nuxt's dev watcher doesn't read .gitignore, so it
-  // would try to watch all of them and crash `pnpm dev` with EMFILE (too many
-  // open files). .worktrees is already git-ignored; this keeps it out of the
-  // file watcher too.
-  ignore: ["**/.worktrees/**"],
+  // files) under .worktrees/, and Agent-tool runs create the same under
+  // .claude/worktrees/. Nuxt's dev watcher doesn't read .gitignore, so it would
+  // try to watch all of them and crash `pnpm dev` with EMFILE (too many open
+  // files). Both are git-ignored; this keeps them out of the file watcher too.
+  ignore: ["**/.worktrees/**", "**/.claude/worktrees/**"],
 
   devtools: { enabled: true },
   css: ["~/assets/css/main.css", "~/assets/css/tailwind.css"],
