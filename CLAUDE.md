@@ -73,12 +73,16 @@ tag), which makes ESLint crash on load.
 
 ### Chat backend (Nitro)
 
-- `server/api/chat.post.ts` — streaming chat endpoint using the **Vercel AI SDK**
-  (`streamText` → `toUIMessageStreamResponse`). No RAG; the whole knowledge base
-  is injected directly into the system prompt.
-- `server/utils/` — `knowledge.ts` (builds the context block from
-  `server/data/personal_data.json`), `prompt.ts` (system prompt), `llm.ts`
-  (provider factory: Groq / Gemini / Ollama, selected via `runtimeConfig`).
+- `server/api/chat.post.ts` — streaming chat endpoint; a thin **HTTP-stream
+  adapter** over `runAssistant` (parses the body, resolves the Provider, converts
+  UI messages, pipes the result to `toUIMessageStreamResponse`). No RAG; the whole
+  knowledge base is injected directly into the system prompt.
+- `server/utils/` — `assistant.ts` (`runAssistant`: the **one** assembly of the
+  Assistant — system prompt + Actions + step policy — issued as a single
+  streaming call; the model is a seam the caller fills), `knowledge.ts` (builds
+  the context block from `server/data/personal_data.json`), `prompt.ts` (system
+  prompt), `llm.ts` (provider factory: Groq / Gemini / Ollama, selected via
+  `runtimeConfig`).
 - `composables/useChat.ts` — wraps `@ai-sdk/vue`'s `Chat` class and adapts
   `chat.messages` to the shape the `*Chat.vue` skins consume.
 - Provider/key config lives in `runtimeConfig` (server-only) in `nuxt.config.ts`,
@@ -86,7 +90,9 @@ tag), which makes ESLint crash on load.
 - The assistant's Scope/Grounding guardrails are **prompt-only by decision**
   ([ADR-0004](docs/adr/0004-scope-guardrail-prompt-first.md)); behavior is
   measured by the eval harness in `evals/` ([docs/EVALS.md](docs/EVALS.md)).
-  Keep `server/utils/prompt.ts` pure — the harness imports it directly.
+  Keep `server/utils/prompt.ts` and `assistant.ts` pure (explicit imports, no
+  Nitro globals, no runtime config) — the harness imports them directly to grade
+  the real production assembly.
 
 ## Conventions (read before editing)
 

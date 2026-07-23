@@ -5,8 +5,9 @@
 *.log
 logs
 
-# ── Git worktrees (isolated theme workspaces) ─────
+# ── Git worktrees (isolated agent workspaces) ─────
 .worktrees/
+.claude/worktrees/
 
 # ── Environment files ─────────────────────────────
 .env

@@ -61,6 +61,13 @@ An external link to a product or project tied to an Experience.
 
 ## Chat
 
+**Assistant**
+The chat persona that answers visitors on Sévrain's behalf — bounded by the
+Guardrails, drawing only on the Knowledge base, able to offer Actions. There is
+exactly **one** Assistant: wherever it is exercised (the live chat, the eval
+harness), it is the same Assistant — never a stand-in with different knowledge
+or abilities. A Provider executes the Assistant but does not define it.
+
 **Knowledge base**
 The fixed set of documents about Sévrain that the assistant may draw on.
 Answering only from these is Grounding.
@@ -105,7 +112,8 @@ as an interactive element in the chat rather than a sentence. Some Actions only
 _present_ information (a project summary card); others carry an _effect_ the
 visitor can trigger (download the resume, open a pre-filled contact draft, switch
 the site's Theme). The assistant offers the affordance; the visitor triggers the
-effect — it never forces one.
+effect — it never forces one. Any copy that introduces an Action on screen is
+part of its rendering — presentation, not the Assistant's reply.
 _Avoid_: "tool" here — the AI-SDK primitive that produces an Action is an
 implementation mechanism, not a domain concept, and lives in `docs/conventions/`
 and `docs/adr/`, never in this glossary.
