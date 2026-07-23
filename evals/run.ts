@@ -1,20 +1,22 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { generateText } from "ai";
-import type { LanguageModel } from "ai";
+import type { LanguageModel, ModelMessage } from "ai";
 import { createGroq } from "@ai-sdk/groq";
 import { createOllama } from "ollama-ai-provider-v2";
-import { buildSystemPrompt } from "../server/utils/prompt";
+import { runAssistant } from "../server/utils/assistant";
 import { assertsPass, runAsserts } from "./asserts";
 import { DEFAULT_JUDGE_MODEL, judgeCase } from "./judge";
 import type { CaseResult, EvalCase, JudgeVerdict } from "./types";
 
-// Eval runner — grades the assistant at the direct seam: the real production
-// system prompt (buildSystemPrompt is pure, no Nitro needed) + a single-shot
-// generateText call. The HTTP route is plumbing that doesn't shape answer
-// content, so it is deliberately bypassed; that's why this builds its own Groq
-// client instead of reusing server/utils/llm.ts (which needs useRuntimeConfig).
+// Eval runner — grades the Assistant across its real interface: it calls
+// runAssistant (server/utils/assistant.ts), the same pure assembly production
+// crosses (system prompt + Actions + step policy), so evals exercise the whole
+// production turn, not just the prompt. The runner stays a collect adapter — it
+// still selects its own model at the seam (an env-driven Groq/Ollama hybrid,
+// built here rather than via server/utils/llm.ts, which needs useRuntimeConfig)
+// but no longer re-assembles the assistant — and awaits the streamed result's
+// aggregated text.
 //
 // Usage: pnpm eval          (reads GROQ_API_KEY / GROQ_MODEL from .env)
 
@@ -160,7 +162,6 @@ async function main() {
     botLabel = `groq/${model}`;
   }
 
-  const system = buildSystemPrompt();
   // EVAL_LIMIT=N runs only the first N cases — for smoke-testing a config
   // change without paying for (or waiting on) the full set.
   const limit = Number(process.env.EVAL_LIMIT) || undefined;
@@ -178,17 +179,30 @@ async function main() {
       const started = Date.now();
       let text = "";
       let error: string | undefined;
+
+      // The Assistant issues a streaming call (server/utils/assistant.ts). Unlike
+      // the single-shot generateText this replaced, streamText NEVER throws — a
+      // failed stream surfaces via the onError callback and as error stream parts.
+      // Belt and braces: register onError to capture the failure per case AND
+      // guard the awaits (a failed stream can reject them). Either way a dead case
+      // is recorded with `error` (the judge is skipped below), never fatal to the
+      // run nor a silent empty answer — preserving the old generateText behavior.
+      const messages: ModelMessage[] = [{ role: "user", content: c.question }];
+      const turn = runAssistant(messages, {
+        model: bot,
+        maxRetries: MAX_RETRIES,
+      });
+      turn.consumeStream({
+        onError: (e) => {
+          error = e instanceof Error ? e.message : String(e);
+        },
+      });
       try {
-        ({ text } = await generateText({
-          model: bot,
-          system,
-          prompt: c.question,
-          maxRetries: MAX_RETRIES,
-        }));
+        text = await turn.text;
       } catch (e) {
-        // A dead case shouldn't kill the run — record it and keep grading.
-        error = e instanceof Error ? e.message : String(e);
+        error ??= e instanceof Error ? e.message : String(e);
       }
+
       const asserts = runAsserts(c, text);
 
       // Judge only what actually answered — a dead bot call has nothing to grade.
